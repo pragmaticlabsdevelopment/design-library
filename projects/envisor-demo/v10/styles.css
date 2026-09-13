@@ -1,0 +1,262 @@
+/* ==========================================================================
+   Envisor v10 — Sierra concept
+   Full independent redesign modeled on sierra.ai: warm cream ground, full
+   two-tier pill buttons, 16px card radius, three real gradient treatments
+   sampled from sierra.ai in this repo's own earlier forensic pass (green/
+   blue/terracotta — not a single repeated hue), full-color logo wall,
+   generous corporate-minimal whitespace. Own token set — does not inherit
+   v4's black/yellow/white/gray palette.
+   ========================================================================== */
+
+:root {
+  --bg:            #FAF7F1;
+  --bg-2:          #F2ECE0;
+  --card:          #FFFFFF;
+  --ink:           #171512;
+  --muted:         #6B655C;
+  --muted-2:       #948C7F;
+  --border:        rgba(23,21,18,0.10);
+
+  --accent:        #4A6D4E;   /* deep green, from Sierra's own green-gradient dark stop */
+  --accent-tint:   #E9EFE6;
+  --grad-green:    linear-gradient(130deg, #8DA46F, #4A6D4E);
+  --grad-blue:     linear-gradient(131deg, #3D78B6 29.8%, #03BDF5 175.51%);
+  --grad-terracotta: linear-gradient(130deg, #C2674D, #A2462D);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --max: 1240px;
+  --space-tight: 56px;
+  --space-lg: 128px;
+
+  --serif: 'Libre Caslon Text', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--sans); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+h1, h2, h3, h4 { margin: 0; }
+p { margin: 0; }
+
+.eyebrow { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 0.03em; color: var(--accent); }
+
+/* ---------- Buttons: Sierra's two-tier pill scale ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 22px; border-radius: var(--radius-pill); font-size: 14px; font-weight: 600; transition: transform 0.15s ease, opacity 0.15s ease; }
+.btn-pill { border-radius: var(--radius-pill); }
+.btn-lg { height: 52px; padding: 0 30px; font-size: 15px; }
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-ink { background: var(--ink); color: var(--bg); }
+.btn-light { background: var(--bg); color: var(--ink); }
+.btn-outline-light { border: 1.5px solid rgba(255,255,255,0.5); color: #fff; }
+.btn-text { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--ink); }
+
+/* ---------- Nav ---------- */
+.nav { position: sticky; top: 0; z-index: 40; background: rgba(250,247,241,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
+.nav.is-scrolled { border-color: var(--border); }
+.nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 32px; height: 76px; display: flex; align-items: center; gap: 36px; }
+.nav-logo img { height: 22px; }
+.nav-links { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; flex: 1; }
+.nav-item a { font-size: 14.5px; font-weight: 500; color: var(--ink); }
+.nav-actions { display: flex; align-items: center; gap: 18px; }
+.nav-signin { font-size: 14px; font-weight: 600; color: var(--muted); }
+.nav-mobile-toggle { display: none; }
+.mobile-nav { display: none; }
+@media (max-width: 860px) {
+  .nav-links, .nav-actions { display: none; }
+  .nav-mobile-toggle { display: flex; flex-direction: column; gap: 4px; background: none; border: none; padding: 8px; }
+  .nav-mobile-toggle span { width: 20px; height: 2px; background: var(--ink); }
+  .mobile-nav { position: absolute; top: 76px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); flex-direction: column; padding: 16px 32px 24px; gap: 14px; display: none; }
+  .mobile-nav.is-open { display: flex; }
+}
+
+/* ---------- Hero ---------- */
+.hero { padding: 88px 32px 0; text-align: center; }
+.hero-inner { max-width: 760px; margin: 0 auto; }
+.hero-headline { font-family: var(--sans); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; font-size: clamp(36px, 5.6vw, 60px); margin: 22px 0 20px; }
+.hero-sub { font-size: 18px; line-height: 1.55; color: var(--muted); max-width: 560px; margin: 0 auto 34px; }
+.hero-cta-row { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 56px; }
+.hero-shot-band { max-width: var(--max); margin: 0 auto; padding: 0 32px 0; }
+.hero-shot-frame { background: var(--card); border: 1px solid var(--border); border-radius: 24px 24px 0 0; padding: 20px 20px 0; box-shadow: 0 30px 70px rgba(23,21,18,0.08); }
+.hero-shot-frame img { border-radius: 14px 14px 0 0; }
+@media (max-width: 640px) {
+  .hero-headline { font-size: clamp(30px, 9vw, 38px); }
+}
+
+/* ---------- Logo carousel band ---------- */
+.logo-carousel-band { padding: 44px 32px 60px; text-align: center; }
+.logo-carousel-label { font-size: 12.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 26px; }
+.logo-carousel-track { max-width: var(--max); margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px 48px; }
+.logo-carousel-cell img { height: 26px; width: auto; opacity: 0.9; }
+.logo-carousel-cell img.logo-lg { height: 34px; }
+
+/* ---------- Benefits strip ---------- */
+.benefits-sierra { padding: 0 32px var(--space-lg); }
+.benefits-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.benefit-card { text-align: left; }
+.benefit-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--accent-tint); color: var(--accent); margin-bottom: 18px; }
+.benefit-card h3 { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
+.benefit-card p { font-size: 15px; line-height: 1.55; color: var(--muted); }
+@media (max-width: 860px) { .benefits-inner { grid-template-columns: 1fr; gap: 32px; } }
+
+/* ---------- Announce card (gradient) ---------- */
+.announce { padding: 0 32px var(--space-lg); }
+.announce-card { max-width: var(--max); margin: 0 auto; border-radius: var(--radius-lg); padding: 64px 32px; text-align: center; color: #fff; }
+.announce-card--green { background: var(--grad-green); }
+.announce-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: var(--radius-pill); margin-bottom: 18px; }
+.announce-card h2 { font-family: var(--sans); font-weight: 800; font-size: clamp(28px, 4vw, 40px); margin-bottom: 16px; }
+.announce-card p { max-width: 48ch; margin: 0 auto 30px; font-size: 16px; line-height: 1.55; opacity: 0.94; }
+
+/* ---------- Bento ---------- */
+.bento { padding: 0 32px var(--space-lg); }
+.sec-head { max-width: 620px; margin: 0 auto 52px; text-align: center; }
+.sec-head h2 { font-size: clamp(26px, 3.2vw, 36px); font-weight: 800; letter-spacing: -0.01em; margin: 14px 0 10px; }
+.sec-head p { font-size: 16px; color: var(--muted); line-height: 1.55; }
+.bento-grid { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.bento-tile { border-radius: var(--radius-lg); padding: 40px 36px; color: #fff; overflow: hidden; }
+.bento-tile--blue { background: var(--grad-blue); }
+.bento-tile--terracotta { background: var(--grad-terracotta); }
+.bento-tile h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+.bento-tile p { font-size: 15px; line-height: 1.55; opacity: 0.92; max-width: 40ch; margin-bottom: 22px; }
+.bento-shot { margin: 26px -36px -40px; border-radius: 0; overflow: hidden; }
+.bento-shot img { width: 100%; height: 240px; object-fit: cover; object-position: top; }
+@media (max-width: 860px) { .bento-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Product features (Sierra audit v2) ----------
+   Sierra's real signature here isn't a collapsed accordion — it's large
+   alternating product rows with real imagery (their Ghostwriter/Insights/
+   Horizon pattern: rotating illustrations paired with icon+headline+
+   description). Rebuilt with Envisor's own three screenshot-backed
+   modules as full-bleed rows, plus a compact 3-up strip for the three
+   capabilities that don't have a dedicated screenshot (Knowledge Base,
+   CEQA Search, Document Remediation) — same copy as the old accordion,
+   just given real visual weight instead of being collapsed by default. */
+.features-sierra { padding: 0 32px var(--space-lg); }
+.features-sierra .sec-head { text-align: center; }
+.feature-row {
+  max-width: var(--max);
+  margin: 0 auto 64px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.feature-row--reverse { direction: rtl; }
+.feature-row--reverse > * { direction: ltr; }
+.feature-row-media { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 24px 60px rgba(23,21,18,0.07); }
+.feature-row-media img { width: 100%; height: 340px; object-fit: cover; object-position: top; }
+.feature-tag { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.feature-row-text h3 { font-size: clamp(22px, 2.6vw, 28px); font-weight: 800; margin-bottom: 12px; }
+.feature-row-text p { font-size: 16px; color: var(--muted); line-height: 1.6; max-width: 40ch; }
+.feature-mini-grid { max-width: var(--max); margin: 24px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.feature-mini-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 26px 24px; }
+.feature-mini-icon { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: var(--radius-sm); background: var(--accent-tint); color: var(--accent); margin-bottom: 14px; }
+.feature-mini-card h4 { font-size: 15.5px; font-weight: 700; margin-bottom: 8px; }
+.feature-mini-card p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+.kb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.kb-tags span { font-size: 11px; background: var(--bg-2); padding: 4px 9px; border-radius: var(--radius-pill); color: var(--muted); }
+@media (max-width: 860px) {
+  .feature-row, .feature-row--reverse { grid-template-columns: 1fr; direction: ltr; gap: 28px; }
+  .feature-row-media img { height: 240px; }
+  .feature-mini-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Workflow ---------- */
+.workflow { padding: 0 32px var(--space-lg); }
+.workflow-steps { max-width: var(--max); margin: 0 auto; list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.workflow-steps li { border-top: 2px solid var(--accent); padding-top: 20px; }
+.workflow-num { font-size: 13px; font-weight: 700; color: var(--accent); }
+.workflow-steps h4 { font-size: 17px; font-weight: 700; margin: 8px 0 8px; }
+.workflow-steps p { font-size: 14.5px; color: var(--muted); line-height: 1.55; }
+@media (max-width: 860px) { .workflow-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .workflow-steps { grid-template-columns: 1fr; } }
+
+/* ---------- Impact (gradient stat tiles) ---------- */
+.impact { padding: 0 32px var(--space-lg); }
+.impact-inner { max-width: var(--max); margin: 0 auto; }
+.impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.impact-stat { border-radius: var(--radius-lg); padding: 34px 28px; color: #fff; }
+.impact-stat--green { background: var(--grad-green); }
+.impact-stat--blue { background: var(--grad-blue); }
+.impact-stat--terracotta { background: var(--grad-terracotta); }
+.impact-eyebrow { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.85; margin-bottom: 14px; }
+.impact-num { display: block; font-family: var(--sans); font-weight: 800; font-size: clamp(22px, 2.4vw, 28px); margin-bottom: 12px; }
+.impact-desc { font-size: 14px; opacity: 0.9; line-height: 1.5; }
+@media (max-width: 860px) { .impact-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Testimonials: bordered cards ---------- */
+.testimonials { padding: 0 32px var(--space-lg); }
+.testimonial-cards { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.testimonial-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px 26px; margin: 0; display: flex; flex-direction: column; }
+.testimonial-card p { font-size: 15.5px; line-height: 1.55; margin-bottom: 22px; flex: 1; }
+.testimonial-card cite { font-style: normal; display: flex; flex-direction: column; gap: 3px; }
+.t-org { font-size: 14.5px; font-weight: 700; }
+.t-role { font-size: 12.5px; color: var(--muted-2); }
+@media (max-width: 860px) { .testimonial-cards { grid-template-columns: 1fr; } }
+
+/* ---------- Customer spotlight (Sierra audit v2, second net-new section) ----------
+   Distinct from both the impact tiles (generic product-level stats, gradient
+   treatment) and the 3-up testimonial grid (three equal peer quotes) — this
+   pulls ONE real testimonial forward and gives it an outsized, asymmetric
+   big-number treatment as a closing proof point right before the final CTA.
+   The 70% figure isn't a new claim — it's the same number already sitting
+   inside EPD Solutions' existing testimonial text, just surfaced visually.
+   Deliberately plain-card (not another gradient) since green/blue/terracotta
+   gradients are already doing real work three times elsewhere on this page;
+   a fourth would read as repetition, not a genuine new visual idea. */
+.spotlight { padding: 0 32px var(--space-lg); }
+.spotlight-card {
+  max-width: var(--max);
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 64px 56px;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 56px;
+  align-items: center;
+}
+.spotlight-stat { border-right: 1px solid var(--border); padding-right: 56px; }
+.spotlight-num { display: block; font-family: var(--sans); font-weight: 800; font-size: clamp(56px, 7vw, 84px); line-height: 1; letter-spacing: -0.02em; color: var(--accent); }
+.spotlight-label { display: block; margin-top: 14px; font-size: 15px; font-weight: 600; color: var(--muted); max-width: 20ch; }
+.spotlight-mark { color: var(--accent); opacity: 0.35; margin-bottom: 14px; }
+.spotlight-quote p { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.4; color: var(--ink); margin-bottom: 26px; }
+.spotlight-attribution { display: flex; align-items: center; gap: 16px; }
+.spotlight-logo { height: 24px; width: auto; }
+.spotlight-attribution .t-role { font-size: 13.5px; color: var(--muted-2); }
+@media (max-width: 860px) {
+  .spotlight-card { grid-template-columns: 1fr; padding: 44px 32px; gap: 32px; }
+  .spotlight-stat { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
+}
+
+/* ---------- Final CTA ---------- */
+.final-cta { padding: 0 32px var(--space-lg); }
+.final-cta-card { max-width: var(--max); margin: 0 auto; background: var(--ink); border-radius: var(--radius-lg); padding: 72px 32px; text-align: center; color: var(--bg); }
+.final-cta-eyebrow { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #A9C79A; margin-bottom: 18px; }
+.final-cta h2 { font-size: clamp(26px, 3.6vw, 38px); font-weight: 800; max-width: 24ch; margin: 0 auto 32px; }
+
+/* ---------- Footer ---------- */
+.footer { padding: 64px 32px 32px; background: var(--bg-2); }
+.footer-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 32px; }
+.footer-logo { height: 20px; margin-bottom: 12px; }
+.footer-brand p { font-size: 14px; color: var(--muted); max-width: 24ch; }
+.footer-col h5 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted-2); margin-bottom: 12px; }
+.footer-col a { display: block; font-size: 14px; padding: 5px 0; color: var(--ink); }
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom { max-width: var(--max); margin: 40px auto 0; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12.5px; color: var(--muted-2); }
+.footer-legal a { margin-left: 16px; }
+.footer-legal a:first-child { margin-left: 0; }
+@media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr 1fr; } }
+@media (max-width: 540px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- Scroll reveal ---------- */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }

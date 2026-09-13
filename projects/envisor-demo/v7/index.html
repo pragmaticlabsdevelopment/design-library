@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Envisor | Ground Truth for Environmental Review</title>
+<meta name="description" content="Envisor gives environmental review teams a live, evidence-backed picture of every constraint on a project site — before the comment period opens.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="envisor-logo-ink.svg" alt="Envisor"></a>
+    <ul class="nav-links">
+      <li class="nav-item" tabindex="0">
+        <span>Solution
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="nav-dropdown">
+          <a href="#platform"><span class="dd-title">MIRA</span><span class="dd-desc">Mapping Intake &amp; Review Assistant</span></a>
+          <a href="#platform"><span class="dd-title">CARA</span><span class="dd-desc">CEQA Comment Response Application</span></a>
+          <a href="#platform"><span class="dd-title">CEQA Search</span><span class="dd-desc">Free semantic search</span></a>
+          <a href="#platform"><span class="dd-title">Document Remediation</span><span class="dd-desc">WCAG 2.2 conversion</span></a>
+        </div>
+      </li>
+      <li class="nav-item" tabindex="0">
+        <span>Who It's For
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="nav-dropdown">
+          <a href="#trust"><span class="dd-title">Consultants</span><span class="dd-desc">Environmental review firms</span></a>
+          <a href="#trust"><span class="dd-title">Public Agencies</span><span class="dd-desc">Municipal &amp; state review bodies</span></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="#about">Company</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#contact" class="nav-login">Sign In</a>
+      <a href="/contact" class="btn btn-primary">Talk to Us</a>
+    </div>
+    <button class="nav-mobile-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#platform">Solution</a>
+    <a href="#trust">Who It's For</a>
+    <a href="#about">Company</a>
+    <a href="/contact" class="btn btn-primary">Talk to Us</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow">AI-NATIVE ENVIRONMENTAL INTELLIGENCE &middot; CEQA &amp; NEPA</p>
+      <h1>Catch the risk before it becomes a redline.</h1>
+      <p class="hero-sub">MIRA gives your team a live, evidence-backed picture of every environmental constraint on a project site — before the comment period ever opens.</p>
+      <div class="hero-cta-row">
+        <a href="/contact" class="btn btn-primary btn-lg">Talk to Us</a>
+        <a href="#platform" class="btn-text">See the platform
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="product-shots/mira-site-intelligence-soft.png" alt="MIRA site intelligence map showing mapped environmental constraints, hazard layers, and verification items for a project site">
+    </div>
+  </div>
+</section>
+
+<section class="signals">
+  <div class="signals-inner">
+    <div class="signals-lead reveal">
+      <span class="eyebrow">Live on every project</span>
+      <h2>Nothing waits for a status meeting.</h2>
+      <p>Envisor surfaces what needs a human the moment it's known — not at the next check-in.</p>
+    </div>
+    <div class="signals-grid reveal">
+      <div class="signal-card signal-card--orange">
+        <span class="signal-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 4L22 20H2L12 4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10.5V15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="17.5" r="0.9" fill="currentColor"/></svg>
+        </span>
+        <span class="signal-tag">Attention needed</span>
+        <p class="signal-text">High-priority comments need attention</p>
+        <span class="signal-meta">Sewer Line Relocation &mdash; Clay St. to Locust Ave</span>
+      </div>
+      <div class="signal-card signal-card--teal">
+        <span class="signal-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 4H18V20L12 17L6 20V4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 10.5L11 12.5L15 8.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="signal-tag">In progress</span>
+        <p class="signal-text">14 drafted responses need review</p>
+        <span class="signal-meta">Review queue &middot; 1/15 reviewed</span>
+      </div>
+      <div class="signal-card signal-card--ink">
+        <span class="signal-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7V12L15.5 14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="signal-tag">On schedule</span>
+        <p class="signal-text">15/15 drafts completed, on time</p>
+        <span class="signal-meta">Project health &middot; up to date</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feature-cards" id="platform">
+  <div class="sec-head reveal">
+    <span class="eyebrow">The platform</span>
+    <h2>Three systems, one connected picture.</h2>
+  </div>
+  <div class="feature-grid">
+    <div class="feature-card reveal">
+      <img src="product-shots/mira-hero-dashboard.png" alt="MIRA project dashboard" loading="lazy">
+      <h3>MIRA</h3>
+      <p>A project description and APN are all MIRA needs to identify concerns, likely petitioners, and mitigation strategies.</p>
+      <a href="/contact" class="card-link">Learn more
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="feature-card reveal">
+      <img src="product-shots/cara-bracketed-comments.png" alt="CARA bracketed public comments" loading="lazy">
+      <h3>CARA</h3>
+      <p>Bracket, group, assign responsible parties and timelines, and generate defensible responses to public comment.</p>
+      <a href="/contact" class="card-link">Learn more
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="feature-card reveal">
+      <img src="product-shots/mira-workflow-composite.png" alt="Initial Study Assistant workflow" loading="lazy">
+      <h3>CEQA Search</h3>
+      <p>Free semantic search across the full body of CEQA determinations, precedent, and agency findings.</p>
+      <a href="/contact" class="card-link">Learn more
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="workflow">
+  <div class="sec-head reveal">
+    <span class="eyebrow">How it works</span>
+    <h2>From project description to defensible record.</h2>
+  </div>
+  <ol class="workflow-steps reveal">
+    <li><span class="workflow-num">01</span><h4>Preliminary Review</h4><p>A project description and APN are all MIRA needs to identify concerns, likely petitioners, and mitigation strategies.</p></li>
+    <li><span class="workflow-num">02</span><h4>Initial Study</h4><p>Leverage public and private data to generate review-ready environmental reports.</p></li>
+    <li><span class="workflow-num">03</span><h4>Public Comments</h4><p>Bracket, group, assign responsible parties and timelines, and generate responses with CARA.</p></li>
+    <li><span class="workflow-num">04</span><h4>Project Implementation</h4><p>Arm approving agencies with the administrative record and monitor mitigation measures over time.</p></li>
+  </ol>
+</section>
+
+<section class="audience">
+  <div class="audience-inner">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Who it's for</span>
+      <h2>Two audiences. One record.</h2>
+    </div>
+    <div class="audience-grid">
+      <article class="audience-card reveal">
+        <div class="audience-media">
+          <img src="product-shots/cara-review-queue.png" alt="CARA review queue showing drafted comment responses awaiting reviewer sign-off" loading="lazy">
+        </div>
+        <div class="audience-body">
+          <span class="audience-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="1.5" stroke="currentColor" stroke-width="1.7"/><path d="M8 7V5.5C8 4.67 8.67 4 9.5 4H14.5C15.33 4 16 4.67 16 5.5V7" stroke="currentColor" stroke-width="1.7"/></svg>
+          </span>
+          <h3>Consultants</h3>
+          <p>Run every project on one platform: research, evidence, drafting, and comment response in a single connected record.</p>
+          <a href="#platform" class="card-link">Explore for consultants
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="audience-card reveal">
+        <div class="audience-media">
+          <img src="product-shots/mira-site-intelligence.png" alt="Site Intelligence map showing mapped environmental constraints for a project site" loading="lazy">
+        </div>
+        <div class="audience-body">
+          <span class="audience-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 21V10L12 4L20 10V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 21V14H15V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>Public Agencies</h3>
+          <p>Move projects through review with a defensible, traceable record, from applicability to determination.</p>
+          <a href="#platform" class="card-link">Explore for agencies
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="trust" id="trust">
+  <div class="trust-inner">
+    <p class="trust-label">Trusted by consultants and public agencies</p>
+    <div class="trust-tier">
+      <span class="trust-tier-label">Consultants</span>
+      <div class="trust-grid">
+        <div class="logo-cell"><img src="logos/placeworks.png" alt="PlaceWorks" loading="lazy"></div>
+        <div class="logo-cell"><img src="logos/epd.png" alt="EPD Solutions" loading="lazy"></div>
+        <div class="logo-cell"><img class="logo-lg" src="logos/Ascent_Logo_FullColor.png.png" alt="Ascent Environmental" loading="lazy"></div>
+        <div class="logo-cell"><img class="logo-lg" src="logos/esa.png" alt="ESA — Environmental Science Associates" loading="lazy"></div>
+        <div class="logo-cell"><img src="logos/rincon.png" alt="Rincon Consultants" loading="lazy"></div>
+        <div class="logo-cell"><img class="logo-lg" src="logos/Logo-ICF.png" alt="ICF" loading="lazy"></div>
+        <div class="logo-cell"><img src="logos/stantec.png" alt="Stantec" loading="lazy"></div>
+        <div class="logo-cell"><img src="logos/Parsons_Corporation_logo.png" alt="Parsons" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="trust-tier">
+      <span class="trust-tier-label">Public Agencies</span>
+      <div class="trust-grid trust-grid-sm">
+        <div class="logo-cell"><img src="logos/pcwa.png" alt="Placer County Water Agency" loading="lazy"></div>
+        <div class="logo-cell"><img class="logo-lg" src="logos/UC_Berkeley_Cal_logo.png" alt="UC Berkeley" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="impact">
+  <div class="impact-inner">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Impact</span>
+      <h2>Environmental review in half the time.</h2>
+    </div>
+    <div class="impact-grid reveal">
+      <div class="impact-stat">
+        <span class="impact-eyebrow">Review Timeline</span>
+        <span class="impact-num">6–12 mo. &rarr; 3–6 mo.</span>
+        <p class="impact-desc">A typical EIR or IS process, compressed.</p>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-eyebrow">Bid Price</span>
+        <span class="impact-num">Cut in half</span>
+        <p class="impact-desc">Billable hours reduced across the review cycle.</p>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-eyebrow">Defensibility</span>
+        <span class="impact-num">Every claim cited</span>
+        <p class="impact-desc">Surface evidence invisible to the human eye.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial-feature-section">
+  <div class="tf-shape" aria-hidden="true"></div>
+  <blockquote class="tf-quote reveal">
+    <p>&ldquo;This technology can easily reduce the time responding to comments by 70%.&rdquo;</p>
+    <cite><span class="tf-org">EPD Solutions</span><span class="tf-role">Principal Planner</span></cite>
+  </blockquote>
+</section>
+
+<section class="testimonials-support">
+  <div class="ts-inner reveal">
+    <blockquote>
+      <p>&ldquo;I actually think the CARA responses are better than what a respected firm prepared.&rdquo;</p>
+      <cite><span class="t-org">Stantec</span><span class="t-role">Principal Planner</span></cite>
+    </blockquote>
+    <blockquote>
+      <p>&ldquo;Firms without these tools will be uncompetitive within 10 years.&rdquo;</p>
+      <cite><span class="t-org">UCOP Planning</span><span class="t-role">Brian Harrington</span></cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="final-cta-inner reveal">
+    <h2>Get a live picture of your next project site.</h2>
+    <a href="/contact" class="btn btn-primary btn-lg">Talk to Us</a>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img class="footer-logo" src="envisor-logo.svg" alt="Envisor">
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="X">X</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h5>Solution</h5>
+        <a href="#platform">MIRA</a>
+        <a href="#platform">CARA</a>
+        <a href="#platform">CEQA Search</a>
+        <a href="#platform">Document Remediation</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#">News</a>
+        <a href="#">Join Us</a>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 Envisor AI. All rights reserved.</div>
+</footer>
+
+<script>
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('is-scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  var toggle = document.getElementById('menu-toggle');
+  var mobileNav = document.getElementById('mobile-nav');
+  toggle.addEventListener('click', function () {
+    var open = mobileNav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px 20% 0px', threshold: 0.01 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-in'); });
+  }
+})();
+</script>
+
+</body>
+</html>

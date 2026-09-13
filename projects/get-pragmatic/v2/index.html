@@ -1,246 +1,1443 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow, noarchive">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Get Pragmatic — v2 visual pass</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#17150f; --ink-2:#514c42; --ink-3:#8b8479;
-    --paper:#faf8f4; --paper-2:#f1ece3; --line:#e2dcd0;
-    --accent:#c2410c; --accent-2:#ea6d2f;
-    --max:1120px;
-    --display:"Fraunces",ui-serif,Georgia,serif;
-    --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    color-scheme:light;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pragmatic. &mdash; Practical product help for people ready to build.</title>
+  <meta name="description" content="We help startups and small teams turn ideas into useful products. Strategy, UX/UI design, front-end engineering, marketing websites, and product storytelling.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.svg" sizes="any">
+
+  <!-- Theme color (mobile browser chrome) -->
+  <meta name="theme-color" content="#3B82F6">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pragmatic. — Practical product help for people ready to build.">
+  <meta property="og:description" content="We help startups and small teams turn ideas into useful products. Strategy, UX/UI design, front-end engineering, marketing websites, and product storytelling.">
+  <meta property="og:url" content="https://pragmatic-labs-development.github.io/pragmatic-website/">
+  <meta property="og:site_name" content="Pragmatic Labs">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pragmatic. — Practical product help for people ready to build.">
+  <meta name="twitter:description" content="We help startups and small teams turn ideas into useful products. Strategy, UX/UI design, front-end engineering, and product storytelling.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://pragmatic-labs-development.github.io/pragmatic-website/">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Pragmatic Labs",
+    "url": "https://pragmatic-labs-development.github.io/pragmatic-website/",
+    "description": "Product studio helping startups with product management, UX/UI design, front-end engineering, and product marketing.",
+    "email": "hello@pragmaticlabs.dev"
   }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 40px}
-  h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.08;margin:0}
-  h1{font-size:clamp(38px,4.6vw,62px)}
-  h2{font-size:clamp(28px,3vw,40px)}
-  h3{font-size:19px;letter-spacing:-.01em;line-height:1.3}
-  p{margin:0;color:var(--ink-2)}
-  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:6px;
-       font-size:14.5px;font-weight:500;text-decoration:none;transition:.15s}
-  .btn.solid{background:var(--ink);color:var(--paper)}
-  .btn.solid:hover{background:var(--accent)}
-  .btn.ghost{border:1px solid var(--line);color:var(--ink)}
-  .btn.ghost:hover{border-color:var(--ink)}
-
-  /* nav */
-  header{border-bottom:1px solid var(--line);background:rgba(250,248,244,.9);backdrop-filter:blur(8px)}
-  nav{display:flex;align-items:center;gap:34px;height:70px}
-  .logo{font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.03em;text-decoration:none;color:var(--ink)}
-  .logo span{color:var(--accent)}
-  nav a.nl{font-size:14.5px;color:var(--ink-2);text-decoration:none}
-  nav a.nl:hover{color:var(--ink)}
-  nav .right{margin-left:auto;display:flex;align-items:center;gap:18px}
-
-  /* hero */
-  .hero{padding:84px 0 76px}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
-  .hero p.lede{font-size:18.5px;margin-top:22px;max-width:46ch}
-  .hero .cta{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
-  .hero .note{font-size:13px;color:var(--ink-3);margin-top:18px}
-  .visual{aspect-ratio:4/3.2;border-radius:12px;border:1px solid var(--line);
-          background:linear-gradient(150deg,#fff 0%,var(--paper-2) 100%);
-          box-shadow:0 1px 2px rgba(23,21,15,.04),0 24px 48px -20px rgba(23,21,15,.18);
-          padding:22px;display:flex;flex-direction:column;gap:12px}
-  .v-bar{height:9px;border-radius:99px;background:var(--paper-2)}
-  .v-chip{height:30px;border-radius:6px;background:#fff;border:1px solid var(--line)}
-  .v-row{display:flex;gap:10px}
-  .v-fill{flex:1}
-  .v-accent{background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:.9}
-
-  /* proof strip */
-  .strip{border-block:1px solid var(--line);padding:26px 0;background:var(--paper-2)}
-  .strip-in{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
-  .strip small{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
-  .strip .marks{display:flex;gap:34px;flex-wrap:wrap;flex:1}
-  .mark{font-family:var(--display);font-size:17px;color:var(--ink-3);opacity:.85}
-
-  /* sections */
-  section.pad{padding:86px 0}
-  .sec-head{max-width:60ch;margin-bottom:44px}
-  .sec-head p{margin-top:14px;font-size:17px}
-
-  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:28px}
-  .card .ico{width:38px;height:38px;border-radius:9px;background:var(--accent);opacity:.12;margin-bottom:18px}
-  .card h3{margin-bottom:10px}
-  .card p{font-size:14.8px}
-
-  .case{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-  .shot{border-radius:10px;border:1px solid var(--line);background:#fff;
-        box-shadow:0 20px 44px -24px rgba(23,21,15,.25);overflow:hidden}
-  .shot .tb{height:34px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 12px;background:var(--paper-2)}
-  .shot .tb i{width:9px;height:9px;border-radius:50%;background:var(--line)}
-  .shot .body{padding:22px;display:flex;flex-direction:column;gap:11px;min-height:230px}
-  .stat{font-family:var(--display);font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1}
-  .stat + p{font-size:14.5px;margin-top:6px}
-  .stats{display:flex;gap:44px;margin:28px 0 30px}
-
-  /* closing */
-  .closing{background:var(--ink);color:var(--paper);border-radius:14px;padding:72px 40px;text-align:center;margin:0 0 86px}
-  .closing h2{color:var(--paper)}
-  .closing p{color:#b9b1a4;margin:16px auto 32px;max-width:48ch;font-size:17px}
-  .closing .btn.solid{background:var(--accent);color:#fff}
-  .closing .btn.solid:hover{background:var(--accent-2)}
-
-  footer{border-top:1px solid var(--line);padding:52px 0 40px}
-  .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px}
-  .fgrid h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px;font-weight:600}
-  .fgrid a{display:block;font-size:14.5px;color:var(--ink-2);text-decoration:none;margin-bottom:9px}
-  .fgrid a:hover{color:var(--accent)}
-  .fbot{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3)}
-
-  @media(max-width:900px){
-    .wrap{padding:0 22px}
-    .hero-grid,.case{grid-template-columns:1fr;gap:40px}
-    .three,.fgrid{grid-template-columns:1fr}
-    .hero{padding:56px 0 48px}
-    section.pad{padding:60px 0}
-    nav{gap:18px} nav .nl{display:none}
-    .stats{gap:28px}
-    .closing{padding:52px 24px}
-  }
-</style>
+  </script>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <nav>
-      <a class="logo" href="#">Get<span>Pragmatic</span></a>
-      <a class="nl" href="#">Services</a>
-      <a class="nl" href="#">Work</a>
-      <a class="nl" href="#">About</a>
-      <div class="right">
-        <a class="nl" href="#">Sign in</a>
-        <a class="btn solid" href="#">Book a call</a>
-      </div>
-    </nav>
-  </div>
-</header>
+  <!-- ============================
+       NAVIGATION
+       ============================ -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="#" class="nav__logo">
+        <svg class="nav__logo-svg" viewBox="0 0 1366 320.9" xmlns="http://www.w3.org/2000/svg" aria-label="Pragmatic.">
+          <g fill="currentColor">
+            <path d="M715.6,234.4l-39.6.4-.4-79.3c0-12.8-10.5-20.2-22.1-19.5-12.8.8-21.8,9.8-21.9,23.2l-.5,75.4h-39.9s-.2-128-.2-128l38.6-.3,2,18.3c10.1-16.4,25-22.5,42.8-21.4,15.8.9,29.2,7.8,36.2,23.9,9.3-17.6,24.7-24,43.1-24,23.9,0,45.1,16.4,45.2,41.7l.4,89.8h-39.5c0,0-.4-76-.4-76,0-5.5-2.4-13.1-5.8-16.9-6.4-7-16.1-6.9-24.6-3.6s-12.8,11.3-12.9,20.6l-.3,75.7Z"/>
+            <path d="M440.6,242.3l39.3.4c2.6,11.8,11.7,16.6,23.5,16.3,10.6-.3,22.5-3,25.7-14.5s2.8-21.3,1.7-33.1c-6.4,11.4-15.4,16.9-28,19.2-22.5,4.3-46.5-3.2-58.3-23.9-12.5-21.9-13.1-48.8-3.1-71.6,9.2-20.8,29.3-32.7,51.6-32.2,16.4.4,29.4,7.8,38.5,20.7l1.7-17.5h38.5c0-.1,0,117.7,0,117.7,0,23.9-9.4,48.6-34,56.9-26.5,9-56.5,7.3-80.6-6.3-12-6.7-19.3-17.7-16.4-32.3ZM525.7,190.3c8.5-13.5,8.2-31.4.9-44.8-4.7-8.5-14.1-11.6-22.8-11.9-7.7-.3-16.9,3.1-21.7,10.8-8,13-8.5,30.5-1.4,43.8,4.6,8.5,13.8,12.3,21.8,12.4,8.4.2,17.8-1.9,23.1-10.3Z"/>
+            <path d="M171.7,149.1c-20.5,29.3-64.1,23.2-96.6,24.1l-.4,61.4H30.2s0-186.4,0-186.4l93.7.3c20.5,0,38.4,9.6,50,25.8,12.8,23.2,13.3,52.7-2.2,74.8ZM139.5,107.7c-1.1-13.9-10.4-24.6-24.3-24.7l-40.2-.4v56.4c13.9.2,27.3.5,40.5-.7,16-1.5,25.3-14.2,24-30.5Z"/>
+            <path d="M312.7,233c-16.1-6.7-22.8-22.5-20.9-38.4,4.7-39.5,57.7-35.1,87.4-36.9,1.3-7.5,1.5-17.7-5.5-23.1-7.7-5.9-34.6-8.6-38.3,10h-37.9c.3-43.8,59-45.4,87.3-38.7,19.9,4.7,34.6,20.5,34.7,41.3l.3,54.5c0,11.1,1.2,21.3,2.5,32.7l-38,.2-3.5-15.8c-14,19.4-46,23.4-68.1,14.2ZM373.3,205.3c6.6-6,8-16.3,5.8-24.3-13.1-.2-43-2.3-46.6,13.3-1.3,5.5.5,13.1,5.6,15.7,11.1,5.6,25.4,4.2,35.2-4.6Z"/>
+            <path d="M828.2,229.5c-13.4-8.9-17-24-13.9-39.2,7.1-34.8,57.6-30.8,85.9-32.4,1.2-6.2,1.1-14.9-3.2-20.8-6.2-8.6-36-11.5-40.2,7.6h-38.1c-.7-44.8,62.6-46.5,92.3-37.1,16.6,5.2,29.3,19.7,29.4,37.7l.5,61.6c0,9.5,1.3,17.8,2.9,27.8h-38.2c0,.1-3.5-14.4-3.5-14.4-16.2,19.2-53.2,23-73.9,9.2ZM896.8,202.9c4.6-6.9,5.2-14.5,3.7-22.2-14.2.3-43.1-2-46.6,13.9-1,4.6.3,11.6,4.2,14.4,11.3,8.1,32.1,3.9,38.7-6.1Z"/>
+            <path d="M1178.5,207.7c14,1.9,25-4.8,27.8-19.6l42.1-.4c-5.5,44.6-53.9,57.5-91.3,46.2-42.3-12.7-53.1-60.9-37-95,20-42.5,80.2-45,109.2-20.4,10.6,9,16.4,20.7,18.5,35.1h-39.9c-4.5-10.4-11.1-17.8-21.7-18.6-10.7-.8-21.9,3.2-26.9,13.8-9.2,19.2-7.2,55.2,19.3,58.8Z"/>
+            <path d="M1041.8,204.8l-.3,28.5c-14.8,3.4-29.1,4.3-43.9,1.5-15.3-2.9-25.7-15.5-25.8-31.4l-.5-67-20.6-1.2v-28.5s20.9-1.1,20.9-1.1l.3-41.2,40.5-.2.2,41.7,29.5.5v28.9c-.1,0-29.5.5-29.5.5v58.4c0,5.5,6,11.2,11.2,11l18.2-.5Z"/>
+            <path d="M238.4,234.5h-40.3s0-128,0-128l39.1-.4,1.1,21.8c8.8-19.7,27.5-28.5,48.8-23.5l-.4,35.4c-9.8-.4-17.4-.8-26.1.7-11.4,1.9-21.5,12.1-21.6,24.4l-.7,69.6Z"/>
+            <polygon points="1098.5 234.4 1058.5 234.5 1058.4 106.4 1098.6 106.2 1098.5 234.4"/>
+            <polygon points="1098.6 83.4 1058.5 83.3 1058.6 48 1098.5 47.8 1098.6 83.4"/>
+          </g>
+          <rect fill="#3B82F6" x="1273.3" y="170.4" width="67.5" height="67.5"/>
+        </svg>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="#capabilities" class="nav__link">What We Do</a></li>
+        <li><a href="#process" class="nav__link">How It Works</a></li>
+        <li><a href="#pricing" class="nav__link">Pricing</a></li>
+        <li><a href="#our-work" class="nav__link">Work</a></li>
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#contact" class="nav__link nav__link--cta">Talk Through Your Idea</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<div class="wrap hero">
-  <div class="hero-grid">
-    <div>
-      <div class="eyebrow">Placeholder eyebrow</div>
-      <h1 style="margin-top:16px">A headline that earns the next scroll.</h1>
-      <p class="lede">One or two sentences of supporting copy that says who this is for and what changes for them. Real words go here in the next version.</p>
-      <div class="cta">
-        <a class="btn solid" href="#">Book a call →</a>
-        <a class="btn ghost" href="#">See the work</a>
-      </div>
-      <p class="note">Placeholder reassurance line · no commitment</p>
+  <!-- ============================
+       HERO
+       ============================ -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <div class="hero__bg-gradient"></div>
+      <div class="hero__bg-orb hero__bg-orb--1"></div>
+      <div class="hero__bg-orb hero__bg-orb--2"></div>
+      <div class="hero__bg-pattern"></div>
     </div>
-    <div class="visual" aria-hidden="true">
-      <div class="v-row"><div class="v-chip v-fill"></div><div class="v-chip" style="width:70px"></div></div>
-      <div class="v-bar" style="width:80%"></div>
-      <div class="v-bar" style="width:58%"></div>
-      <div class="v-bar v-accent" style="width:42%"></div>
-      <div class="v-row" style="margin-top:auto">
-        <div class="v-chip v-fill"></div><div class="v-chip v-fill"></div><div class="v-chip v-fill"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="strip">
-  <div class="wrap strip-in">
-    <small>Trusted by</small>
-    <div class="marks">
-      <span class="mark">Northbeam</span><span class="mark">Kestrel</span>
-      <span class="mark">海 Studio</span><span class="mark">Ardent</span><span class="mark">Lumen</span>
-    </div>
-  </div>
-</div>
-
-<section class="pad">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">What we do</div>
-      <h2 style="margin-top:14px">Three things, done properly.</h2>
-      <p>Section intro copy — placeholder. This explains the shape of the offer before the reader has to commit to reading three cards.</p>
-    </div>
-    <div class="three">
-      <div class="card">
-        <div class="ico"></div>
-        <h3>Strategy &amp; positioning</h3>
-        <p>Placeholder description of the first service. Two lines is the target length so the three cards stay balanced.</p>
-      </div>
-      <div class="card">
-        <div class="ico"></div>
-        <h3>Design &amp; build</h3>
-        <p>Placeholder description of the second service. Keep it concrete — what you get, not what you believe.</p>
-      </div>
-      <div class="card">
-        <div class="ico"></div>
-        <h3>Ongoing partnership</h3>
-        <p>Placeholder description of the third service. Ends on the outcome rather than the process.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="pad" style="background:var(--paper-2);border-block:1px solid var(--line)">
-  <div class="wrap case">
-    <div class="shot" aria-hidden="true">
-      <div class="tb"><i></i><i></i><i></i></div>
-      <div class="body">
-        <div class="v-bar" style="width:52%;height:14px"></div>
-        <div class="v-bar" style="width:88%"></div>
-        <div class="v-bar" style="width:74%"></div>
-        <div class="v-row" style="margin-top:10px">
-          <div class="v-chip v-fill"></div><div class="v-chip v-fill"></div>
+    <div class="container hero__content">
+      <div class="hero__intro">
+        <p class="hero__eyebrow animate-up">The Front-End Agency Experts</p>
+        <h1 class="hero__title animate-up delay-1">UX/UI Design &amp;<br> Front-End Coding.</h1>
+        <p class="hero__subtitle animate-up delay-2">Bring us the problem and we'll have a working interface up within hours. UX/UI design and front-end coding are what we do most &mdash; product management and marketing are there too, for the full product stack when you need it.</p>
+        <div class="hero__ctas animate-up delay-3">
+          <a href="#pricing" class="btn btn--primary">Start With a Two-Week Engagement &rarr;</a>
+          <a href="#retainer-tiers" class="btn btn--secondary">View Monthly Retainers &rarr;</a>
         </div>
-        <div class="v-bar v-accent" style="width:36%;margin-top:auto"></div>
+        <p class="hero__ctas-note animate-up delay-3">Start with one capability or combine several around your most important work.</p>
+      </div>
+
+      <div class="hero__mockup animate-up delay-4">
+        <div class="hero__device-wrapper">
+          <div class="hero__laptop device-float-slow">
+            <div class="hero__laptop-screen">
+              <div class="hero__laptop-content">
+                <div class="hero__laptop-header-bar">
+                  <span class="hero__laptop-dot hero__laptop-dot--red"></span>
+                  <span class="hero__laptop-dot hero__laptop-dot--yellow"></span>
+                  <span class="hero__laptop-dot hero__laptop-dot--green"></span>
+                </div>
+                <div class="hero__laptop-body">
+                  <div class="hero__laptop-sidebar"></div>
+                  <div class="hero__laptop-main">
+                    <div class="hero__laptop-nav-bar"></div>
+                    <div class="hero__laptop-cards">
+                      <div class="hero__laptop-card"></div>
+                      <div class="hero__laptop-card"></div>
+                      <div class="hero__laptop-card"></div>
+                    </div>
+                    <div class="hero__laptop-chart"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hero__laptop-base">
+              <div class="hero__laptop-base-top"></div>
+            </div>
+          </div>
+
+          <div class="hero__tablet device-float-reverse">
+            <div class="hero__tablet-screen">
+              <div class="hero__tablet-header">
+                <span class="hero__tablet-time">9:41</span>
+              </div>
+              <div class="hero__tablet-content">
+                <div class="hero__tablet-hero-card"></div>
+                <div class="hero__tablet-grid">
+                  <div class="hero__tablet-grid-item"></div>
+                  <div class="hero__tablet-grid-item"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__phone device-float">
+            <div class="hero__phone-notch"></div>
+            <div class="hero__phone-screen">
+              <span class="hero__phone-time">9:41</span>
+              <div class="hero__phone-content">
+                <div class="hero__phone-card"></div>
+                <div class="hero__phone-stats">
+                  <div class="hero__phone-stat"></div>
+                  <div class="hero__phone-stat"></div>
+                </div>
+                <div class="hero__phone-list-item"></div>
+                <div class="hero__phone-list-item"></div>
+                <div class="hero__phone-list-item"></div>
+              </div>
+              <div class="hero__phone-nav">
+                <span class="hero__phone-nav-dot hero__phone-nav-dot--active"></span>
+                <span class="hero__phone-nav-dot"></span>
+                <span class="hero__phone-nav-dot"></span>
+                <span class="hero__phone-nav-dot"></span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div>
-      <div class="eyebrow">Case study</div>
-      <h2 style="margin-top:14px">Proof, not promises.</h2>
-      <p style="margin-top:16px;font-size:17px">Placeholder summary of one engagement — the situation, what was done, and what moved. Numbers below carry most of the weight.</p>
-      <div class="stats">
-        <div><div class="stat">2.4×</div><p>placeholder metric</p></div>
-        <div><div class="stat">6 wks</div><p>placeholder metric</p></div>
+  </section>
+
+  <!-- ============================
+       CAPABILITIES
+       ============================ -->
+  <section class="capabilities" id="capabilities">
+    <div class="container">
+      <div class="capabilities__groups reveal">
+        <div class="capabilities__group capabilities__group--core">
+          <p class="capabilities__group-label">Always included</p>
+          <div class="capabilities__group-cards">
+            <div class="capability-card capability-card--green">
+              <div class="capability-card__icon capability-card__icon--green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+              </div>
+              <h3 class="capability-card__title">UX/UI Design</h3>
+              <p class="capability-card__desc">Turn complex ideas into products people can use.</p>
+              <ul class="capability-card__list">
+                <li>User research</li>
+                <li>Flows and wireframes</li>
+                <li>Prototypes</li>
+                <li>Visual and interaction design</li>
+              </ul>
+            </div>
+            <div class="capability-card capability-card--orange">
+              <div class="capability-card__icon capability-card__icon--orange">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <h3 class="capability-card__title">Front-End Engineering</h3>
+              <p class="capability-card__desc">Turn approved designs into polished, production-ready experiences.</p>
+              <ul class="capability-card__list">
+                <li>Responsive interfaces</li>
+                <li>Component systems</li>
+                <li>Product implementation</li>
+                <li>UI quality and refinement</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="capabilities__divider" aria-hidden="true"></div>
+
+        <div class="capabilities__group capabilities__group--support">
+          <p class="capabilities__group-label">Available when you need it</p>
+          <div class="capabilities__group-cards">
+            <div class="capability-card capability-card--blue">
+              <div class="capability-card__icon capability-card__icon--blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+              <h3 class="capability-card__title">Product Management</h3>
+              <p class="capability-card__desc">Turn uncertainty into a clear plan.</p>
+              <ul class="capability-card__list">
+                <li>Product strategy</li>
+                <li>Customer discovery</li>
+                <li>Roadmaps and prioritization</li>
+                <li>Delivery leadership</li>
+              </ul>
+            </div>
+            <div class="capability-card capability-card--purple">
+              <div class="capability-card__icon capability-card__icon--purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </div>
+              <h3 class="capability-card__title">Product Marketing</h3>
+              <p class="capability-card__desc">Turn product value into a story the market understands.</p>
+              <ul class="capability-card__list">
+                <li>Positioning</li>
+                <li>Messaging</li>
+                <li>Launch planning</li>
+                <li>Sales and customer enablement</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-      <a class="btn ghost" href="#">Read the case study</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="wrap" style="padding-top:86px">
-  <div class="closing">
-    <h2>Ready when you are.</h2>
-    <p>Closing placeholder copy. Restates the offer in one sentence and removes the last objection before the button.</p>
-    <a class="btn solid" href="#">Book a call →</a>
-  </div>
-</div>
+  <!-- ============================
+       DEVICE SHOWCASE
+       ============================ -->
+  <section class="showcase" id="showcase">
+    <div class="container">
+      <h2 class="showcase__title reveal">The frontend firepower most teams don&rsquo;t have.</h2>
+      <p class="showcase__subtitle reveal">We build web apps, mobile apps, and marketing sites &mdash; bringing the design and product thinking your team doesn&rsquo;t have time to hire for.</p>
 
-<footer>
-  <div class="wrap">
-    <div class="fgrid">
-      <div>
-        <a class="logo" href="#">Get<span>Pragmatic</span></a>
-        <p style="font-size:14px;margin-top:12px;max-width:30ch">One-line positioning statement goes here.</p>
+      <div class="showcase__control">
+        <input type="radio" id="showcase-webapp" name="showcase-type" checked>
+        <label for="showcase-webapp">Web App</label>
+        <input type="radio" id="showcase-mobileapp" name="showcase-type">
+        <label for="showcase-mobileapp">Mobile App</label>
+        <input type="radio" id="showcase-marketing" name="showcase-type">
+        <label for="showcase-marketing">Marketing Website</label>
       </div>
-      <div><h4>Services</h4><a href="#">Strategy</a><a href="#">Design</a><a href="#">Build</a></div>
-      <div><h4>Company</h4><a href="#">About</a><a href="#">Work</a><a href="#">Contact</a></div>
-      <div><h4>More</h4><a href="#">Journal</a><a href="#">Careers</a></div>
-    </div>
-    <div class="fbot">© 2026 Pragmatic Labs · v2 visual pass · placeholder copy</div>
-  </div>
-</footer>
 
+      <div class="showcase__stage">
+        <div class="showcase__panel showcase__panel--webapp">
+          <div class="showcase__laptop">
+            <div class="showcase__laptop-screen">
+              <div class="showcase__laptop-content">
+                <div class="showcase__laptop-header-bar">
+                  <span class="showcase__laptop-dot showcase__laptop-dot--red"></span>
+                  <span class="showcase__laptop-dot showcase__laptop-dot--yellow"></span>
+                  <span class="showcase__laptop-dot showcase__laptop-dot--green"></span>
+                </div>
+                <div class="showcase__laptop-body">
+                  <div class="showcase__laptop-sidebar"></div>
+                  <div class="showcase__laptop-main">
+                    <div class="showcase__laptop-nav-bar"></div>
+                    <div class="showcase__laptop-cards">
+                      <div class="showcase__laptop-card"></div>
+                      <div class="showcase__laptop-card"></div>
+                      <div class="showcase__laptop-card"></div>
+                    </div>
+                    <div class="showcase__laptop-chart"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="showcase__laptop-base">
+              <div class="showcase__laptop-base-top"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase__panel showcase__panel--mobile">
+          <div class="showcase__phone">
+            <div class="showcase__phone-notch"></div>
+            <div class="showcase__phone-screen">
+              <span class="showcase__phone-time">9:41</span>
+              <div class="showcase__phone-content">
+                <div class="showcase__phone-card"></div>
+                <div class="showcase__phone-stats">
+                  <div class="showcase__phone-stat"></div>
+                  <div class="showcase__phone-stat"></div>
+                </div>
+                <div class="showcase__phone-list">
+                  <div class="showcase__phone-list-item"></div>
+                  <div class="showcase__phone-list-item"></div>
+                  <div class="showcase__phone-list-item"></div>
+                  <div class="showcase__phone-list-item"></div>
+                </div>
+              </div>
+              <div class="showcase__phone-nav">
+                <span class="showcase__phone-nav-dot showcase__phone-nav-dot--active"></span>
+                <span class="showcase__phone-nav-dot"></span>
+                <span class="showcase__phone-nav-dot"></span>
+                <span class="showcase__phone-nav-dot"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase__panel showcase__panel--marketing">
+          <div class="showcase__laptop">
+            <div class="showcase__laptop-screen">
+              <div class="showcase__laptop-content">
+                <div class="showcase__laptop-header-bar">
+                  <span class="showcase__laptop-dot showcase__laptop-dot--red"></span>
+                  <span class="showcase__laptop-dot showcase__laptop-dot--yellow"></span>
+                  <span class="showcase__laptop-dot showcase__laptop-dot--green"></span>
+                </div>
+                <div class="showcase__laptop-body">
+                  <div class="showcase__marketing-main">
+                    <div class="showcase__marketing-nav"></div>
+                    <div class="showcase__marketing-hero">
+                      <div class="showcase__marketing-hero-text">
+                        <div class="showcase__marketing-headline"></div>
+                        <div class="showcase__marketing-subline"></div>
+                        <div class="showcase__marketing-cta"></div>
+                      </div>
+                      <div class="showcase__marketing-hero-image"></div>
+                    </div>
+                    <div class="showcase__marketing-features">
+                      <div class="showcase__marketing-feature"></div>
+                      <div class="showcase__marketing-feature"></div>
+                      <div class="showcase__marketing-feature"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="showcase__laptop-base">
+              <div class="showcase__laptop-base-top"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       PAIN POINTS — "Sound familiar?"
+       ============================ -->
+  <section class="painpoints" id="painpoints">
+    <div class="container">
+      <h2 class="painpoints__title reveal">Sound familiar?</h2>
+      <div class="painpoints__grid">
+        <div class="sticky-note sticky-note--blue reveal">"Our app works, but every new customer asks why it looks like that."</div>
+        <div class="sticky-note sticky-note--purple reveal">"We can't afford a full-time designer and front-end engineer — but the product needs to look and work right."</div>
+        <div class="sticky-note sticky-note--green reveal">"We need a prototype to show investors next week and nobody knows Figma."</div>
+        <div class="sticky-note sticky-note--yellow reveal">"The CEO has 47 ideas but none of them are in Jira."</div>
+        <div class="sticky-note sticky-note--pink reveal">"The backend team is waiting on tickets that don't exist yet."</div>
+        <div class="sticky-note sticky-note--orange reveal">"We've explained what we do 200 times and people still don't get it."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       OUR WORK — illustrative examples by industry
+       ============================ -->
+  <section class="work" id="our-work">
+    <div class="container">
+      <div class="work__header">
+        <div>
+          <p class="work__eyebrow-tag">Our Work</p>
+          <h2 class="work__section-title">Work Across Industries</h2>
+        </div>
+        <div class="work__controls">
+          <div class="work__tabs">
+            <button class="work__tab work__tab--active" data-filter="all">All</button>
+            <button class="work__tab" data-filter="mobile">Mobile</button>
+            <button class="work__tab" data-filter="web">Web</button>
+          </div>
+          <div class="work__nav">
+            <button class="work__nav-btn work__nav-btn--prev" type="button" aria-label="Previous">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="work__nav-btn work__nav-btn--next" type="button" aria-label="Next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="work__list">
+        <div class="work__card" data-categories="mobile">
+          <div class="work__content">
+            <span class="work__eyebrow">Example &middot; FinTech</span>
+            <h3 class="work__title">Mobile Banking App</h3>
+            <p class="work__subtitle">A clean, trustworthy mobile experience for everyday banking.</p>
+            <div class="work__tags">
+              <span class="work__tag">Mobile</span>
+              <span class="work__tag">FinTech</span>
+              <span class="work__tag">Flutter</span>
+            </div>
+            <a href="#contact" class="work__link">Let's build something like this <span>&rarr;</span></a>
+          </div>
+          <div class="work__visual work__visual--blue">
+            <div class="work__phone" style="border-color: var(--brand-blue);">
+              <div class="work__phone-content">
+                <div class="work__phone-header" style="background: var(--brand-blue);"></div>
+                <div class="work__phone-body">
+                  <div class="work__phone-card"></div>
+                  <div class="work__phone-card"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="work__card" data-categories="web">
+          <div class="work__content">
+            <span class="work__eyebrow">Example &middot; Healthcare</span>
+            <h3 class="work__title">Patient Engagement Platform</h3>
+            <p class="work__subtitle">A connected experience that keeps care teams and patients in sync.</p>
+            <div class="work__tags">
+              <span class="work__tag">Web</span>
+              <span class="work__tag">Healthcare</span>
+              <span class="work__tag">React</span>
+            </div>
+            <a href="#contact" class="work__link">Let's build something like this <span>&rarr;</span></a>
+          </div>
+          <div class="work__visual work__visual--green">
+            <div class="work__phone" style="border-color: #10B981;">
+              <div class="work__phone-content">
+                <div class="work__phone-header" style="background: #10B981;"></div>
+                <div class="work__phone-body">
+                  <div class="work__phone-card"></div>
+                  <div class="work__phone-card"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="work__card" data-categories="mobile web">
+          <div class="work__content">
+            <span class="work__eyebrow">Example &middot; Retail</span>
+            <h3 class="work__title">Omnichannel Commerce Experience</h3>
+            <p class="work__subtitle">A unified shopping experience across web, mobile, and in-store.</p>
+            <div class="work__tags">
+              <span class="work__tag">E-commerce</span>
+              <span class="work__tag">Web</span>
+              <span class="work__tag">Mobile</span>
+            </div>
+            <a href="#contact" class="work__link">Let's build something like this <span>&rarr;</span></a>
+          </div>
+          <div class="work__visual work__visual--purple">
+            <div class="work__phone" style="border-color: var(--brand-violet);">
+              <div class="work__phone-content">
+                <div class="work__phone-header" style="background: var(--brand-violet);"></div>
+                <div class="work__phone-body">
+                  <div class="work__phone-card"></div>
+                  <div class="work__phone-card"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       LOW-RISK WAY TO START
+       ============================ -->
+  <section class="lowrisk">
+    <div class="container">
+      <div class="lowrisk__grid">
+        <div class="lowrisk__intro reveal">
+          <p class="lowrisk__eyebrow">A Low-Risk Way to Start</p>
+          <h2 class="lowrisk__title">Two weeks to clarity.<br> A plan you can <span class="lowrisk__title-mark">act on</span>.</h2>
+          <p class="lowrisk__desc">We embed with your team for two weeks to solve one meaningful problem and deliver a clear path forward. No fluff. Just traction.</p>
+          <a href="#contact" class="btn btn--primary lowrisk__cta">Start a Two-Week Engagement &rarr;</a>
+          <p class="lowrisk__reassurance">A real project, not a sales exercise.</p>
+        </div>
+
+        <div class="lowrisk__compare reveal">
+          <div class="lowrisk__compare-col">
+            <p class="lowrisk__compare-label lowrisk__compare-label--pragmatic">Pragmatic<br>Two-Week Engagement</p>
+            <span class="lowrisk__compare-price lowrisk__compare-price--pragmatic" id="lowrisk-engagement-price">$1,999</span>
+            <ul class="lowrisk__compare-list lowrisk__compare-list--check">
+              <li>
+                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#3B82F6" stroke-width="1.3"/><path d="M11 6L7 10.5 5 8.5" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                One defined problem
+              </li>
+              <li>
+                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#3B82F6" stroke-width="1.3"/><path d="M11 6L7 10.5 5 8.5" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Two focused weeks
+              </li>
+              <li>
+                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#3B82F6" stroke-width="1.3"/><path d="M11 6L7 10.5 5 8.5" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                A clear plan and recommendations
+              </li>
+            </ul>
+            <div class="lowrisk__compare-callout">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Fast clarity.<br>Real momentum.</span>
+            </div>
+          </div>
+
+          <div class="lowrisk__compare-vs">VS.</div>
+
+          <div class="lowrisk__compare-col">
+            <p class="lowrisk__compare-label">Full-Time Hire</p>
+            <span class="lowrisk__compare-price" id="lowrisk-twoweek-cost">~$7,500</span>
+            <span class="lowrisk__compare-sublabel">Estimated two-week cost</span>
+            <ul class="lowrisk__compare-list lowrisk__compare-list--cross">
+              <li><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#94a3b8" stroke-width="1.3"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>Salary</li>
+              <li><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#94a3b8" stroke-width="1.3"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>Benefits &amp; payroll taxes</li>
+              <li><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#94a3b8" stroke-width="1.3"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>Recruiting &amp; onboarding</li>
+              <li><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#94a3b8" stroke-width="1.3"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>Equipment &amp; software</li>
+              <li><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#94a3b8" stroke-width="1.3"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>Management time</li>
+              <li><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#94a3b8" stroke-width="1.3"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>Long-term commitment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="lowrisk__disclaimer">Illustrative comparison only. Salaries, benefits, recruiting costs, and employment expenses vary by company and location. Based on an illustrative fully loaded annual cost of approximately <span id="lowrisk-annual-cost">$180,000</span>.</p>
+
+      <div class="lowrisk__features">
+        <div class="lowrisk__feature">
+          <span class="lowrisk__feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.75" fill="currentColor"/></svg>
+          </span>
+          <h3 class="lowrisk__feature-title">Solve the right problem</h3>
+          <p class="lowrisk__feature-desc">We get to the root cause and define what matters.</p>
+        </div>
+        <div class="lowrisk__feature">
+          <span class="lowrisk__feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 3v18" stroke-linecap="round"/><path d="M4 4h13l-2.5 3.5L17 11H4" stroke-linejoin="round"/></svg>
+          </span>
+          <h3 class="lowrisk__feature-title">Build the right plan</h3>
+          <p class="lowrisk__feature-desc">A focused roadmap you can execute with confidence.</p>
+        </div>
+        <div class="lowrisk__feature">
+          <span class="lowrisk__feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke-linecap="round"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2c2.6.4 4.5 2.6 4.5 5.3" stroke-linecap="round"/></svg>
+          </span>
+          <h3 class="lowrisk__feature-title">Senior experts, day one</h3>
+          <p class="lowrisk__feature-desc">Work directly with practitioners who've done it before.</p>
+        </div>
+        <div class="lowrisk__feature">
+          <span class="lowrisk__feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l6-6 4 4 8-8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3 class="lowrisk__feature-title">Start seeing value&mdash;fast</h3>
+          <p class="lowrisk__feature-desc">Make progress in two weeks, not two months.</p>
+        </div>
+      </div>
+
+      <p class="lowrisk__framing reveal">Hire when the role is clear. Start with Pragmatic when the work can't wait.</p>
+    </div>
+  </section>
+
+  <!-- ============================
+       HOW IT STARTS — 3 steps
+       ============================ -->
+  <section class="howstart" id="process">
+    <div class="container">
+      <div class="howstart__header reveal">
+        <h2 class="howstart__title">How it starts</h2>
+        <p class="howstart__subtitle">No proposals. No SOWs. No six-week onboarding.</p>
+      </div>
+      <div class="howstart__steps reveal">
+        <div class="howstart__step">
+          <span class="howstart__num">1</span>
+          <h3 class="howstart__step-title">Book a working session</h3>
+          <p class="howstart__step-desc">30 minutes. Tell us what you're building, where you're stuck, and what you need.</p>
+        </div>
+        <div class="howstart__connector">
+          <svg viewBox="0 0 24 12" fill="none"><path d="M0 6h20m0 0l-4-4m4 4l-4 4" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="howstart__step">
+          <span class="howstart__num">2</span>
+          <h3 class="howstart__step-title">We scope the engagement</h3>
+          <p class="howstart__step-desc">Two-week sprint or monthly retainer &mdash; clear deliverables, timeline, and price. You approve before anything starts.</p>
+        </div>
+        <div class="howstart__connector">
+          <svg viewBox="0 0 24 12" fill="none"><path d="M0 6h20m0 0l-4-4m4 4l-4 4" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="howstart__step">
+          <span class="howstart__num">3</span>
+          <h3 class="howstart__step-title">Work starts within a week</h3>
+          <p class="howstart__step-desc">Real output, fast. You'll have something to react to before most agencies finish discovery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       WHY NOT HIRE — Cost comparison
+       ============================ -->
+  <section class="whynothire">
+    <div class="container">
+      <div class="whynothire__header reveal">
+        <h2 class="whynothire__title">Why not just hire?</h2>
+        <p class="whynothire__subtitle">Four full-time product roles means four salaries, four benefits packages, and months of recruiting before anyone starts.</p>
+      </div>
+      <div class="whynothire__equation reveal">
+        <div class="whynothire__role">
+          <div class="whynothire__role-icon whynothire__role-icon--teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+          <h4 class="whynothire__role-title">Product Designer</h4>
+          <p class="whynothire__role-salary">$110&ndash;150K/yr</p>
+        </div>
+        <span class="whynothire__operator" aria-hidden="true">+</span>
+        <div class="whynothire__role">
+          <div class="whynothire__role-icon whynothire__role-icon--red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h4 class="whynothire__role-title">Front-End Engineer</h4>
+          <p class="whynothire__role-salary">$130&ndash;170K/yr</p>
+        </div>
+        <span class="whynothire__operator" aria-hidden="true">+</span>
+        <div class="whynothire__role">
+          <div class="whynothire__role-icon whynothire__role-icon--yellow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h4 class="whynothire__role-title">Product Manager</h4>
+          <p class="whynothire__role-salary">$120&ndash;160K/yr</p>
+        </div>
+        <span class="whynothire__operator" aria-hidden="true">+</span>
+        <div class="whynothire__role">
+          <div class="whynothire__role-icon whynothire__role-icon--orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <h4 class="whynothire__role-title">Product Marketer</h4>
+          <p class="whynothire__role-salary">$100&ndash;140K/yr</p>
+        </div>
+        <span class="whynothire__operator whynothire__operator--equals" aria-hidden="true">=</span>
+        <div class="whynothire__badresult">
+          <span class="whynothire__badresult-label">Hiring all four</span>
+          <span class="whynothire__badresult-price">Half a million dollars</span>
+          <span class="whynothire__badresult-note">$460&ndash;620K/yr &mdash; plus months to recruit &amp; ramp up</span>
+        </div>
+      </div>
+
+      <div class="whynothire__divider reveal">
+        <span class="whynothire__divider-line"></span>
+        <span class="whynothire__divider-label">By the way</span>
+        <span class="whynothire__divider-line"></span>
+      </div>
+
+      <div class="whynothire__result reveal">
+        <span class="whynothire__result-badge">&#9733; The whole product side, handled</span>
+        <div class="whynothire__result-grid">
+          <div class="whynothire__result-price-block">
+            <span class="whynothire__result-pretitle">Starting at</span>
+            <span class="whynothire__result-price">$1,999<small>/sprint</small></span>
+            <span class="whynothire__result-annual">Like it? Continue for $3,000/mo &mdash; or $30,000/yr paid annually.</span>
+          </div>
+          <div class="whynothire__result-details">
+            <p class="whynothire__result-hook">One partner. Four roles. No recruiting, no ramp-up, no overhead.</p>
+            <ul class="whynothire__result-list">
+              <li>Senior-level from day one</li>
+              <li>Start within a week</li>
+              <li>Two-week sprints or monthly retainer</li>
+              <li>Cancel anytime &mdash; no lock-in</li>
+            </ul>
+          </div>
+          <a href="#contact" class="whynothire__result-cta">Get Started &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       FAQ
+       ============================ -->
+  <section class="faq">
+    <div class="container">
+      <h2 class="faq__title reveal">Common questions</h2>
+      <div class="faq__grid reveal">
+        <div class="faq__item">
+          <h3 class="faq__question">How fast can you start?</h3>
+          <p class="faq__answer">Usually within a week. We scope the first sprint together and get moving.</p>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__question">What's the minimum commitment?</h3>
+          <p class="faq__answer">One two-week sprint or one month. No long-term contracts. If it works, we keep going. Minimum engagement is $3,000/month, or pay annually and save.</p>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__question">Do you work in our tools?</h3>
+          <p class="faq__answer">Yes. Jira, Linear, Figma, Notion, Slack, GitHub &mdash; whatever your team already uses.</p>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__question">Do we need to bring in product management or marketing too?</h3>
+          <p class="faq__answer">No. Most clients start with just design and front-end engineering. We bring in product management or marketing later, only if the work calls for it.</p>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__question">Do you replace our team?</h3>
+          <p class="faq__answer">No. We fill the gaps your team doesn't cover yet. We work alongside your engineers, not instead of them.</p>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__question">What if we eventually hire for these roles?</h3>
+          <p class="faq__answer">That's the goal. We help you move fast now and hand off cleanly when you're ready to build the team in-house.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       DELIVERABLES — Post-it Bingo
+       ============================ -->
+  <section class="deliverables">
+    <div class="container">
+      <h2 class="deliverables__title reveal">Everything we deliver</h2>
+      <p class="deliverables__subtitle reveal">Real artifacts, not decks about artifacts.</p>
+      <p class="deliverables__subtitle reveal">Design and front-end lead every engagement. Product management, marketing, and things like investor or sales decks are available &agrave; la carte.</p>
+
+      <div class="deliverables__control reveal">
+        <input type="radio" id="deliverables-design" name="deliverables-type" checked>
+        <label for="deliverables-design">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+          Design
+        </label>
+        <input type="radio" id="deliverables-fe" name="deliverables-type">
+        <label for="deliverables-fe">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Front End Engineering
+        </label>
+        <input type="radio" id="deliverables-pm" name="deliverables-type">
+        <label for="deliverables-pm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Product Management
+        </label>
+        <input type="radio" id="deliverables-marketing" name="deliverables-type">
+        <label for="deliverables-marketing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Product Marketing
+        </label>
+      </div>
+
+      <div class="deliverables__stage reveal">
+        <div class="deliverables__panel deliverables__panel--pm">
+          <span class="deliverables__tape">Plan the product</span>
+          <div class="deliverables__grid">
+            <div class="deliverables__postit deliverables__postit--yellow">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="4" cy="18" r="1.5"/>
+                  <path d="M5.5 16.5l4-4" stroke-dasharray="2 2"/>
+                  <circle cx="11" cy="11" r="1.5"/>
+                  <path d="M12.5 9.5l4-4" stroke-dasharray="2 2"/>
+                  <circle cx="18" cy="4" r="1.5"/>
+                  <path d="M18 4V1"/>
+                  <path d="M18 1h3l-1.5 1.5L21 4h-3"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Roadmaps</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--yellow">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 2h8l4 4v16H6z"/>
+                  <path d="M14 2v4h4"/>
+                  <path d="M9 11h6M9 14h6M9 17h4"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">PRDs</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--yellow">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="5" height="5" rx="1"/>
+                  <path d="M4 6.5l1 1 2-2"/>
+                  <path d="M11 6.5h10"/>
+                  <rect x="3" y="13" width="5" height="5" rx="1"/>
+                  <path d="M4 15.5l1 1 2-2"/>
+                  <path d="M11 15.5h10"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Epics &amp; tickets</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--yellow">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="4.5" cy="6" r="1.3"/>
+                  <path d="M9 6h11"/>
+                  <circle cx="4.5" cy="12" r="1.3"/>
+                  <path d="M9 12h11"/>
+                  <circle cx="4.5" cy="18" r="1.3"/>
+                  <path d="M9 18h8"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Feature specs</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--yellow">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="9" width="6" height="6" rx="1"/>
+                  <path d="M7 12h3"/>
+                  <path d="M13 8l3 4-3 4-3-4z"/>
+                  <path d="M16 12h3"/>
+                  <rect x="19" y="9" width="4" height="6" rx="1"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">User flows</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--yellow">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="6" height="16" rx="1"/>
+                  <rect x="9" y="4" width="6" height="16" rx="1"/>
+                  <rect x="16" y="4" width="6" height="16" rx="1"/>
+                  <rect x="3.5" y="6.5" width="3" height="2.5" rx="0.5"/>
+                  <rect x="3.5" y="10.5" width="3" height="2.5" rx="0.5"/>
+                  <rect x="10.5" y="6.5" width="3" height="2.5" rx="0.5"/>
+                  <rect x="17.5" y="6.5" width="3" height="2.5" rx="0.5"/>
+                  <rect x="17.5" y="10.5" width="3" height="2.5" rx="0.5"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Kanban boards</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--yellow">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Internal tools</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deliverables__panel deliverables__panel--design">
+          <span class="deliverables__tape">Design the experience</span>
+          <div class="deliverables__grid">
+            <div class="deliverables__postit deliverables__postit--blue">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M3 8h18"/>
+                  <rect x="6" y="11" width="6" height="6" rx="0.5"/>
+                  <path d="M6 11l6 6M12 11l-6 6"/>
+                  <path d="M14 12h4M14 15h3"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">UI/UX designs</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--blue">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="3" width="14" height="18" rx="2"/>
+                  <rect x="8" y="7" width="8" height="4" rx="0.5"/>
+                  <path d="M8 14h8M8 17h5"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Landing pages</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--blue">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="7" cy="7" r="3"/>
+                  <rect x="13" y="4" width="7" height="6" rx="1"/>
+                  <path d="M7 15l4.5 6h-9z"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Design systems</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--blue">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="8" height="8" rx="1.5" stroke-dasharray="2.5 2.5"/>
+                  <rect x="14" y="3" width="8" height="8" rx="1.5"/>
+                  <rect x="2" y="15" width="8" height="6" rx="1"/>
+                  <rect x="14" y="16" width="8" height="5" rx="2.5"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Component systems</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--blue">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="9" width="6" height="6" rx="1"/>
+                  <path d="M7 12h3"/>
+                  <path d="M13 8l3 4-3 4-3-4z"/>
+                  <path d="M16 12h3"/>
+                  <rect x="19" y="9" width="4" height="6" rx="1"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">User flows</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--blue">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="7" cy="12" r="5"/>
+                  <path d="M7 7v5h5"/>
+                  <path d="M15 19v-4M18 19v-8M21 19v-2"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Visual diagrams</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--blue">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="6" cy="7" r="3"/>
+                  <path d="M2 20l5-8 4 5 3-4 6 7H2z"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Logos &amp; identity</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deliverables__panel deliverables__panel--fe">
+          <span class="deliverables__tape">Build the product</span>
+          <div class="deliverables__grid">
+            <div class="deliverables__postit deliverables__postit--orange">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M3 8h18"/>
+                  <rect x="6" y="11" width="6" height="6" rx="0.5"/>
+                  <path d="M6 11l6 6M12 11l-6 6"/>
+                  <path d="M15 13l5 2-2 1 2 2-1.5 1.5-2-2-1 2z"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Front-end prototypes</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--orange">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M3 8h18"/>
+                  <rect x="6" y="11" width="5" height="4" rx="0.5"/>
+                  <path d="M13 11h5M13 13.5h4"/>
+                  <rect x="6" y="17" width="4" height="2" rx="1"/>
+                  <rect x="12" y="17" width="4" height="2" rx="1"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Web applications</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--orange">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"/>
+                  <polyline points="8 6 2 12 8 18"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Landing page dev</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--orange">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 4v16"/>
+                  <circle cx="6.5" cy="12" r="4"/>
+                  <path d="M6.5 8v4h4"/>
+                  <path d="M16 17v-4M18.5 17v-7M21 17v-2"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Dashboards</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--orange">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M3 8h18"/>
+                  <circle cx="12" cy="14.5" r="4.5"/>
+                  <path d="M7.5 14.5h9M12 10v9"/>
+                  <path d="M8.8 11.3a7 7 0 0 0 0 6.4M15.2 11.3a7 7 0 0 1 0 6.4"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Websites</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--orange">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Internal tools</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--orange">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="8" height="8" rx="1.5" stroke-dasharray="2.5 2.5"/>
+                  <rect x="14" y="3" width="8" height="8" rx="1.5"/>
+                  <rect x="2" y="15" width="8" height="6" rx="1"/>
+                  <rect x="14" y="16" width="8" height="5" rx="2.5"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Component systems</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deliverables__panel deliverables__panel--marketing">
+          <span class="deliverables__tape">Tell the story</span>
+          <div class="deliverables__grid">
+            <div class="deliverables__postit deliverables__postit--green">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="12" rx="1.5"/>
+                  <circle cx="8.5" cy="9" r="3.2"/>
+                  <path d="M8.5 5.8V9h3.2"/>
+                  <path d="M14 6.5h5M14 9h4M14 11.5h3"/>
+                  <path d="M12 15v4M8 22l4-3 4 3"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Investor decks</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--green">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 20h18"/>
+                  <path d="M6 20v-5M11 20v-9M16 20v-3"/>
+                  <path d="M6 11l5-5 3 3 6-6"/>
+                  <path d="M16 3h4v4"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Sales decks</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--green">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M3 8h18"/>
+                  <path d="M7 14l4-1.5v7L7 18z"/>
+                  <path d="M11 12.5l5-2v9l-5-2"/>
+                  <path d="M16.5 12a3 3 0 0 1 0 6"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Marketing websites</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--green">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 5h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/>
+                  <circle cx="8" cy="10.5" r="1"/>
+                  <circle cx="12" cy="10.5" r="1"/>
+                  <circle cx="16" cy="10.5" r="1"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Website messaging</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--green">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="13" rx="2"/>
+                  <path d="M10 7.5l6 4.5-6 4.5z"/>
+                  <path d="M5 19h14"/>
+                  <circle cx="12" cy="19" r="1.4"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Demo narratives</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--green">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 2h9l5 5v15H6z"/>
+                  <path d="M15 2v5h5"/>
+                  <rect x="9" y="11" width="5" height="4" rx="0.5"/>
+                  <path d="M9 17h6"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">One-pagers</span>
+            </div>
+            <div class="deliverables__postit deliverables__postit--green">
+              <span class="deliverables__postit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="6" cy="7" r="3"/>
+                  <path d="M2 20l5-8 4 5 3-4 6 7H2z"/>
+                </svg>
+              </span>
+              <span class="deliverables__postit-label">Logos &amp; identity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       PRICING
+       ============================ -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="pricing__hero-header reveal">
+        <div class="pricing__hero-header-text">
+          <h2 class="pricing__title">Start with a sprint.<br>Stay for the momentum.</h2>
+          <p class="pricing__hero-subtitle">Not ready for a monthly commitment? Try a focused two-week sprint and bring in the exact product, design, engineering, or marketing expertise you need.</p>
+        </div>
+        <div class="pricing__hero-features">
+          <div class="pricing__hero-feature">
+            <div class="pricing__hero-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <p><strong>Low-risk</strong> way to try us out</p>
+          </div>
+          <div class="pricing__hero-feature">
+            <div class="pricing__hero-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+            </div>
+            <p><strong>Clear scope,</strong> fast turnaround</p>
+          </div>
+          <div class="pricing__hero-feature">
+            <div class="pricing__hero-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M15 9.5c0-1.4-1.3-2.5-3-2.5s-3 1.1-3 2.5 1.3 2.5 3 2.5 3 1.1 3 2.5-1.3 2.5-3 2.5-3-1.1-3-2.5"/></svg>
+            </div>
+            <p><strong>Monthly</strong> retainers from $3,000/mo</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sprint Block -->
+      <div class="pricing__hero reveal">
+        <div class="pricing__hero-card">
+          <span class="pricing__hero-badge">&#9733; Best way to start</span>
+          <h3 class="pricing__hero-title">Two-Week Sprint</h3>
+          <span class="pricing__hero-price">$1,999</span>
+          <span class="pricing__hero-divider"></span>
+          <p class="pricing__hero-desc">Up to 10 hours over two weeks. Clear scope. Tangible deliverables. No long-term commitment.</p>
+          <a href="#contact" class="btn btn--primary pricing__hero-cta">Plan your sprint &rarr;</a>
+          <a href="#retainer-tiers" class="pricing__hero-link">View retainer pricing &rsaquo;</a>
+        </div>
+        <div class="pricing__hero-roles">
+          <div class="pricing__hero-role pricing__hero-role--purple">
+            <div class="pricing__hero-role-icon pricing__hero-role-icon--purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+            </div>
+            <h4>UX/UI Designer</h4>
+            <p>Research, flows, wireframes, high-fidelity design.</p>
+            <span class="pricing__hero-role-footer">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Available in every sprint
+            </span>
+          </div>
+          <div class="pricing__hero-role pricing__hero-role--blue">
+            <div class="pricing__hero-role-icon pricing__hero-role-icon--blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h4>Front-End Engineer</h4>
+            <p>Responsive UI, prototypes, integrations, implementation.</p>
+            <span class="pricing__hero-role-footer">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Available in every sprint
+            </span>
+          </div>
+          <div class="pricing__hero-role pricing__hero-role--green">
+            <div class="pricing__hero-role-icon pricing__hero-role-icon--green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h4>Product Manager</h4>
+            <p>Strategy, roadmap, prioritization, requirements.</p>
+            <span class="pricing__hero-role-footer">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Available in every sprint
+            </span>
+          </div>
+          <div class="pricing__hero-role pricing__hero-role--orange">
+            <div class="pricing__hero-role-icon pricing__hero-role-icon--orange">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </div>
+            <h4>Product Marketing</h4>
+            <p>Positioning, messaging, launch assets, sales enablement.</p>
+            <span class="pricing__hero-role-footer">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Available in every sprint
+            </span>
+          </div>
+          <div class="pricing__hero-role pricing__hero-role--gray">
+            <div class="pricing__hero-role-icon pricing__hero-role-icon--gray">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h4>Flexible Mix</h4>
+            <p>Need a blend of skills? We'll shape the sprint around your goal.</p>
+            <span class="pricing__hero-role-footer">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Available in every sprint
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Retainer Block -->
+      <div class="pricing__retainer reveal">
+        <div class="pricing__retainer-top">
+          <div class="pricing__retainer-intro">
+            <div class="pricing__retainer-intro-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><rect x="7" y="14" width="4" height="4" rx="0.5"/></svg>
+            </div>
+            <div>
+              <p class="pricing__retainer-eyebrow">Ongoing support</p>
+              <h3 class="pricing__retainer-headline">Need ongoing support?</h3>
+              <p class="pricing__retainer-sub">Monthly retainers lock in dedicated capacity at a better rate&mdash;so you get continuous coverage and momentum that compounds.</p>
+            </div>
+          </div>
+          <div class="pricing__retainer-selector">
+            <p class="pricing__retainer-selector-label">Select your monthly capacity</p>
+            <div class="pricing__capacity-pills" role="radiogroup" aria-label="Monthly capacity">
+              <button class="pricing__pill" role="radio" aria-checked="false" tabindex="-1" data-hours="20" type="button">
+                <svg class="pricing__pill-check" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                20h
+              </button>
+              <button class="pricing__pill" role="radio" aria-checked="false" tabindex="-1" data-hours="40" type="button">
+                <svg class="pricing__pill-check" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                40h
+              </button>
+              <button class="pricing__pill" role="radio" aria-checked="true" tabindex="0" data-hours="80" type="button">
+                <svg class="pricing__pill-check" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                80h
+              </button>
+              <button class="pricing__pill" role="radio" aria-checked="false" tabindex="-1" data-hours="160" type="button">
+                <svg class="pricing__pill-check" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                160h
+              </button>
+            </div>
+            <p class="pricing__retainer-selector-hint">Prices update to match your selection.</p>
+          </div>
+          <div class="pricing__retainer-billing">
+            <div class="pricing__retainer-billing-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <p><strong>Predictable billing.</strong><br>Flexible terms.</p>
+          </div>
+        </div>
+
+        <div class="pricing__retainer-tiers" id="retainer-tiers">
+          <button class="pricing__tier" aria-pressed="false" data-hours="20" type="button">
+            <span class="pricing__tier-selected-label" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Selected
+            </span>
+            <span class="pricing__tier-name">Focus</span>
+            <span class="pricing__tier-desc">One focused work block each week</span>
+            <span class="pricing__tier-hours">(20 hours)</span>
+            <span class="pricing__tier-divider"></span>
+            <span class="pricing__tier-price">$3,000<small>/mo</small></span>
+            <span class="pricing__tier-weekly">Approximately 5 hours per week</span>
+            <span class="pricing__tier-longdesc">Ideal for keeping one clear priority moving with consistent, senior-level support.</span>
+            <span class="pricing__tier-check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Dedicated hours each month
+            </span>
+            <span class="pricing__tier-annual">Ask about locking in for a year to save with annual billing.</span>
+          </button>
+          <button class="pricing__tier" aria-pressed="false" data-hours="40" type="button">
+            <span class="pricing__tier-selected-label" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Selected
+            </span>
+            <span class="pricing__tier-name">Momentum</span>
+            <span class="pricing__tier-desc">More than a full working day each week</span>
+            <span class="pricing__tier-hours">(40 hours)</span>
+            <span class="pricing__tier-divider"></span>
+            <span class="pricing__tier-price">$6,000<small>/mo</small></span>
+            <span class="pricing__tier-weekly">Approximately 10 hours per week</span>
+            <span class="pricing__tier-longdesc">Enough capacity to own a consistent workstream and make meaningful progress every week.</span>
+            <span class="pricing__tier-check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Dedicated hours each month
+            </span>
+            <span class="pricing__tier-annual">Ask about locking in for a year to save with annual billing.</span>
+          </button>
+          <button class="pricing__tier pricing__tier--popular" aria-pressed="true" data-hours="80" type="button">
+            <span class="pricing__tier-badge">Most popular</span>
+            <span class="pricing__tier-selected-label" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Selected
+            </span>
+            <span class="pricing__tier-name">Scale</span>
+            <span class="pricing__tier-desc">A part-time specialist or blended team</span>
+            <span class="pricing__tier-hours">(80 hours)</span>
+            <span class="pricing__tier-divider"></span>
+            <span class="pricing__tier-price">$12,000<small>/mo</small></span>
+            <span class="pricing__tier-weekly">Approximately 20 hours per week</span>
+            <span class="pricing__tier-longdesc">Substantial weekly ownership for a major initiative or several connected priorities.</span>
+            <span class="pricing__tier-check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Dedicated hours each month
+            </span>
+            <span class="pricing__tier-annual">Ask about locking in for a year to save with annual billing.</span>
+          </button>
+          <button class="pricing__tier" aria-pressed="false" data-hours="160" type="button">
+            <span class="pricing__tier-selected-label" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Selected
+            </span>
+            <span class="pricing__tier-name">Embedded</span>
+            <span class="pricing__tier-desc">Full-time capacity without the full-time hire</span>
+            <span class="pricing__tier-hours">(160 hours)</span>
+            <span class="pricing__tier-divider"></span>
+            <span class="pricing__tier-price">$24,000<small>/mo</small></span>
+            <span class="pricing__tier-weekly">Approximately 40 hours per week</span>
+            <span class="pricing__tier-longdesc">Embedded support across product, design, marketing, or front-end engineering.</span>
+            <span class="pricing__tier-check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Dedicated hours each month
+            </span>
+            <span class="pricing__tier-annual">Ask about locking in for a year to save with annual billing.</span>
+          </button>
+        </div>
+        <p class="pricing__retainer-note">Need something in between? <a href="#contact">Custom capacity available.</a></p>
+      </div>
+
+      <p class="pricing__footnote reveal">Cash, partial equity, milestone-based, or hybrid. Flexible terms for different stages.</p>
+    </div>
+  </section>
+
+  <!-- ============================
+       ABOUT
+       ============================ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__inner reveal">
+        <div class="about__content">
+          <p class="about__eyebrow">About Pragmatic</p>
+          <h2 class="about__title">Small by design. Senior by default.</h2>
+          <p class="about__desc">Pragmatic is a tiny, modern studio that designs and builds the web apps, mobile apps, and marketing sites your customers actually use. Need product strategy or marketing support around the work? We bring that too.</p>
+          <p class="about__desc">We've been founders, operators, and early employees. We know what it's like to have more ideas than bandwidth. We use modern AI-assisted tools to move fast &mdash; but the judgment, taste, and product thinking are deeply human.</p>
+        </div>
+        <div class="about__values">
+          <div class="about__value">
+            <div class="about__value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <h4>Founder/operator mindset</h4>
+              <p>We think like owners, not vendors.</p>
+            </div>
+          </div>
+          <div class="about__value">
+            <div class="about__value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <h4>AI-forward, human-led</h4>
+              <p>Modern tools, real judgment.</p>
+            </div>
+          </div>
+          <div class="about__value">
+            <div class="about__value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <h4>Fast first drafts</h4>
+              <p>Something to react to, quickly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       BOTTOM CTA
+       ============================ -->
+  <section class="cta-section" id="contact">
+    <div class="cta-section__orb cta-section__orb--1"></div>
+    <div class="cta-section__orb cta-section__orb--2"></div>
+    <div class="container">
+      <div class="cta-section__inner reveal">
+        <h2 class="cta-section__title">Ready to turn the conversation into something useful?</h2>
+        <p class="cta-section__desc">Start with a working session. We'll listen, ask the right questions, and show you what we can build together.</p>
+        <div class="cta-section__actions">
+          <a href="mailto:hello@pragmaticlabs.dev" class="btn btn--cta-primary">Start With a Working Session &rarr;</a>
+        </div>
+        <p class="cta-section__email">Or email us directly: <a href="mailto:hello@pragmaticlabs.dev">hello@pragmaticlabs.dev</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       FOOTER
+       ============================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="#" class="footer__logo">
+            <svg class="footer__logo-svg" viewBox="0 0 1366 320.9" xmlns="http://www.w3.org/2000/svg" aria-label="Pragmatic.">
+              <g fill="currentColor">
+                <path d="M715.6,234.4l-39.6.4-.4-79.3c0-12.8-10.5-20.2-22.1-19.5-12.8.8-21.8,9.8-21.9,23.2l-.5,75.4h-39.9s-.2-128-.2-128l38.6-.3,2,18.3c10.1-16.4,25-22.5,42.8-21.4,15.8.9,29.2,7.8,36.2,23.9,9.3-17.6,24.7-24,43.1-24,23.9,0,45.1,16.4,45.2,41.7l.4,89.8h-39.5c0,0-.4-76-.4-76,0-5.5-2.4-13.1-5.8-16.9-6.4-7-16.1-6.9-24.6-3.6s-12.8,11.3-12.9,20.6l-.3,75.7Z"/>
+                <path d="M440.6,242.3l39.3.4c2.6,11.8,11.7,16.6,23.5,16.3,10.6-.3,22.5-3,25.7-14.5s2.8-21.3,1.7-33.1c-6.4,11.4-15.4,16.9-28,19.2-22.5,4.3-46.5-3.2-58.3-23.9-12.5-21.9-13.1-48.8-3.1-71.6,9.2-20.8,29.3-32.7,51.6-32.2,16.4.4,29.4,7.8,38.5,20.7l1.7-17.5h38.5c0-.1,0,117.7,0,117.7,0,23.9-9.4,48.6-34,56.9-26.5,9-56.5,7.3-80.6-6.3-12-6.7-19.3-17.7-16.4-32.3ZM525.7,190.3c8.5-13.5,8.2-31.4.9-44.8-4.7-8.5-14.1-11.6-22.8-11.9-7.7-.3-16.9,3.1-21.7,10.8-8,13-8.5,30.5-1.4,43.8,4.6,8.5,13.8,12.3,21.8,12.4,8.4.2,17.8-1.9,23.1-10.3Z"/>
+                <path d="M171.7,149.1c-20.5,29.3-64.1,23.2-96.6,24.1l-.4,61.4H30.2s0-186.4,0-186.4l93.7.3c20.5,0,38.4,9.6,50,25.8,12.8,23.2,13.3,52.7-2.2,74.8ZM139.5,107.7c-1.1-13.9-10.4-24.6-24.3-24.7l-40.2-.4v56.4c13.9.2,27.3.5,40.5-.7,16-1.5,25.3-14.2,24-30.5Z"/>
+                <path d="M312.7,233c-16.1-6.7-22.8-22.5-20.9-38.4,4.7-39.5,57.7-35.1,87.4-36.9,1.3-7.5,1.5-17.7-5.5-23.1-7.7-5.9-34.6-8.6-38.3,10h-37.9c.3-43.8,59-45.4,87.3-38.7,19.9,4.7,34.6,20.5,34.7,41.3l.3,54.5c0,11.1,1.2,21.3,2.5,32.7l-38,.2-3.5-15.8c-14,19.4-46,23.4-68.1,14.2ZM373.3,205.3c6.6-6,8-16.3,5.8-24.3-13.1-.2-43-2.3-46.6,13.3-1.3,5.5.5,13.1,5.6,15.7,11.1,5.6,25.4,4.2,35.2-4.6Z"/>
+                <path d="M828.2,229.5c-13.4-8.9-17-24-13.9-39.2,7.1-34.8,57.6-30.8,85.9-32.4,1.2-6.2,1.1-14.9-3.2-20.8-6.2-8.6-36-11.5-40.2,7.6h-38.1c-.7-44.8,62.6-46.5,92.3-37.1,16.6,5.2,29.3,19.7,29.4,37.7l.5,61.6c0,9.5,1.3,17.8,2.9,27.8h-38.2c0,.1-3.5-14.4-3.5-14.4-16.2,19.2-53.2,23-73.9,9.2ZM896.8,202.9c4.6-6.9,5.2-14.5,3.7-22.2-14.2.3-43.1-2-46.6,13.9-1,4.6.3,11.6,4.2,14.4,11.3,8.1,32.1,3.9,38.7-6.1Z"/>
+                <path d="M1178.5,207.7c14,1.9,25-4.8,27.8-19.6l42.1-.4c-5.5,44.6-53.9,57.5-91.3,46.2-42.3-12.7-53.1-60.9-37-95,20-42.5,80.2-45,109.2-20.4,10.6,9,16.4,20.7,18.5,35.1h-39.9c-4.5-10.4-11.1-17.8-21.7-18.6-10.7-.8-21.9,3.2-26.9,13.8-9.2,19.2-7.2,55.2,19.3,58.8Z"/>
+                <path d="M1041.8,204.8l-.3,28.5c-14.8,3.4-29.1,4.3-43.9,1.5-15.3-2.9-25.7-15.5-25.8-31.4l-.5-67-20.6-1.2v-28.5s20.9-1.1,20.9-1.1l.3-41.2,40.5-.2.2,41.7,29.5.5v28.9c-.1,0-29.5.5-29.5.5v58.4c0,5.5,6,11.2,11.2,11l18.2-.5Z"/>
+                <path d="M238.4,234.5h-40.3s0-128,0-128l39.1-.4,1.1,21.8c8.8-19.7,27.5-28.5,48.8-23.5l-.4,35.4c-9.8-.4-17.4-.8-26.1.7-11.4,1.9-21.5,12.1-21.6,24.4l-.7,69.6Z"/>
+                <polygon points="1098.5 234.4 1058.5 234.5 1058.4 106.4 1098.6 106.2 1098.5 234.4"/>
+                <polygon points="1098.6 83.4 1058.5 83.3 1058.6 48 1098.5 47.8 1098.6 83.4"/>
+              </g>
+              <rect fill="#3B82F6" x="1273.3" y="170.4" width="67.5" height="67.5"/>
+            </svg>
+          </a>
+          <p class="footer__tagline">Web, mobile, and marketing sites &mdash; designed and built.</p>
+        </div>
+        <div class="footer__nav">
+          <a href="#capabilities">What We Do</a>
+          <a href="#process">How It Works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer__social">
+          <a href="https://github.com/pragmatic-labs-development" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:hello@pragmaticlabs.dev">Email</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Pragmatic Labs. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
 </body>
 </html>

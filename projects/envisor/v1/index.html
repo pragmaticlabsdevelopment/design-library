@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Envisor | AI-Powered Environmental Review</title>
+  <meta name="description" content="Envisor turns complex environmental records into faster, more defensible review workflows. Purpose-built AI for CEQA, NEPA, and environmental consulting.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600;1,8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="nav" role="banner">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Envisor home">
+        <span class="nav-logo-name">Envisor</span>
+        <span class="nav-logo-divider"></span>
+        <span class="nav-logo-suffix">AI</span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li class="nav-item nav-item--has-mega">
+            <button class="nav-link nav-link--products" aria-expanded="false" aria-controls="mega-menu">
+              Platform
+              <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li class="nav-item"><span class="nav-label">Solutions</span></li>
+          <li class="nav-item"><span class="nav-label">Resources</span></li>
+          <li class="nav-item"><span class="nav-label">Company</span></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/login" class="nav-login">Log in</a>
+        <a href="/contact" class="nav-cta">Request a Demo</a>
+      </div>
+
+      <button class="nav-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="nav-indicator"></div>
+
+    <!-- Mega Menu -->
+    <div class="mega-menu" id="mega-menu" role="region" aria-label="Platform menu">
+      <div class="mega-menu-panel">
+        <div class="mega-menu-body">
+          <div class="mega-intro">
+            <span class="mega-intro-label">ENVISOR PLATFORM</span>
+            <h2 class="mega-intro-headline">AI-powered software for environmental review workflows.</h2>
+            <p class="mega-intro-desc">From initial project screening through impact analysis, public comments, mitigation tracking, and the administrative record.</p>
+            <a href="/platform" class="mega-intro-btn">
+              Explore the platform
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <div class="mega-grid">
+            <a href="/products/review" class="mega-card">
+              <div class="mega-card-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.3 16.3 15 18"/></svg></div>
+              <h3 class="mega-card-title">Review</h3>
+              <p class="mega-card-desc">Screen projects, identify pathways, and organize required documents.</p>
+              <div class="mega-card-footer"><span class="mega-card-badge">POWERED BY MIRA</span><svg class="mega-card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 8H12M12 8L8.5 4.5M12 8L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </a>
+            <a href="/products/analyze" class="mega-card">
+              <div class="mega-card-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></div>
+              <h3 class="mega-card-title">Analyze</h3>
+              <p class="mega-card-desc">Support impact analysis with project facts, thresholds, evidence, and technical study inputs.</p>
+              <div class="mega-card-footer"><span></span><svg class="mega-card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 8H12M12 8L8.5 4.5M12 8L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </a>
+            <a href="/products/respond" class="mega-card">
+              <div class="mega-card-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/><path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"/></svg></div>
+              <h3 class="mega-card-title">Respond</h3>
+              <p class="mega-card-desc">Draft defensible comment responses tied to the record.</p>
+              <div class="mega-card-footer"><span class="mega-card-badge">POWERED BY CARA</span><svg class="mega-card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 8H12M12 8L8.5 4.5M12 8L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </a>
+            <a href="/products/monitor" class="mega-card">
+              <div class="mega-card-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></div>
+              <h3 class="mega-card-title">Monitor</h3>
+              <p class="mega-card-desc">Track mitigation measures, commitments, and compliance.</p>
+              <div class="mega-card-footer"><span></span><svg class="mega-card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 8H12M12 8L8.5 4.5M12 8L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </a>
+            <a href="/products/remediate" class="mega-card">
+              <div class="mega-card-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="m14 20 2 2 4-4"/></svg></div>
+              <h3 class="mega-card-title">Remediate</h3>
+              <p class="mega-card-desc">Prepare accessible, compliant review documents.</p>
+              <div class="mega-card-footer"><span></span><svg class="mega-card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 8H12M12 8L8.5 4.5M12 8L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </a>
+            <a href="/products/search" class="mega-card">
+              <div class="mega-card-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.34-4.34"/></svg></div>
+              <h3 class="mega-card-title">Search</h3>
+              <p class="mega-card-desc">Find statutes, thresholds, citations, and record evidence.</p>
+              <div class="mega-card-footer"><span></span><svg class="mega-card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 8H12M12 8L8.5 4.5M12 8L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </a>
+          </div>
+        </div>
+        <div class="mega-strip">
+          <div class="mega-strip-left">
+            <svg class="mega-strip-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="#a88413" stroke-width="1.5" fill="none"/><path d="M16 16L28 10" stroke="#a88413" stroke-width="1" opacity="0.5"/><path d="M16 16L4 10" stroke="#a88413" stroke-width="1" opacity="0.5"/><path d="M16 16V28" stroke="#a88413" stroke-width="1" opacity="0.5"/></svg>
+            <div>
+              <strong class="mega-strip-title">Shared Intelligence Layer</strong>
+              <span class="mega-strip-desc">Every module connects to the same project facts, citations, evidence, and administrative record.</span>
+            </div>
+          </div>
+          <a href="/products/connect" class="mega-strip-cta">See all integrations <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega-menu-backdrop" aria-hidden="true"></div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <div class="mobile-menu-inner">
+      <div class="mobile-accordion">
+        <button class="mobile-accordion-trigger" aria-expanded="false">
+          Platform
+          <svg class="mobile-accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="mobile-accordion-panel">
+          <div class="mobile-platform-intro">
+            <h3>ENVISOR Platform</h3>
+            <p>AI-powered software for environmental review workflows.</p>
+            <a href="/platform">Explore the platform</a>
+          </div>
+          <a href="/products/review" class="mobile-product-link"><span class="mobile-product-name">Review</span><span class="mobile-product-desc">Screen projects and organize required documents.</span></a>
+          <a href="/products/analyze" class="mobile-product-link"><span class="mobile-product-name">Analyze</span><span class="mobile-product-desc">Support impact analysis with project facts and evidence.</span></a>
+          <a href="/products/respond" class="mobile-product-link"><span class="mobile-product-name">Respond</span><span class="mobile-product-desc">Draft defensible public comment responses.</span></a>
+          <a href="/products/monitor" class="mobile-product-link"><span class="mobile-product-name">Monitor</span><span class="mobile-product-desc">Track mitigation measures and compliance.</span></a>
+          <a href="/products/remediate" class="mobile-product-link"><span class="mobile-product-name">Remediate</span><span class="mobile-product-desc">Prepare accessible environmental review documents.</span></a>
+          <a href="/products/search" class="mobile-product-link"><span class="mobile-product-name">Search</span><span class="mobile-product-desc">Find statutes, precedent, and record evidence.</span></a>
+        </div>
+      </div>
+      <a href="/solutions" class="mobile-nav-link">Solutions</a>
+      <a href="/resources" class="mobile-nav-link">Resources</a>
+      <a href="/company" class="mobile-nav-link">Company</a>
+      <div class="mobile-actions">
+        <a href="/login" class="mobile-login">Log in</a>
+        <a href="/contact" class="mobile-cta">Request a Demo</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ===== 1. HERO ===== -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <span class="eyebrow">AI-powered environmental review</span>
+          <h1 class="hero-headline">AI that turns complex reviews into <span class="hero-highlight">clarity.</span></h1>
+          <p class="hero-body">Envisor automates the most time-consuming parts of environmental review so teams can move faster, reduce risk, and build defensible records.</p>
+          <div class="hero-actions">
+            <a href="/contact" class="btn btn--primary">Request a Demo</a>
+            <a href="/how-it-works" class="btn btn--outline">
+              See How It Works
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <div class="hero-metrics">
+            <div class="hero-metric">
+              <span class="hero-metric-number">50%+</span>
+              <span class="hero-metric-label">Faster reviews</span>
+            </div>
+            <div class="hero-metric-divider"></div>
+            <div class="hero-metric">
+              <span class="hero-metric-number">30&ndash;50%</span>
+              <span class="hero-metric-label">Lower delivery cost</span>
+            </div>
+            <div class="hero-metric-divider"></div>
+            <div class="hero-metric">
+              <span class="hero-metric-number">2&ndash;3x</span>
+              <span class="hero-metric-label">Capacity per professional</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Mockup -->
+        <div class="hero-mockup">
+          <div class="mockup-window">
+            <div class="mockup-chrome">
+              <div class="mockup-dots"><span></span><span></span><span></span></div>
+              <div class="mockup-tabs">
+                <span class="mockup-tab mockup-tab--active">Review</span>
+                <span class="mockup-tab">Responses</span>
+                <span class="mockup-tab">Record</span>
+              </div>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-sidebar">
+                <div class="mockup-sidebar-label">Sources</div>
+                <div class="mockup-source"><span class="mockup-source-icon">&#x25A0;</span> Air Quality Technical Report</div>
+                <div class="mockup-source"><span class="mockup-source-icon">&#x25A0;</span> CEQA Guidelines &sect; 15126.2</div>
+                <div class="mockup-source"><span class="mockup-source-icon">&#x25A0;</span> Mitigation Measure AQ-1</div>
+                <div class="mockup-source"><span class="mockup-source-icon">&#x25A0;</span> Dust Control Plan</div>
+                <div class="mockup-sidebar-divider"></div>
+                <div class="mockup-sidebar-label">Status</div>
+                <div class="mockup-status"><span class="mockup-status-dot mockup-status-dot--green"></span> Verified</div>
+                <div class="mockup-status"><span class="mockup-status-dot mockup-status-dot--gold"></span> Cited</div>
+                <div class="mockup-status"><span class="mockup-status-dot mockup-status-dot--green"></span> Record-ready</div>
+              </div>
+              <div class="mockup-main">
+                <div class="mockup-draft-header">
+                  <span class="mockup-draft-title">Response Draft</span>
+                  <span class="mockup-draft-badge">AI-generated &middot; source-backed</span>
+                </div>
+                <div class="mockup-draft-content">
+                  <p class="mockup-draft-text">The project is not expected to result in significant impacts related to air quality. Construction-phase emissions would remain below SCAQMD regional significance thresholds with implementation of Mitigation Measure AQ-1, which requires compliance with Rule 403 dust control provisions.</p>
+                  <div class="mockup-citations">
+                    <div class="mockup-citation">Air Quality Technical Report, p. 24</div>
+                    <div class="mockup-citation">CEQA Guidelines &sect; 15064</div>
+                    <div class="mockup-citation">Mitigation Measure AQ-1</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. PURPOSE-BUILT ===== -->
+    <section class="purpose">
+      <!-- Topographic background -->
+      <svg class="purpose-bg" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+        <path d="M1100 80c-60 40-100 120-80 200s80 140 160 180 180 20 240-40" stroke="rgba(168,132,19,0.10)" stroke-width="1" fill="none"/>
+        <path d="M1080 100c-50 35-90 110-70 190s75 130 150 170 170 15 230-45" stroke="rgba(168,132,19,0.07)" stroke-width="1" fill="none"/>
+        <path d="M1120 60c-70 45-110 130-90 210s85 150 170 190 190 25 250-35" stroke="rgba(168,132,19,0.05)" stroke-width="1" fill="none"/>
+        <path d="M1200 300c-30 60-20 140 30 200s120 100 200 100 160-40 200-100" stroke="rgba(168,132,19,0.08)" stroke-width="1" fill="none"/>
+        <path d="M1180 320c-25 55-15 130 35 185s110 90 185 90 150-35 190-95" stroke="rgba(168,132,19,0.05)" stroke-width="1" fill="none"/>
+        <path d="M1300 500c-40 50-30 120 20 170s110 70 180 60 140-50 170-110" stroke="rgba(168,132,19,0.07)" stroke-width="1" fill="none"/>
+        <path d="M1280 520c-35 45-25 110 25 155s100 60 165 50 130-45 160-100" stroke="rgba(168,132,19,0.04)" stroke-width="1" fill="none"/>
+        <circle cx="1310" cy="280" r="4" fill="rgba(168,132,19,0.35)"/>
+        <circle cx="1310" cy="280" r="8" stroke="rgba(168,132,19,0.12)" stroke-width="1" fill="none"/>
+        <line x1="1302" y1="280" x2="1318" y2="280" stroke="rgba(168,132,19,0.15)" stroke-width="0.5"/>
+        <line x1="1310" y1="272" x2="1310" y2="288" stroke="rgba(168,132,19,0.15)" stroke-width="0.5"/>
+      </svg>
+
+      <div class="section-container purpose-container">
+        <div class="purpose-header">
+          <span class="eyebrow">Purpose-built for environmental review</span>
+          <h2 class="purpose-headline">The AI built for work that has to <em>hold up.</em></h2>
+          <p class="purpose-body">General-purpose AI can summarize. Envisor is built to support real environmental review work &mdash; grounded in CEQA and NEPA frameworks, tied to the administrative record, and structured around the workflows your team uses to review, respond, track, and defend.</p>
+        </div>
+        <div class="purpose-grid">
+          <div class="purpose-card" data-animate>
+            <div class="purpose-card-icon">
+              <i data-lucide="book-open-text"></i>
+            </div>
+            <h3>Knows the domain</h3>
+            <p>CEQA and NEPA frameworks, thresholds, mitigation measures, case law, and agency protocols are built into the system from the start.</p>
+          </div>
+          <div class="purpose-card" data-animate>
+            <div class="purpose-card-icon">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <h3>Shows its sources</h3>
+            <p>Every output is tied to project facts, citations, and record materials so teams can review, verify, and stand behind the work.</p>
+          </div>
+          <div class="purpose-card" data-animate>
+            <div class="purpose-card-icon">
+              <i data-lucide="workflow"></i>
+            </div>
+            <h3>Fits the workflow</h3>
+            <p>From scoping and analysis to comment response, mitigation tracking, and record closeout, Envisor supports the work end to end.</p>
+          </div>
+          <div class="purpose-card" data-animate>
+            <div class="purpose-card-icon">
+              <i data-lucide="scale"></i>
+            </div>
+            <h3>Built for scrutiny</h3>
+            <p>Responses, decisions, and work product stay documented, versioned, and ready for agency review, public challenge, or legal defense.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. PLATFORM ===== -->
+    <section class="platform">
+      <div class="section-container">
+        <div class="platform-header">
+          <span class="eyebrow">The Envisor Platform</span>
+          <h2 class="platform-headline">One knowledge base.<br>Every application.</h2>
+          <p class="platform-body">Decades of environmental review expertise, project records, regulations, thresholds, mitigation measures, and agency knowledge continuously improve every stage of review.</p>
+        </div>
+
+        <div class="platform-bento">
+          <div class="platform-bento-hub" data-animate>
+            <div class="platform-bento-hub-icon">
+              <i data-lucide="layers"></i>
+            </div>
+            <h3>Knowledge Base</h3>
+            <span class="platform-bento-hub-sub">Shared Intelligence Layer</span>
+            <p class="platform-bento-hub-desc">Every module connects to the same project facts, citations, evidence, and administrative record.</p>
+            <p class="platform-bento-hub-tags">EIRs &middot; MNDs &middot; Technical studies &middot; Statutes &middot; Thresholds &middot; Agency protocols &middot; Mitigation measures</p>
+            <span class="platform-bento-hub-proof">Built for scrutiny. Designed for the record.</span>
+          </div>
+
+          <div class="platform-bento-module" data-animate>
+            <div class="platform-bento-module-icon"><i data-lucide="file-search"></i></div>
+            <h3>Review</h3>
+            <span class="platform-bento-module-sub">Powered by MIRA</span>
+            <p>Screen projects, identify pathways, and organize required documents.</p>
+          </div>
+
+          <div class="platform-bento-module" data-animate>
+            <div class="platform-bento-module-icon"><i data-lucide="messages-square"></i></div>
+            <h3>Respond</h3>
+            <span class="platform-bento-module-sub">Powered by CARA</span>
+            <p>Draft defensible comment responses tied to the record.</p>
+          </div>
+
+          <div class="platform-bento-module" data-animate>
+            <div class="platform-bento-module-icon"><i data-lucide="bar-chart-3"></i></div>
+            <h3>Analyze</h3>
+            <p>Support impact analysis with project facts, thresholds, and technical study inputs.</p>
+          </div>
+
+          <div class="platform-bento-module" data-animate>
+            <div class="platform-bento-module-icon"><i data-lucide="list-checks"></i></div>
+            <h3>Monitor</h3>
+            <p>Track mitigation measures, commitments, and compliance.</p>
+          </div>
+
+          <div class="platform-bento-module" data-animate>
+            <div class="platform-bento-module-icon"><i data-lucide="file-check-2"></i></div>
+            <h3>Remediate</h3>
+            <p>Prepare accessible, compliant review documents.</p>
+          </div>
+
+          <div class="platform-bento-module" data-animate>
+            <div class="platform-bento-module-icon"><i data-lucide="search"></i></div>
+            <h3>Search</h3>
+            <p>Find statutes, thresholds, citations, and record evidence.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ===== 4. WORKFLOW ===== -->
+    <section class="workflow">
+      <div class="section-container">
+        <span class="eyebrow">From intake to record closeout</span>
+        <h2 class="section-title">Move through every stage with the record intact.</h2>
+
+        <div class="workflow-steps">
+          <div class="workflow-step" data-animate>
+            <div class="workflow-step-number">01</div>
+            <h3>Scope</h3>
+            <p>Capture project facts, constraints, prior records, and technical inputs.</p>
+          </div>
+          <div class="workflow-step" data-animate>
+            <div class="workflow-step-number">02</div>
+            <h3>Review</h3>
+            <p>Analyze environmental documents, appendices, studies, and agency requirements.</p>
+          </div>
+          <div class="workflow-step" data-animate>
+            <div class="workflow-step-number">03</div>
+            <h3>Draft</h3>
+            <p>Generate structured sections, summaries, findings, and review-ready content.</p>
+          </div>
+          <div class="workflow-step" data-animate>
+            <div class="workflow-step-number">04</div>
+            <h3>Respond</h3>
+            <p>Cluster public comments, draft responses, and cite every answer.</p>
+          </div>
+          <div class="workflow-step" data-animate>
+            <div class="workflow-step-number">05</div>
+            <h3>Track</h3>
+            <p>Manage mitigation measures, permit conditions, and compliance obligations.</p>
+          </div>
+          <div class="workflow-step" data-animate>
+            <div class="workflow-step-number">06</div>
+            <h3>Close</h3>
+            <p>Package final outputs, citations, decisions, and record materials.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. OUTCOMES ===== -->
+    <section class="outcomes">
+      <div class="section-container">
+        <span class="eyebrow eyebrow--light">AI-enabled consulting advantage</span>
+        <h2 class="section-title outcomes-title">Deliver faster without weakening the record.</h2>
+        <p class="section-body outcomes-body">Envisor helps teams reduce manual review effort, accelerate response cycles, and preserve the evidence trail behind every decision.</p>
+
+        <div class="outcomes-grid">
+          <div class="outcome-stat" data-animate>
+            <div class="outcome-icon"><i data-lucide="zap"></i></div>
+            <div class="outcome-number-wrap">
+              <span class="outcome-number" data-target="50">0</span><span class="outcome-suffix">%+</span>
+            </div>
+            <span class="outcome-label">Faster reviews</span>
+            <span class="outcome-context">vs. manual document review</span>
+          </div>
+          <div class="outcome-stat" data-animate>
+            <div class="outcome-icon"><i data-lucide="trending-down"></i></div>
+            <div class="outcome-number-wrap">
+              <span class="outcome-number" data-target="30">0</span><span class="outcome-suffix">&ndash;50%</span>
+            </div>
+            <span class="outcome-label">Lower delivery cost</span>
+            <span class="outcome-context">across project lifecycle</span>
+          </div>
+          <div class="outcome-stat" data-animate>
+            <div class="outcome-icon"><i data-lucide="users"></i></div>
+            <div class="outcome-number-wrap">
+              <span class="outcome-number" data-target="2">0</span><span class="outcome-suffix">&ndash;3x</span>
+            </div>
+            <span class="outcome-label">Capacity per professional</span>
+            <span class="outcome-context">without additional headcount</span>
+          </div>
+          <div class="outcome-stat" data-animate>
+            <div class="outcome-icon"><i data-lucide="shield-check"></i></div>
+            <div class="outcome-number-wrap">
+              <span class="outcome-number" data-target="100">0</span><span class="outcome-suffix">%</span>
+            </div>
+            <span class="outcome-label">Source-backed outputs</span>
+            <span class="outcome-context">every claim tied to evidence</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ===== 6. SECTORS ===== -->
+    <section class="sectors">
+      <div class="section-container">
+        <div class="sectors-header">
+          <span class="eyebrow">Who we serve</span>
+          <h2 class="sectors-headline">Built for every sector under review.</h2>
+          <p class="sectors-sub">From public infrastructure to private development, Envisor helps teams move through document-heavy reviews, comment cycles, mitigation obligations, and record requirements with greater speed and confidence.</p>
+        </div>
+        <div class="sectors-grid">
+
+          <div class="sector-card" data-animate>
+            <div class="sector-card-accent"></div>
+            <div class="sector-card-inner">
+              <div class="sector-card-icon">
+                <i data-lucide="construction"></i>
+              </div>
+              <span class="sector-label">Infrastructure</span>
+              <p class="sector-desc">Environmental review for the public works, transportation, and utility projects that shape regions.</p>
+              <div class="sector-divider"></div>
+              <p class="sector-list">Roads &middot; Bridges &middot; Dams &middot; Transit &middot; Utilities</p>
+            </div>
+          </div>
+
+          <div class="sector-card" data-animate>
+            <div class="sector-card-accent"></div>
+            <div class="sector-card-inner">
+              <div class="sector-card-icon">
+                <i data-lucide="trees"></i>
+              </div>
+              <span class="sector-label">Natural Resources</span>
+              <p class="sector-desc">Compliance workflows for extraction, energy, water, land use, and restoration projects.</p>
+              <div class="sector-divider"></div>
+              <p class="sector-list">Mining &middot; Timber &middot; Energy &middot; Water &middot; Restoration</p>
+            </div>
+          </div>
+
+          <div class="sector-card" data-animate>
+            <div class="sector-card-accent"></div>
+            <div class="sector-card-inner">
+              <div class="sector-card-icon">
+                <i data-lucide="building-2"></i>
+              </div>
+              <span class="sector-label">Commercial Development</span>
+              <p class="sector-desc">Review support for built-environment projects with complex approvals and public visibility.</p>
+              <div class="sector-divider"></div>
+              <p class="sector-list">Housing &middot; Schools &middot; Data Centers &middot; Industrial Sites</p>
+            </div>
+          </div>
+
+          <div class="sector-card" data-animate>
+            <div class="sector-card-accent"></div>
+            <div class="sector-card-inner">
+              <div class="sector-card-icon">
+                <i data-lucide="landmark"></i>
+              </div>
+              <span class="sector-label">Public Agencies</span>
+              <p class="sector-desc">Tools for lead agencies managing review, permitting, compliance, comments, and public records.</p>
+              <div class="sector-divider"></div>
+              <p class="sector-list">Cities &middot; Counties &middot; State Agencies &middot; Special Districts</p>
+            </div>
+          </div>
+
+          <div class="sector-card" data-animate>
+            <div class="sector-card-accent"></div>
+            <div class="sector-card-inner">
+              <div class="sector-card-icon">
+                <i data-lucide="users"></i>
+              </div>
+              <span class="sector-label">Consultants</span>
+              <p class="sector-desc">For the firms that prepare, defend, and deliver the environmental record.</p>
+              <div class="sector-divider"></div>
+              <p class="sector-list">Environmental Firms &middot; Planning Teams &middot; Technical Specialists</p>
+            </div>
+          </div>
+
+          <div class="sector-card" data-animate>
+            <div class="sector-card-accent"></div>
+            <div class="sector-card-inner">
+              <div class="sector-card-icon">
+                <i data-lucide="scale"></i>
+              </div>
+              <span class="sector-label">Legal & Litigation</span>
+              <p class="sector-desc">Research and record support for attorneys navigating CEQA challenges, compliance disputes, and administrative proceedings.</p>
+              <div class="sector-divider"></div>
+              <p class="sector-list">Environmental Law &middot; Land Use Litigation &middot; Regulatory Defense</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. TRUST ===== -->
+    <section class="trust">
+      <div class="section-container">
+        <span class="eyebrow">Designed for scrutiny</span>
+        <h2 class="section-title">Every answer needs a trail.</h2>
+        <p class="section-body trust-body">Environmental review work is public, technical, and often challenged. Envisor helps teams move faster while preserving the evidence behind every claim, response, mitigation measure, and decision.</p>
+
+        <div class="trust-grid">
+          <div class="trust-point" data-animate>
+            <div class="trust-point-icon"><i data-lucide="link"></i></div>
+            <div class="trust-point-content">
+              <strong>Source-backed outputs</strong>
+              <span>Every paragraph links to source material in the project record.</span>
+            </div>
+          </div>
+          <div class="trust-point" data-animate>
+            <div class="trust-point-icon"><i data-lucide="file-text"></i></div>
+            <div class="trust-point-content">
+              <strong>Administrative record traceability</strong>
+              <span>Full lineage from input documents to final outputs.</span>
+            </div>
+          </div>
+          <div class="trust-point" data-animate>
+            <div class="trust-point-icon"><i data-lucide="user-check"></i></div>
+            <div class="trust-point-content">
+              <strong>Human review workflows</strong>
+              <span>AI assists, professionals decide. Every output requires approval.</span>
+            </div>
+          </div>
+          <div class="trust-point" data-animate>
+            <div class="trust-point-icon"><i data-lucide="history"></i></div>
+            <div class="trust-point-content">
+              <strong>Version history</strong>
+              <span>Complete audit trail of every change, revision, and decision.</span>
+            </div>
+          </div>
+          <div class="trust-point" data-animate>
+            <div class="trust-point-icon"><i data-lucide="quote"></i></div>
+            <div class="trust-point-content">
+              <strong>Citation-backed responses</strong>
+              <span>Every response tied to statutes, thresholds, and record evidence.</span>
+            </div>
+          </div>
+          <div class="trust-point" data-animate>
+            <div class="trust-point-icon"><i data-lucide="clipboard-check"></i></div>
+            <div class="trust-point-content">
+              <strong>Audit-friendly records</strong>
+              <span>Structured for agency review and public records requests.</span>
+            </div>
+          </div>
+          <div class="trust-point" data-animate>
+            <div class="trust-point-icon"><i data-lucide="scale"></i></div>
+            <div class="trust-point-content">
+              <strong>CEQA and NEPA-aware workflows</strong>
+              <span>Built-in compliance with environmental review frameworks.</span>
+            </div>
+          </div>
+          <div class="trust-point" data-animate>
+            <div class="trust-point-icon"><i data-lucide="shield"></i></div>
+            <div class="trust-point-content">
+              <strong>Defensible decision documentation</strong>
+              <span>Every finding documented with supporting evidence.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8. CEQA SEARCH ===== -->
+    <section class="ceqa-search">
+      <div class="section-container">
+        <div class="ceqa-search-inner">
+          <span class="eyebrow">Try it yourself</span>
+          <h2 class="section-title ceqa-search-title">Explore CEQA with AI &mdash; free.</h2>
+          <p class="section-body ceqa-search-body">Search across thousands of CEQA documents, statutes, thresholds, and mitigation measures. See how Envisor turns complex environmental records into clear, source-backed answers.</p>
+          <a href="https://envisor.ai/ceqa-search" class="btn btn--primary ceqa-search-btn" target="_blank" rel="noopener">
+            Try CEQA Search
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <span class="ceqa-search-note">No account required</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 9. FINAL CTA ===== -->
+    <section class="final-cta">
+      <!-- Topographic contour lines — left -->
+      <svg class="final-cta-deco-left" viewBox="0 0 300 700" preserveAspectRatio="none" fill="none" aria-hidden="true">
+        <path d="M0,150 C50,180 90,260 100,340 C110,420 80,500 50,570 C20,640 -10,680 -30,720" stroke="rgba(255,255,255,0.05)" stroke-width="0.75"/>
+        <path d="M0,130 C60,165 110,250 125,335 C140,420 105,510 70,580 C35,650 0,695 -20,740" stroke="rgba(255,255,255,0.04)" stroke-width="0.75"/>
+        <path d="M0,110 C70,150 130,240 150,330 C170,420 130,520 90,590 C50,660 10,710 -10,760" stroke="rgba(255,255,255,0.035)" stroke-width="0.75"/>
+        <path d="M0,90 C80,135 150,230 175,325 C200,420 155,530 110,600 C65,670 20,725 0,780" stroke="rgba(255,255,255,0.03)" stroke-width="0.75"/>
+        <path d="M0,70 C90,120 170,220 200,320 C230,420 180,540 130,610 C80,680 30,740 10,800" stroke="rgba(255,255,255,0.025)" stroke-width="0.75"/>
+      </svg>
+      <!-- Topographic contour lines — right -->
+      <svg class="final-cta-deco-right" viewBox="0 0 300 700" preserveAspectRatio="none" fill="none" aria-hidden="true">
+        <path d="M300,150 C250,180 210,260 200,340 C190,420 220,500 250,570 C280,640 310,680 330,720" stroke="rgba(255,255,255,0.05)" stroke-width="0.75"/>
+        <path d="M300,130 C240,165 190,250 175,335 C160,420 195,510 230,580 C265,650 300,695 320,740" stroke="rgba(255,255,255,0.04)" stroke-width="0.75"/>
+        <path d="M300,110 C230,150 170,240 150,330 C130,420 170,520 210,590 C250,660 290,710 310,760" stroke="rgba(255,255,255,0.035)" stroke-width="0.75"/>
+        <path d="M300,90 C220,135 150,230 125,325 C100,420 145,530 190,600 C235,670 280,725 300,780" stroke="rgba(255,255,255,0.03)" stroke-width="0.75"/>
+        <path d="M300,70 C210,120 130,220 100,320 C70,420 120,540 170,610 C220,680 270,740 290,800" stroke="rgba(255,255,255,0.025)" stroke-width="0.75"/>
+      </svg>
+      <div class="section-container">
+        <span class="eyebrow eyebrow--light final-cta-eyebrow">Built for Defensible Review</span>
+        <div class="final-cta-divider">
+          <span class="final-cta-divider-line"></span>
+          <svg class="final-cta-shield" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(168,132,19,0.55)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span class="final-cta-divider-line"></span>
+        </div>
+        <h2 class="section-title final-cta-title">Move faster without losing defensibility.</h2>
+        <p class="section-body final-cta-body">Envisor helps environmental review teams analyze large records, draft evidence-backed responses, and preserve the reasoning behind every decision.</p>
+        <div class="final-cta-actions">
+          <a href="/contact" class="btn btn--primary-cta">
+            Request a Demo
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M5 7H11M11 7L8 4M11 7L8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="/platform" class="btn btn--outline-cta">
+            Explore the Platform
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="final-cta-footer">
+          <span class="final-cta-footer-line"></span>
+          <svg class="final-cta-footer-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(168,132,19,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          <p class="final-cta-footer-text">Purpose-built for public comments, administrative records, and environmental documentation workflows.</p>
+        </div>
+      </div>
+      <div class="final-cta-gold-bar"></div>
+    </section>
+
+</main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="footer-logo-name">Envisor</span>
+            <span class="footer-logo-divider"></span>
+            <span class="footer-logo-suffix">AI</span>
+          </div>
+          <p class="footer-tagline">The operating system for environmental review.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Platform</h4>
+            <a href="/products/review">Review</a>
+            <a href="/products/respond">Respond</a>
+            <a href="/products/monitor">Monitor</a>
+            <a href="/products/remediate">Remediate</a>
+            <a href="/products/search">Search</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="/about">About</a>
+            <a href="/careers">Careers</a>
+            <a href="/contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="/blog">Blog</a>
+            <a href="/docs">Documentation</a>
+            <a href="/security">Security</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Envisor AI. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      /* Mega Menu */
+      var productsBtn = document.querySelector('.nav-link--products');
+      var megaMenu = document.getElementById('mega-menu');
+      var backdrop = document.querySelector('.mega-menu-backdrop');
+      var navItem = document.querySelector('.nav-item--has-mega');
+      var indicator = document.querySelector('.nav-indicator');
+      var closeTimeout;
+
+      function positionIndicator() {
+        var rect = productsBtn.getBoundingClientRect();
+        var w = 36;
+        indicator.style.left = (rect.left + (rect.width - w) / 2) + 'px';
+        indicator.style.width = w + 'px';
+      }
+
+      function openMega() {
+        clearTimeout(closeTimeout);
+        productsBtn.setAttribute('aria-expanded', 'true');
+        megaMenu.classList.add('is-open');
+        backdrop.classList.add('is-open');
+        indicator.classList.add('is-visible');
+        positionIndicator();
+      }
+
+      function closeMega() {
+        productsBtn.setAttribute('aria-expanded', 'false');
+        megaMenu.classList.remove('is-open');
+        backdrop.classList.remove('is-open');
+        indicator.classList.remove('is-visible');
+      }
+
+      function scheduleClose() { closeTimeout = setTimeout(closeMega, 200); }
+
+      navItem.addEventListener('mouseenter', openMega);
+      navItem.addEventListener('mouseleave', scheduleClose);
+      megaMenu.addEventListener('mouseenter', function () { clearTimeout(closeTimeout); });
+      megaMenu.addEventListener('mouseleave', scheduleClose);
+      productsBtn.addEventListener('click', function () {
+        productsBtn.getAttribute('aria-expanded') === 'true' ? closeMega() : openMega();
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeMega(); productsBtn.focus(); } });
+      backdrop.addEventListener('click', closeMega);
+      window.addEventListener('resize', function () { if (megaMenu.classList.contains('is-open')) positionIndicator(); });
+
+      /* Mobile Menu */
+      var mobileToggle = document.querySelector('.nav-mobile-toggle');
+      var mobileMenu = document.getElementById('mobile-menu');
+      mobileToggle.addEventListener('click', function () {
+        var isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
+        mobileToggle.setAttribute('aria-expanded', String(!isOpen));
+        mobileToggle.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+        mobileMenu.classList.toggle('is-open');
+        document.body.classList.toggle('menu-open');
+      });
+
+      var accordionTrigger = document.querySelector('.mobile-accordion-trigger');
+      accordionTrigger.addEventListener('click', function () {
+        var isOpen = accordionTrigger.getAttribute('aria-expanded') === 'true';
+        accordionTrigger.setAttribute('aria-expanded', String(!isOpen));
+        accordionTrigger.parentElement.classList.toggle('is-open');
+      });
+
+      /* Initialize Lucide icons */
+      lucide.createIcons();
+
+      /* Counter animation for outcome numbers */
+      var counterEls = document.querySelectorAll('.outcome-number[data-target]');
+      var counterObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var target = parseInt(el.getAttribute('data-target'));
+            var duration = 1200;
+            var startTime = performance.now();
+            function updateCounter(now) {
+              var elapsed = now - startTime;
+              var progress = Math.min(elapsed / duration, 1);
+              var eased = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.round(eased * target);
+              if (progress < 1) requestAnimationFrame(updateCounter);
+            }
+            requestAnimationFrame(updateCounter);
+            counterObs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.3 });
+      counterEls.forEach(function(el) { counterObs.observe(el); });
+
+      /* Scroll animations */
+      var animEls = document.querySelectorAll('[data-animate]');
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      animEls.forEach(function (el) { obs.observe(el); });
+    })();
+  </script>
+</body>
+</html>

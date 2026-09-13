@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Prototypes — Pragmatic Labs</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#FF2D8A;
+    --pink-glow:rgba(255,45,138,.15);
+    --ink:#0f172a;
+    --ink-2:#475569;
+    --ink-3:#94a3b8;
+    --bg:#ffffff;
+    --bg-2:#f8fafc;
+    --line:#e2e8f0;
+    --radius:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font:16px/1.5 'Plus Jakarta Sans',ui-sans-serif,-apple-system,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  /* ---- topbar ---- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:100;height:56px;
+    background:var(--pink);color:#fff;
+    display:flex;align-items:center;padding:0 24px;gap:16px;
+    box-shadow:0 2px 12px rgba(255,45,138,.3);
+  }
+  .topbar .back{
+    display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;
+    color:rgba(255,255,255,.85);cursor:pointer;background:none;border:none;
+    padding:6px 12px;border-radius:8px;transition:.15s;
+  }
+  .topbar .back:hover{background:rgba(255,255,255,.15);color:#fff}
+  .topbar .back svg{width:18px;height:18px}
+  .topbar .title{font-size:15px;font-weight:700;letter-spacing:-.01em}
+  .topbar .sep{color:rgba(255,255,255,.4)}
+  .topbar .crumb{font-size:14px;font-weight:500;color:rgba(255,255,255,.8)}
+  .topbar .spacer{flex:1}
+  .topbar .badge-admin{
+    font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.15);
+    color:rgba(255,255,255,.9);cursor:pointer;border:none;transition:.15s;
+  }
+  .topbar .badge-admin:hover{background:rgba(255,255,255,.25)}
+  body{padding-top:56px}
+
+  /* ---- views ---- */
+  .view{display:none;animation:fadeUp .3s ease}
+  .view.active{display:block}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+  /* ---- projects grid ---- */
+  .projects-view{padding:40px 32px 60px}
+  .projects-view h1{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
+  .projects-view .sub{font-size:15px;color:var(--ink-2);margin-bottom:36px}
+  .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+
+  .pcard{
+    background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);
+    cursor:pointer;transition:all .2s ease;overflow:hidden;
+  }
+  .pcard:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(15,23,42,.1);border-color:#cbd5e1}
+  .pcard-thumb{
+    height:180px;background:var(--bg-2);border-bottom:1px solid var(--line);
+    position:relative;overflow:hidden;
+  }
+  .pcard-thumb iframe{
+    width:1440px;height:900px;border:0;pointer-events:none;
+    transform-origin:top left;position:absolute;top:0;left:0;
+  }
+  /* folder look for multi-version */
+  .pcard.multi{position:relative}
+  .pcard.multi::before,.pcard.multi::after{
+    content:"";position:absolute;border-radius:var(--radius);
+    border:1px solid var(--line);background:var(--bg);
+  }
+  .pcard.multi::before{top:-6px;left:6px;right:6px;height:12px;z-index:-1;border-bottom:0}
+  .pcard.multi::after{top:-3px;left:3px;right:3px;height:8px;z-index:-1;border-bottom:0}
+  .pcard-body{padding:16px 20px 20px}
+  .pcard-body h2{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .pcard-body .pdesc{font-size:13px;color:var(--ink-2);margin-top:2px}
+  .pcard-count{
+    display:inline-flex;align-items:center;gap:4px;margin-top:10px;
+    font-size:12px;font-weight:600;color:var(--ink-3);
+    background:var(--bg-2);padding:3px 10px;border-radius:6px;
+  }
+
+  /* ---- versions list ---- */
+  .versions-view{padding:40px 32px 60px;max-width:900px;margin:0 auto}
+  .versions-view h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .versions-view .sub{font-size:14px;color:var(--ink-2);margin:4px 0 28px}
+  .vlist{display:flex;flex-direction:column;gap:8px}
+  .vrow{
+    display:flex;align-items:center;gap:16px;
+    padding:16px 20px;border:1px solid var(--line);border-radius:10px;
+    background:var(--bg);cursor:pointer;transition:all .15s ease;
+  }
+  .vrow:hover{border-color:var(--pink);background:var(--pink-glow);transform:translateX(4px)}
+  .vrow .vid{
+    font-size:14px;font-weight:800;color:var(--pink);
+    background:var(--pink-glow);padding:4px 12px;border-radius:6px;
+    min-width:48px;text-align:center;flex:none;
+  }
+  .vrow .vlabel{font-size:15px;font-weight:600;color:var(--ink)}
+  .vrow .vdate{font-size:13px;color:var(--ink-3);margin-left:auto;flex:none}
+  .vrow .varrow{color:var(--ink-3);flex:none;transition:transform .15s}
+  .vrow:hover .varrow{transform:translateX(4px);color:var(--pink)}
+
+  /* ---- preview ---- */
+  .preview-view{position:fixed;top:56px;left:0;right:0;bottom:0;background:var(--bg)}
+  .preview-view iframe{width:100%;height:100%;border:0}
+
+  @media(max-width:640px){
+    .projects-view,.versions-view{padding:24px 16px 40px}
+    .pgrid{grid-template-columns:1fr}
+    .topbar{padding:0 12px;gap:10px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar">
+  <button class="back" id="backBtn" style="display:none">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    Back
+  </button>
+  <span class="title" id="topTitle">Prototypes</span>
+  <span class="sep" id="topSep" style="display:none">/</span>
+  <span class="crumb" id="topCrumb"></span>
+  <span class="spacer"></span>
+  <button class="badge-admin" onclick="location.href='index.html'">Admin View</button>
+</div>
+
+<div class="view active" id="projectsView">
+  <div class="projects-view">
+    <h1 id="libTitle">Prototypes</h1>
+    <div class="sub" id="libSub"></div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</div>
+
+<div class="view" id="versionsView">
+  <div class="versions-view">
+    <h1 id="versTitle"></h1>
+    <div class="sub" id="versSub"></div>
+    <div class="vlist" id="vlist"></div>
+  </div>
+</div>
+
+<div class="view" id="previewView">
+  <div class="preview-view">
+    <iframe id="previewFrame" title="Preview"></iframe>
+  </div>
+</div>
+
+<script src="manifest.js"></script>
+<script>
+(function(){
+  "use strict";
+  var LIB = window.DESIGN_LIBRARY || {projects:[]};
+  var PROJECTS = LIB.projects || [];
+  var $ = function(id){ return document.getElementById(id); };
+
+  function show(viewId){
+    document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+    $(viewId).classList.add('active');
+  }
+
+  function esc(s){
+    return String(s==null?"":s).replace(/[&<>"']/g,function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  /* ---- projects grid ---- */
+  function renderProjects(){
+    $("topTitle").textContent = "Prototypes";
+    $("topSep").style.display = "none";
+    $("topCrumb").textContent = "";
+    $("backBtn").style.display = "none";
+    $("libTitle").textContent = LIB.title || "Prototypes";
+    $("libSub").textContent = PROJECTS.length + " project" + (PROJECTS.length!==1?"s":"");
+
+    var grid = $("pgrid");
+    grid.innerHTML = "";
+    PROJECTS.forEach(function(p){
+      var card = document.createElement("div");
+      var multi = p.versions.length > 1;
+      card.className = "pcard" + (multi ? " multi" : "");
+      card.onclick = function(){
+        if (p.versions.length === 1){
+          openPreview(p, p.versions[0]);
+        } else {
+          renderVersions(p);
+        }
+      };
+
+      var thumb = document.createElement("div");
+      thumb.className = "pcard-thumb";
+      var latest = p.versions[0];
+      if (latest){
+        var iframe = document.createElement("iframe");
+        iframe.src = latest.path;
+        iframe.width = 1440; iframe.height = 900;
+        iframe.loading = "lazy"; iframe.tabIndex = -1;
+        iframe.setAttribute("aria-hidden","true");
+        thumb.appendChild(iframe);
+        (function(t,f){
+          requestAnimationFrame(function(){
+            var w = t.clientWidth;
+            if (w > 0) f.style.transform = "scale(" + (w/1440) + ")";
+          });
+        })(thumb, iframe);
+      }
+      card.appendChild(thumb);
+
+      var body = document.createElement("div");
+      body.className = "pcard-body";
+      body.innerHTML = "<h2>" + esc(p.name) + "</h2>" +
+        (p.description ? '<div class="pdesc">' + esc(p.description) + "</div>" : "");
+      if (p.versions.length > 1){
+        body.innerHTML += '<div class="pcard-count">' + p.versions.length + " versions</div>";
+      }
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+    show("projectsView");
+    history.replaceState(null,"",location.pathname);
+  }
+
+  /* ---- versions list ---- */
+  function renderVersions(proj){
+    $("topTitle").textContent = "Prototypes";
+    $("topSep").style.display = "";
+    $("topCrumb").textContent = proj.name;
+    $("backBtn").style.display = "";
+    $("backBtn").onclick = function(){ renderProjects(); };
+
+    $("versTitle").textContent = proj.name;
+    $("versSub").textContent = proj.description || "";
+
+    var list = $("vlist");
+    list.innerHTML = "";
+    proj.versions.forEach(function(v){
+      var row = document.createElement("div");
+      row.className = "vrow";
+      row.onclick = function(){ openPreview(proj, v); };
+      row.innerHTML =
+        '<span class="vid">' + esc(v.id).toUpperCase() + '</span>' +
+        '<span class="vlabel">' + esc(v.label) + '</span>' +
+        '<span class="vdate">' + esc(v.date) + '</span>' +
+        '<svg class="varrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+      list.appendChild(row);
+    });
+    show("versionsView");
+    history.replaceState(null,"","#/" + proj.slug);
+  }
+
+  /* ---- full page preview ---- */
+  function openPreview(proj, ver){
+    $("topTitle").textContent = "";
+    $("topSep").style.display = "";
+    $("topCrumb").textContent = proj.name + " — " + ver.label;
+    $("backBtn").style.display = "";
+    $("backBtn").onclick = function(){
+      if (proj.versions.length === 1) renderProjects();
+      else renderVersions(proj);
+    };
+    $("previewFrame").src = ver.path;
+    show("previewView");
+    history.replaceState(null,"","#/" + proj.slug + "/" + ver.id);
+  }
+
+  /* ---- routing ---- */
+  function readHash(){
+    var m = location.hash.match(/^#\/([^\/]+)(?:\/(.+))?$/);
+    if (!m) return false;
+    var slug = decodeURIComponent(m[1]);
+    var vid = m[2] ? decodeURIComponent(m[2]) : null;
+    var proj = null;
+    for (var i=0;i<PROJECTS.length;i++) if (PROJECTS[i].slug===slug){ proj=PROJECTS[i]; break; }
+    if (!proj) return false;
+    if (vid){
+      var ver = null;
+      for (var j=0;j<proj.versions.length;j++) if (proj.versions[j].id===vid){ ver=proj.versions[j]; break; }
+      if (ver){ openPreview(proj,ver); return true; }
+    }
+    renderVersions(proj);
+    return true;
+  }
+
+  addEventListener("popstate",function(){ if(!readHash()) renderProjects(); });
+
+  /* ---- boot ---- */
+  if (!readHash()) renderProjects();
+})();
+</script>
+</body>
+</html>

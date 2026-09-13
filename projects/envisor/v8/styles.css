@@ -1,0 +1,846 @@
+/* ===================================================================
+   Envisor — Marketing Website v8 "Legora Concept"
+   Full redesign modeled on legora.com's real identity: full-viewport dark
+   cinematic hero with a vignette, a verified real accent (#005032, sampled
+   directly from legora.com's own CTA green), rounded-rect (not pill)
+   buttons, and the capsule-accordion + media-panel platform section. Not a
+   patch on v4 — a genuinely distinct concept sharing only the content bank
+   and the reveal-on-scroll mechanics. See HANDOFF.md for rationale.
+   =================================================================== */
+
+:root {
+  --bg: #FAF8F4;
+  --bg-dark: #0A0B09;       /* near-black — hero, footer. Legora's own hero band tone */
+  --ink: #12110E;
+  --muted: #5C5952;
+  --muted-2: #83807A;
+  --border: #E4E1DA;
+  --card: #ffffff;
+  --accent: #005032;        /* verified real Legora green, sampled from legora.com's own CTA/announcement-bar */
+  --accent-2: #003620;      /* darker shade for hover states, text-on-light */
+  --accent-tint: rgba(0, 80, 50, 0.08);
+  /* This page's dark backgrounds (--ink, --bg-dark) used --accent directly for
+     foreground text/icons in several places — a holdover from v4's original
+     bright-yellow accent, which really did pop on near-black. #005032 is a
+     DARK green; on near-black it drops to roughly a 1.5:1 contrast ratio,
+     effectively invisible (found by actually scrolling the rendered page,
+     not by reading the CSS). --accent-bright is the same hue lifted to a
+     legible tone, used only where accent text/icons sit on a dark ground. */
+  --accent-bright: #4FBE8C;
+  --dark-1: #12110E;
+  --dark-2: #201f1e;
+  --dark-3: #0A0B09;
+
+  /* radius scale — Legora leans rounded-rect, not full pill (that's Sierra's
+     signature, deliberately not reused here so the two concepts don't read
+     as the same shape language). */
+  --radius-sm: 10px;         /* buttons/tags */
+  --radius-md: 14px;         /* small cards: nav dropdown, logo cells */
+  --radius-lg: 20px;         /* standard cards: announce, impact, testimonials */
+  --radius-xl: 28px;         /* accordion capsules — Legora's own shape, unchanged */
+  --radius-sharp: 8px;
+  --radius-sharp-sm: 4px;
+
+  --surface-1: rgba(15, 14, 13, 0.04);
+  --surface-2: rgba(15, 14, 13, 0.075);
+
+  --space-tight: 104px;
+  --space-lg: 152px;
+  --space-xl: 168px;
+
+  --gradient-announce: linear-gradient(130deg, #0B3B27 0%, #051C12 100%);
+  --bento-charcoal: #0F1F17;   /* green-black, not the old yellow-scheme charcoal */
+  --bento-slate: #23342C;     /* green-neutral, not warm gray */
+  --bento-mist: #EAF0EC;
+  --frame-dark: #1a2620;
+
+  --max: 1280px;
+  --serif: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; margin: 0; line-height: 1.08; letter-spacing: -0.015em; }
+/* Every wrapping section heading was dropping a single-word last line
+   ("...who deliver the / work") — text-wrap:balance fixes this everywhere a
+   heading actually wraps, without touching the hero's hand-set <br>. */
+h1, h2 { text-wrap: balance; }
+p { margin: 0; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  /* was --accent-2: matches the logo-wall masthead label's neutral tracked-caps
+     vocabulary rather than competing in amber with whatever headline follows it */
+  color: var(--muted-2);
+}
+.eyebrow--light { color: rgba(250, 250, 249, 0.7); }
+
+/* ---------- Section header (shared) ----------
+   The single most transferable structural move found auditing this page
+   against permitflow.com — the closest content parallel to Envisor, selling
+   into the same bureaucratic, high-stakes compliance space. Every one of
+   their sections opens with the same three-part header (tracked eyebrow ->
+   headline -> optional subhead), which is what makes a long, dense,
+   unfamiliar-domain page navigable: the eyebrow orients a non-specialist
+   visitor before they've read a word of the headline.
+   This page previously had five differently-shaped section intros (centered
+   620px h2+p; a lone centered h2 at three different clamp scales) and no
+   eyebrows anywhere except the hero. One component now covers all of them.
+   Headline voice is serif/400 (Harvey's core move — see .sec-head h2 below);
+   structure and the eyebrow label are PermitFlow's. */
+.sec-head { max-width: var(--max); margin: 0 auto 56px; text-align: center; }
+.sec-head .eyebrow { display: block; margin-bottom: 16px; }
+.sec-head h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-size: clamp(30px, 3.8vw, 46px);
+  max-width: 20ch;
+  margin: 0 auto;
+}
+.sec-head p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 48ch;
+  margin: 18px auto 0;
+}
+@media (max-width: 640px) {
+  .sec-head { margin-bottom: 40px; }
+  .sec-head p { font-size: 15px; }
+}
+
+/* ---------- Buttons (pill — Sierra/Legora) ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  height: 40px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: opacity 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+/* No lift-on-hover: Harvey's buttons change color and nothing else. A 1px
+   translate on every button on the page read as busy rather than responsive. */
+.btn-primary { background: var(--accent); color: #FAF8F4; }
+.btn-primary:hover { background: var(--accent-2); }
+/* Ink-filled pill for the nav CTA. The nav and the hero both used to be brand
+   yellow, putting two identical saturated "Book Demo" pills in the first
+   viewport with nothing to say which was primary. The nav one is now ink,
+   leaving exactly one accent moment above the fold. */
+.btn-ink { background: var(--ink); color: var(--bg); }
+.btn-ink:hover { background: var(--dark-2); }
+.btn-light { background: var(--bg); color: var(--ink); }
+.btn-light:hover { opacity: 0.85; }
+/* Sierra's two-tier button scale — nav pill (32px, sampled from sierra.ai) stays small via .btn;
+   hero/announce CTAs get the larger scale sampled from Sierra's own hero pill (56px, 0 32px). */
+.btn-lg { height: 52px; padding: 0 30px; font-size: 15px; }
+.btn-outline-light { background: transparent; color: var(--bg); border-color: rgba(250,250,249,0.35); }
+.btn-outline-light:hover { border-color: rgba(250,250,249,0.7); }
+.btn-text { font-family: var(--sans); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; color: var(--accent-2); }
+.btn-text svg { transition: transform 0.15s ease; }
+.btn-text:hover svg { transform: translateX(3px); }
+
+/* ---------- Top announcement strip (Legora) ----------
+   legora.com opens on a slim full-bleed strip above the nav carrying one line
+   of news plus a single forward link — the page's first horizontal edge, and
+   part of why its nav reads as anchored rather than floating on the
+   background. This page had no equivalent: the nav sat straight on --bg with
+   nothing establishing the top of the page. Deliberately NOT sticky — Legora
+   pins both bar and nav, permanently taxing viewport height; letting the
+   strip scroll away keeps this page's restraint while still landing the
+   structural move. */
+.topbar { background: var(--ink); }
+.topbar-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 13px;
+  color: rgba(250, 250, 249, 0.72);
+}
+.topbar-inner a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-weight: 500;
+}
+.topbar-inner a svg { transition: transform 0.15s ease; }
+.topbar-inner a:hover svg { transform: translateX(3px); }
+@media (max-width: 640px) {
+  .topbar-inner { height: auto; padding: 10px 20px; gap: 10px; font-size: 12.5px; flex-wrap: wrap; }
+}
+
+/* ---------- Nav ----------
+   Legora's real nav sits transparent over its dark cinematic hero, then
+   solidifies once the page scrolls past it — no topbar strip, no light
+   nav-on-light-page treatment the rest of this repo's versions default to.
+   Logo/links start white-on-transparent and flip to ink-on-cream only after
+   .is-scrolled is added (see the JS below, unchanged mechanism, new states). */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.nav.is-scrolled { background: var(--bg); border-bottom-color: var(--border); }
+.nav .nav-logo img { filter: brightness(0) invert(1); transition: filter 0.25s ease; }
+.nav.is-scrolled .nav-logo img { filter: none; }
+.nav-links a, .nav-item > span { color: rgba(250,248,244,0.85); transition: color 0.25s ease; }
+.nav.is-scrolled .nav-links a, .nav.is-scrolled .nav-item > span { color: var(--ink); }
+.nav-actions .btn-text { color: rgba(250,248,244,0.85); transition: color 0.25s ease; }
+.nav.is-scrolled .nav-actions .btn-text { color: var(--ink); }
+.nav-mobile-toggle span { background: rgba(250,248,244,0.85); transition: background-color 0.25s ease; }
+.nav.is-scrolled .nav-mobile-toggle span { background: var(--ink); }
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  height: 72px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-logo { display: flex; align-items: center; height: 30px; }
+.nav-logo img { height: 100%; width: auto; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  padding-left: 40px;
+}
+.nav-links a, .nav-item > span {
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-item { position: relative; }
+.nav-item svg { opacity: 0.5; }
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: -16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px rgba(15,14,13,0.10);
+  padding: 10px;
+  width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+.nav-item:hover .nav-dropdown,
+.nav-item:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+}
+.nav-dropdown a:hover { background: var(--accent-tint); }
+.nav-dropdown .dd-title { font-size: 14px; font-weight: 500; color: var(--ink); }
+.nav-dropdown .dd-desc { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.nav-actions { display: flex; align-items: center; gap: 20px; }
+.nav-actions .btn-text { font-size: 14px; color: var(--ink); }
+.nav-mobile-toggle { display: none; }
+
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-actions .btn-text { display: none; }
+  .nav-mobile-toggle {
+    display: flex; flex-direction: column; gap: 4px;
+    width: 32px; height: 32px; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer;
+  }
+  .nav-mobile-toggle span { width: 20px; height: 1.5px; background: var(--ink); }
+}
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  padding: 8px 32px 28px;
+  border-top: 1px solid var(--border);
+}
+.mobile-nav.is-open { display: flex; }
+.mobile-nav a { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+.mobile-nav .btn { margin-top: 18px; align-self: flex-start; }
+
+/* ---------- Hero — Legora's full-viewport dark cinematic band ----------
+   No screenshot inset, no contained card: a full-bleed near-black band with
+   a layered vignette (darker at top/bottom edges, lighter through the
+   middle — the same move v4's very first draft used before it was
+   corrected toward Harvey's split hero; that correction doesn't apply here,
+   this concept IS the cinematic-band direction). Centered, single-column,
+   large serif headline. No licensed photo exists, so the vignette itself
+   (not a photo) carries the mood, matching this repo's own precedent for
+   the same constraint. */
+.hero-cinematic {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(0,80,50,0.16) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 22%, transparent 70%, rgba(0,0,0,0.6) 100%),
+    var(--bg-dark);
+  padding: 140px 32px 100px;
+  overflow: hidden;
+}
+.hero-cinematic-inner { max-width: 820px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+.hero-cinematic-headline {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(38px, 5.6vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  color: #FAF8F4;
+  margin: 22px 0 0;
+}
+.hero-cinematic-sub {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(250,248,244,0.7);
+  max-width: 52ch;
+  margin: 24px auto 0;
+}
+.hero-cta-row { display: flex; align-items: center; gap: 24px; margin-top: 34px; }
+.hero-cta-row--center { justify-content: center; }
+.btn-text--light { color: rgba(250,248,244,0.85); }
+
+@media (max-width: 860px) {
+  .hero-cinematic { min-height: auto; padding: 120px 24px 72px; }
+}
+@media (max-width: 640px) {
+  .hero-cinematic-headline { font-size: clamp(30px, 9vw, 40px); }
+}
+
+/* ---------- Announcement (Introducing MIRA) — Sierra gradient bento card ---------- */
+.announce { padding: var(--space-tight) 32px; }
+.announce-card {
+  max-width: var(--max);
+  margin: 0 auto;
+  background: var(--gradient-announce);
+  border-radius: var(--radius-lg);
+  padding: 88px 40px;
+  text-align: center;
+}
+.announce-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  color: var(--bg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 22px;
+}
+.announce-card h2 { font-family: var(--serif); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; color: var(--bg); font-size: clamp(32px, 4.2vw, 48px); margin-bottom: 18px; }
+.announce-card p {
+  max-width: 46ch;
+  margin: 0 auto 32px;
+  color: rgba(250,250,249,0.82);
+  font-size: 17px;
+  line-height: 1.55;
+}
+@media (max-width: 640px) { .announce-card { padding: 56px 28px; border-radius: var(--radius-md); } }
+
+/* ---------- Logo wall (Sierra — bigger, warmer, natural color) ---------- */
+/* Classier logo wall (2026-08-21): the bordered-card treatment read as
+   utilitarian/form-like. Since every logo here is already a flat black
+   silhouette, the card chrome was doing the unifying work a restrained
+   opacity treatment can do instead — logos now float directly on the page,
+   muted until hovered, bracketed by hairline rules like a masthead rather
+   than boxed like form fields. */
+.logowall { padding: var(--space-tight) 32px; text-align: center; }
+.logowall h3 { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2); margin: 0 auto 48px; position: relative; display: inline-block; padding: 0 20px; }
+.logowall h3::before, .logowall h3::after { content: ''; position: absolute; top: 50%; width: 40px; height: 1px; background: var(--border); }
+.logowall h3::before { right: 100%; }
+.logowall h3::after { left: 100%; }
+.logowall-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.logo-cell {
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 28px;
+}
+.logo-cell img {
+  max-height: 42px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+.logo-cell img.logo-lg { max-height: 58px; }
+.logo-cell:hover img { opacity: 1; }
+@media (max-width: 860px) {
+  .logowall-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .logo-cell { height: 92px; padding: 18px 22px; }
+  .logo-cell img { max-height: 32px; }
+  .logo-cell img.logo-lg { max-height: 44px; }
+}
+
+/* ---------- Product bento (Hebbia asymmetric grid, real screenshots) ---------- */
+.bento { padding: var(--space-lg) 32px; }
+/* Simplified to two equal tiles (2026-08-21): the "For Public Agencies" tile
+   previously sat above two extra small tiles that re-showed the same map
+   image plus a dashboard shot — three images doing one tile's job. Dropped
+   the two small tiles entirely so Consultants and Agencies are a plain,
+   symmetric pair, each making its point with exactly one screenshot. */
+.bento-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; /* sampled from hebbia.com's own bento grid gap */
+}
+.bento-tile {
+  position: relative;
+  border-radius: var(--radius-sharp); /* the one deliberately sharper geometry on
+                                          the page — marks this section as its own
+                                          "Hebbia mode" against the pill/22px rest */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 32px 0;
+}
+.bento-tile--consultants { background: linear-gradient(160deg, var(--bento-charcoal) 0%, var(--dark-1) 100%); }
+.bento-tile--agencies { background: linear-gradient(160deg, var(--bento-slate) 0%, var(--dark-2) 100%); }
+/* Copy lockup sampled from hebbia.com's own card: title at *positive* 0.02em
+   tracking (not the page's default -0.015em) and a subtitle on a wide 46ch
+   measure — Hebbia's cards say their piece in one or two calm lines rather
+   than a narrow 4-line column, which is where the section's dense-and-
+   confident quality actually comes from. */
+.bento-tile h3 { color: var(--bg); font-size: 20px; font-weight: 500; letter-spacing: 0.02em; margin-bottom: 8px; }
+.bento-tile p {
+  color: rgba(250,250,249,0.55);
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 46ch;
+  margin-bottom: 22px;
+  /* locks both tiles' copy blocks to the same height so the two CTAs and the
+     two screenshot crops land on the same line, not offset by ~20px */
+  min-height: 68px;
+}
+/* Hebbia mode: the page's one non-pill button, matching the section's own
+   sharp 8px tiles and hebbia.com's own 4px CTAs. */
+.bento-tile .btn { align-self: flex-start; border-radius: var(--radius-sharp-sm); }
+/* Harvey's own tiles bleed the screenshot flush to the tile's left/right edges,
+   flat top corners (no radius — the tile's own overflow:hidden clips the outer
+   corners), cropped hard at the bottom rather than framed as an inset card.
+   Height raised 260->340px so the screenshot is the majority of the tile, the
+   way Hebbia's own media is, instead of a thin strip under a tall copy block. */
+.bento-shot { margin-top: auto; overflow: hidden; height: 340px; margin-left: -32px; margin-right: -32px; border-radius: 0; }
+.bento-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+@media (max-width: 860px) {
+  .bento-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Trust stat (Legora audit v2, second net-new section) ----------
+   Distinct from the existing .impact band (same three review-timeline/
+   bid-price/defensibility stats, dark full-bleed, equal three-column grid)
+   — this uses a different real fact (the count of real organizations
+   already in the logo wall above, 10 — verified against the actual number
+   of .logo-cell entries in this file, not invented) in a single oversized-
+   numeral statement, Legora's own confident-headline register applied to a
+   trust claim rather than a product claim. Built as a CONTAINED card
+   (matching the announce/final-cta card family) rather than a fourth
+   full-bleed dark section — the page already deliberately limits itself to
+   three full-bleed dark moments (hero, impact, footer); a fourth would
+   overload that rhythm. Logos reuse the same real files as the logowall
+   section, inverted to white via the same filter technique already used on
+   the nav logo in its dark/transparent state (brightness(0) invert(1)) —
+   these are black silhouette PNGs, so without the invert they'd repeat the
+   invisible-on-dark contrast bug found and fixed elsewhere on this page. */
+.trust-stat { padding: 0 32px var(--space-lg); }
+.trust-stat-card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--dark-1);
+  border-radius: var(--radius-lg);
+  padding: 72px 48px;
+  text-align: center;
+}
+.trust-stat-card .eyebrow--light { display: block; margin-bottom: 22px; }
+.trust-stat-number { font-family: var(--serif); font-weight: 400; font-size: clamp(64px, 9vw, 108px); line-height: 1; color: var(--accent-bright); }
+.trust-stat-desc { max-width: 42ch; margin: 20px auto 40px; color: rgba(250,248,244,0.72); font-size: 16px; line-height: 1.55; }
+.trust-stat-logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px 40px; }
+.trust-stat-logos img { height: 22px; width: auto; filter: brightness(0) invert(1); opacity: 0.75; }
+@media (max-width: 640px) {
+  .trust-stat-card { padding: 56px 28px; }
+  .trust-stat-logos { gap: 22px 28px; }
+  .trust-stat-logos img { height: 18px; }
+}
+
+/* ---------- Journey — one project's real path through the record ----------
+   New section (V2 pass): the page had two ways to learn what Envisor does —
+   an accordion (categorized, interactive) and a workflow list (plain text,
+   no imagery) — but nothing that actually showed one project moving through
+   the system as a single thread. This uses four real screenshots already in
+   the asset library, in the order a project actually moves through them,
+   connected by a plain hairline rather than boxed into cards — closer to
+   how confident, editorial B2B sites narrate a single case rather than
+   listing disconnected features. Copy is reused verbatim from this same
+   page's accordion panels and workflow steps, not new claims. */
+.journey { padding: var(--space-lg) 32px; }
+.journey-track { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+.journey-step { display: flex; flex-direction: column; }
+.journey-media { aspect-ratio: 4/3; overflow: hidden; border-radius: var(--radius-sharp); border: 1px solid var(--border); margin-bottom: 22px; }
+.journey-media img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.journey-body { padding-right: 20px; }
+.journey-num { display: block; font-family: var(--serif); font-size: 22px; color: var(--accent-2); margin-bottom: 10px; }
+.journey-step h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+.journey-step p { font-size: 14.5px; line-height: 1.55; color: var(--muted); }
+@media (max-width: 980px) {
+  .journey-track { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+}
+@media (max-width: 640px) {
+  .journey-track { grid-template-columns: 1fr; gap: 36px; }
+  .journey-body { padding-right: 0; }
+}
+
+/* ---------- Platform accordion (Legora expanding capsules) ----------
+   Rebuilt after a side-by-side re-check against legora.com's live
+   "Introducing the Legora aOS" section — the component this was sampled from
+   in the first place. Four things had drifted far enough that the section no
+   longer read as Legora at all, it read as a generic enterprise settings list:
+
+   1. HUG-WIDTH, NOT FULL-WIDTH. Legora's capsules are exactly as wide as their
+      own label — the stack is left-aligned with a ragged right edge, which is
+      the entire reason it reads as objects floating in space rather than a
+      bordered list. Ours were uniform full-width bars with the toggle
+      stranded at the far right of a field of empty space. Rows now hug;
+      only the open one stretches.
+   2. CONTINUOUS SHAPE. Legora's closed pill and open card share one radius and
+      one fill — opening changes size, never identity. Ours changed *color*,
+      flooding the row with the yellow tint (a green-era holdover that read
+      like a validation warning once the palette pivoted).
+   3. THE FILL IS NEUTRAL, NOT A HUE. Open now steps --surface-1 -> --surface-2
+      (both the same neutral ink wash) and the accent does one small precise
+      job: the toggle chip.
+   4. THE TOGGLE IS INLINE. Legora's + sits in a small circle immediately after
+      the label while closed, and only travels to the row's far edge once the
+      row stretches open.
+
+   The fixed-width badge rail and deep panel indent are gone too — those made
+   a borderless table. The category badge is now the small caption line inside
+   the open panel, where Legora puts its own label once a row expands.
+
+   Two-column composition, corrected against a live re-check: Legora never
+   runs this stack full-bleed, but the counterweight beside it is not a block
+   of intro copy — on legora.com the section heading sits centered above the
+   whole thing (matching our shared .sec-head, not a left-anchored intro),
+   and *below* that heading the aOS category list sits in a narrow left rail
+   next to a persistent media panel on the right that swaps to match
+   whichever category pill is open (confirmed by watching the panel's
+   `#aos1`..`#aos7` URL fragment and content change on click, live on the
+   site). .platform-stage below reproduces that: a narrow .accordion rail
+   plus a .platform-stage-media panel, not the old sticky-text-intro column.
+   Only rows with a real, purpose-built product shot carry a `data-media`
+   attribute (Knowledge Base, MIRA, CARA, Initial Study Assistant); CEQA
+   Search and Document Remediation have no matching screenshot in the asset
+   library yet, so opening them leaves the panel on the last real image
+   rather than showing a mismatched one. */
+.platform { padding: var(--space-lg) 32px; }
+.platform-stage {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+}
+.platform-stage-media {
+  position: sticky;
+  top: 120px;
+  aspect-ratio: 16 / 11;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 60px rgba(15,14,13,0.10);
+}
+.platform-stage-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  opacity: 1;
+  transition: opacity 0.18s ease;
+}
+.platform-stage-media.is-fading img { opacity: 0; }
+
+.accordion { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.accordion-row {
+  max-width: 100%;
+  background: var(--surface-1);
+  border-radius: var(--radius-xl);
+  transition: background 0.2s ease;
+}
+.accordion-row:hover { background: var(--surface-2); }
+.accordion-row.is-open {
+  align-self: stretch; /* the one row that leaves the ragged edge */
+  background: var(--surface-2);
+}
+/* 48px closed pill = 24px chip + 2x12px padding */
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 12px 12px 22px;
+  text-align: left;
+  font-family: var(--sans);
+}
+.accordion-row.is-open .accordion-trigger { width: 100%; justify-content: space-between; }
+.accordion-title { font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -0.005em; }
+.accordion-toggle {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(15,14,13,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background 0.2s ease;
+}
+.accordion-toggle::before, .accordion-toggle::after {
+  content: '';
+  position: absolute;
+  background: var(--ink);
+}
+.accordion-toggle::before { width: 9px; height: 1.3px; }
+.accordion-toggle::after { width: 1.3px; height: 9px; transition: opacity 0.2s ease; }
+.accordion-row.is-open .accordion-toggle { background: var(--accent-bright); }
+.accordion-row.is-open .accordion-toggle::after { opacity: 0; }
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.accordion-row.is-open .accordion-panel { grid-template-rows: 1fr; }
+.accordion-panel-inner { overflow: hidden; }
+/* text starts at the same inset as the closed pill's label, so the open card
+   reads as the same object grown rather than a different component */
+.accordion-kicker {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  padding: 0 24px 8px 22px;
+}
+.accordion-panel p { max-width: 52ch; color: var(--muted); font-size: 15px; line-height: 1.6; padding: 0 24px 20px 22px; }
+.kb-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 24px 20px 22px; margin-top: -8px; }
+.kb-tags span { font-size: 11.5px; background: var(--card); padding: 4px 10px; border-radius: var(--radius-sm); color: var(--muted); }
+@media (max-width: 980px) {
+  .platform-stage { grid-template-columns: 1fr; gap: 32px; }
+  .platform-stage-media { order: -1; position: static; aspect-ratio: 16 / 9; }
+}
+@media (max-width: 640px) {
+  .accordion { align-items: stretch; }
+  .accordion-trigger { width: 100%; justify-content: space-between; padding: 12px 12px 12px 20px; }
+  .accordion-kicker, .accordion-panel p, .kb-tags { padding-left: 20px; padding-right: 20px; }
+  .platform-stage-media { aspect-ratio: 4 / 3; }
+}
+
+/* ---------- Workflow ----------
+   Rebalanced against permitflow.com's equivalent section: this was the
+   thinnest section on the page despite being the "how it works" explainer a
+   non-technical civic buyer actually needs most. Two changes: (1) the step
+   number becomes the visual anchor — serif, sitting above a hairline instead
+   of the old solid-yellow 2px slab, which was the loudest and least
+   meaningful use of the accent anywhere on the page; the accent now carries
+   as typography, consistent with the hairline vocabulary the impact band,
+   testimonials, and logo wall already use. (2) step title and body each move
+   up a size so the column reads as content, not a footnote. */
+.workflow { padding: var(--space-lg) 32px; }
+.workflow-steps {
+  max-width: var(--max);
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.workflow-steps li { border-top: 1px solid var(--border); padding-top: 22px; }
+.workflow-num { font-family: var(--serif); font-size: 26px; line-height: 1; color: var(--accent-2); display: block; margin-bottom: 16px; }
+.workflow-steps h4 { font-size: 19px; letter-spacing: -0.01em; margin-bottom: 10px; }
+.workflow-steps p { font-size: 15px; color: var(--muted); line-height: 1.55; }
+@media (max-width: 860px) { .workflow-steps { grid-template-columns: 1fr 1fr; gap: 28px; } }
+
+/* ---------- Impact band — full-bleed dark, tracked-serif stat columns ----------
+   Ground-up redesign (2026-08-21): was three separately-colored bento-style
+   tiles; now one unified dark band (the page's only other two full-bleed dark
+   moments are the announce strip and the footer, so this gives the page a
+   third resting beat) with the stats set as plain typographic columns
+   separated by hairline rules, no card chrome at all. */
+.impact { background: var(--ink); padding: var(--space-lg) 32px; }
+.impact-inner { max-width: var(--max); margin: 0 auto; }
+/* Left-anchored (was centered): the header and first stat now share the same
+   left rail the accordion, bento tiles, and workflow steps sit on, instead of
+   floating independently in the middle of their own column. The per-stat
+   kicker also drops its tracked-caps treatment — with a section eyebrow now
+   sitting above the band, two tiers of tracked uppercase in one section read
+   as an echo of each other. The section eyebrow carries the tracked caps; the
+   per-stat kicker is a plain sentence-case lede. */
+.impact .sec-head { text-align: left; margin: 0 0 64px; }
+.impact .sec-head h2 { color: var(--bg); margin: 0; }
+.impact .sec-head .eyebrow { color: var(--accent-bright); } /* --accent itself is a dark green, unreadable on this dark band */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.impact-stat { padding: 0 40px; border-left: 1px solid rgba(250,250,249,0.14); }
+.impact-stat:first-child { border-left: none; padding-left: 0; }
+.impact-eyebrow { display: block; font-size: 16px; font-weight: 500; line-height: 1.4; color: rgba(250,250,249,0.92); margin-bottom: 18px; }
+/* min-height reserves two lines: the outer two stats wrap, the middle one
+   doesn't, which otherwise leaves the middle column's description ~44px
+   above its neighbors' — three stats in a row need to share a baseline. */
+.impact-num { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.1; color: var(--bg); display: block; margin-bottom: 16px; min-height: 2.3em; }
+.impact-desc { font-size: 15px; line-height: 1.55; color: rgba(250,250,249,0.58); max-width: 26ch; }
+@media (max-width: 860px) {
+  .impact-grid { grid-template-columns: 1fr; gap: 44px; }
+  .impact-stat { border-left: none; border-top: 1px solid rgba(250,250,249,0.14); padding: 36px 0 0; }
+  .impact-stat:first-child { border-top: none; padding-top: 0; }
+}
+
+/* ---------- Testimonials (Harvey serif pull-quotes, Sierra card wrap) ---------- */
+/* Ground-up redesign (2026-08-21): was three equal bordered/boxed cards;
+   now a bookended horizontal "quote log" — no card chrome, just hairline
+   rules between rows, editorial-style pairing of a wide serif quote against
+   a narrow fixed-width attribution column. Sits directly below the impact
+   band's vertical-divider columns, so this deliberately uses horizontal
+   rules instead to keep the two sections from reading as the same shape. */
+.testimonials { padding: var(--space-lg) 32px; text-align: center; }
+.testimonials-inner { max-width: 900px; margin: 0 auto; }
+.testimonial-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); text-align: left; }
+/* margin:0 is load-bearing: <blockquote> carries a UA default of `1em 40px`,
+   which inset every row 40px on each side while the list's own border-top
+   spanned the full 900px — the section's top hairline visibly overhung the
+   between-row hairlines at both ends, and rows carried phantom vertical
+   margins on top of their own padding. */
+.testimonial { display: flex; align-items: flex-start; gap: 48px; margin: 0; padding: 36px 0; border-bottom: 1px solid var(--border); }
+.testimonial p { font-family: var(--serif); font-size: 20px; line-height: 1.45; flex: 1; margin: 0; }
+.testimonial cite { flex-shrink: 0; width: 170px; display: flex; flex-direction: column; gap: 6px; font-style: normal; }
+/* role was 12px regular sitting above a 13.5px semibold org — two near-identical
+   sizes read as one muddled block. Role now uses the page's established
+   tracked-uppercase micro-label vocabulary (impact eyebrow, final-CTA eyebrow,
+   logo-wall masthead), which separates the two cleanly. */
+.t-role { font-size: 10.5px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-2); }
+.t-org { font-size: 14px; font-weight: 600; color: var(--ink); }
+@media (max-width: 760px) {
+  .testimonial { flex-direction: column; gap: 14px; padding: 28px 0; }
+  .testimonial cite { width: auto; flex-direction: row; gap: 8px; }
+  .t-org::before { content: '— '; }
+}
+
+/* ---------- Final CTA ---------- */
+/* Ground-up redesign (2026-08-21): was a full-bleed ink slab identical in
+   shape to the footer directly beneath it, so the two ran together as one
+   block. Now a contained rounded card floating on the page's cream
+   background — echoes the hero's contained-frame move from earlier in the
+   page, and gives the footer's own full-bleed dark back some contrast to
+   land against. */
+.final-cta { background: var(--bg); padding: var(--space-xl) 32px; }
+.final-cta-card {
+  max-width: 880px;
+  margin: 0 auto;
+  background: var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 76px 48px;
+  text-align: center;
+}
+.final-cta-eyebrow { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 20px; }
+/* 18ch forced this headline into four lines inside an 880px card — widened so
+   it sets in three, with text-wrap:balance handling the break points. */
+.final-cta h2 { font-family: var(--serif); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; color: var(--bg); font-size: clamp(30px, 4vw, 48px); max-width: 24ch; margin: 0 auto 36px; }
+
+/* ---------- Footer ---------- */
+/* Redesign (2026-08-21): the grid previously reserved 5 tracks
+   (1.6fr + repeat(4,1fr)) but only 2 link columns were ever populated,
+   leaving a large dead gap on the right at desktop widths. Grid now has
+   exactly as many tracks as there are columns, and the freed width goes
+   to the brand column (own CTA button) instead of empty space. */
+.footer { padding: 72px 32px 40px; background: var(--bg-dark); }
+.footer-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(240px, 1.7fr) 1fr 1fr;
+  gap: 48px;
+}
+.footer-logo { height: 20px; display: block; margin-bottom: 14px; }
+.footer-brand p { font-size: 14px; color: rgba(250,250,249,0.55); max-width: 26ch; line-height: 1.5; margin-bottom: 24px; }
+.footer-col h5 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(250,250,249,0.4); margin-bottom: 14px; }
+.footer-col a { display: block; font-size: 14px; padding: 6px 0; color: var(--bg); }
+.footer-col a:hover { color: var(--accent-bright); }
+.footer-bottom { max-width: var(--max); margin: 48px auto 0; padding-top: 24px; border-top: 1px solid rgba(250,250,249,0.12); font-size: 13px; color: rgba(250,250,249,0.4); }
+@media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- Scroll reveal ---------- */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-in { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}

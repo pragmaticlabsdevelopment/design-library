@@ -1,0 +1,879 @@
+/* ===================================================================
+   Envisor — Marketing Website v4 "Blended Inspirations"
+   Design register: blend of Legora (cinematic photography energy,
+   forest-green accent, accordion feature list), Hebbia (dark
+   asymmetric bento product grid, tracked serif impact statements),
+   and Sierra (rounded pill buttons/nav, generous logo wall, gradient
+   bento tiles) — reskinned onto v3's cream/ink base and real Envisor
+   content. See HANDOFF.md for full sourcing and rationale.
+   =================================================================== */
+
+:root {
+  --bg: #fafaf9;
+  --ink: #0f0e0d;
+  --muted: #5c5952;
+  --muted-2: #83807a;
+  --border: #e4e1da;
+  --card: #ffffff;
+  --accent: #F2B400;        /* brand yellow — fills: buttons, active states, badges */
+  --accent-2: #B8860B;      /* deep amber — hover-darken of fills, and text-on-light contexts where bright yellow reads too low-contrast */
+  --accent-tint: #FBEEC7;   /* pale yellow fill for tags/badges */
+  --dark-1: #0f0e0d;
+  --dark-2: #201f1e;        /* neutral dark gray, for bento/lane cards */
+  --dark-3: #0f0e0d;
+
+  /* radius scale — HARVEY AUDIT (2026-08-22). A forensic sweep of every element
+     on harvey.ai returns exactly three radii in the entire document:
+       8px  (58 elements — every card, tile, media frame, dropdown, panel)
+       4px  (12 elements — every CTA, without exception)
+       50%  (9 elements  — avatars and other genuinely round things)
+     No 14px. No 22px. No large soft corners anywhere, including the hero's own
+     product-shot frame. This page was running SIX card/button radii (999/14/22/
+     28/8/4). Large soft radii are the single loudest consumer-SaaS tell on a
+     page selling to public agencies, and the CEO's stated goal for this site is
+     "this is serious enterprise software." Collapsed to Harvey's vocabulary:
+     4px for CTAs, 8px for every card and frame. The pill is retained ONLY for
+     tags/badges and the Legora accordion capsules, where the shape is carrying
+     a specific borrowed identity rather than just softening a box. */
+  --radius-btn: 4px;        /* every CTA — sampled from harvey.ai's own buttons */
+  --radius-card: 8px;       /* every card, tile, media frame, dropdown, panel */
+  --radius-sm: 999px;       /* tags/badges only */
+  --radius-xl: 28px;        /* accordion capsules — Legora's own shape, kept deliberately */
+
+  /* legacy aliases — kept so no rule silently loses its radius; both now
+     resolve to Harvey's single 8px card radius */
+  --radius-md: var(--radius-card);
+  --radius-lg: var(--radius-card);
+  --radius-sharp: var(--radius-card);
+  --radius-sharp-sm: var(--radius-btn);
+
+  /* ink washes — resting/active fill pair for the Legora accordion capsules.
+     Deliberately neutral, not a hue: Legora separates a closed row from an open
+     one by depth of the same neutral, never by color, so the accent stays free
+     to do one small, precise job (the toggle chip). */
+  --surface-1: rgba(15, 14, 13, 0.04);
+  --surface-2: rgba(15, 14, 13, 0.075);
+
+  /* spacing scale — every section's top+bottom padding is one of these three,
+     applied explicitly on both sides, so no section depends on a neighbor's
+     padding to create its own gap. Widened toward harvey.ai's own generous
+     ladder per the CEO's explicit direction (2026-08-22): "Harvey uses a lot
+     of white/negative space... that could communicate 'this is serious
+     enterprise software.'"
+
+     HARVEY AUDIT (2026-08-22) — pulled the real numbers off harvey.ai's own
+     section classes rather than approximating them. Their ladder is:
+        pt-lg  =  64px
+        pt-xl  = 128px
+        pt-2xl = 160px
+     Two things this page had wrong. (1) RANGE. Ours ran 104->168px, a ratio of
+     1.6; Harvey's runs 64->160, a ratio of 2.5. A narrow range is why this page
+     reads as evenly-spaced-therefore-flat: no gap is meaningfully bigger than
+     any other, so nothing announces itself as a new chapter. (2) ASYMMETRY.
+     Harvey routinely sets a section pt-lg/pb-0 so it stays welded to the one
+     above it (their hero and their audience router both do this), then spends
+     160px where a real break belongs. We were applying both sides on every
+     section as a matter of policy, which guarantees uniform gaps. --space-couple
+     is the missing bottom rung: for a section that is a continuation, not a
+     new chapter. */
+  --space-couple: 64px;     /* welded to the section above (harvey pt-lg) */
+  --space-tight: 128px;     /* transitional sections: announce, logo wall (harvey pt-xl) */
+  --space-lg: 160px;        /* standard content sections (harvey pt-2xl) */
+  --space-xl: 160px;        /* bookends: hero band, final CTA */
+
+  /* HARVEY AUDIT: harvey.ai runs THREE grounds, not two — #fafaf9 primary,
+     #f2f1f0 secondary, #0f0e0d dark. The secondary is barely a shade darker
+     and does one job: separating a section without spending the page's scarce
+     dark. This page had no equivalent, so every light section from the hero to
+     the testimonials sat on one unbroken sheet of #fafaf9. */
+  --surface-alt: #f2f1f0;
+
+  /* gradients — named so the palette is visible without reading comments */
+  --gradient-announce: linear-gradient(130deg, #4a4a48 0%, #1a1a19 100%);
+  --gradient-impact-blue: linear-gradient(131deg, #3D78B6 29.8%, #03BDF5 175.51%);
+  --gradient-impact-terracotta: linear-gradient(130deg, #C2674D 0%, #A2462D 100%);
+  --bento-charcoal: #2D2828;
+  --bento-slate: #5A564F; /* was #57657A, a blue-gray left over from the pre-pivot palette — replaced with a warm neutral gray on-palette with the rest of the black/yellow/white/gray site */
+  --bento-mist: #EDF0F3;
+  --frame-dark: #3a3a38;   /* hero product-shot frame — was a hardcoded hex */
+
+  --max: 1280px;            /* was 1200 — left the hero headline no room to grow past 54px */
+  --serif: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; margin: 0; line-height: 1.08; letter-spacing: -0.015em; }
+/* Every wrapping section heading was dropping a single-word last line
+   ("...who deliver the / work") — text-wrap:balance fixes this everywhere a
+   heading actually wraps, without touching the hero's hand-set <br>. */
+h1, h2 { text-wrap: balance; }
+p { margin: 0; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  /* was --accent-2: matches the logo-wall masthead label's neutral tracked-caps
+     vocabulary rather than competing in amber with whatever headline follows it */
+  color: var(--muted-2);
+}
+.eyebrow--light { color: rgba(250, 250, 249, 0.7); }
+
+/* ---------- Section header (shared) ----------
+   The single most transferable structural move found auditing this page
+   against permitflow.com — the closest content parallel to Envisor, selling
+   into the same bureaucratic, high-stakes compliance space. Every one of
+   their sections opens with the same three-part header (tracked eyebrow ->
+   headline -> optional subhead), which is what makes a long, dense,
+   unfamiliar-domain page navigable: the eyebrow orients a non-specialist
+   visitor before they've read a word of the headline.
+   This page previously had five differently-shaped section intros (centered
+   620px h2+p; a lone centered h2 at three different clamp scales) and no
+   eyebrows anywhere except the hero. One component now covers all of them.
+   structure and the eyebrow label are PermitFlow's.
+
+   HARVEY AUDIT (2026-08-22) — THE BIG ONE. This page had adopted Harvey's
+   serif headline and then applied it to every single section header at one
+   size, centered. Harvey does not do that. Measured, harvey.ai runs exactly
+   two kinds of section header:
+
+     BILLBOARD  48px serif / 400 / centered  — used TWICE on the whole page
+                ("One Platform for Legal Work", "Introducing Harvey II")
+     WORKHORSE  32px SANS  / 500 / LEFT      — used for everything else
+                ("Product Innovation for the Best Legal Minds", "Real Impact
+                 for Real Clients", "Enterprise-Grade Security and Controls")
+
+   That is a 48/32 cliff plus a serif/sans switch plus a centered/left switch —
+   three simultaneous signals separating "this is a chapter opening" from "this
+   is a section". We were running seven headers at 46px serif centered, which
+   means the serif stops reading as emphasis and starts reading as body style,
+   and no section can announce itself as more important than any other. The
+   serif is a scarce resource; spending it everywhere is spending it nowhere.
+
+   .sec-head is now the WORKHORSE (32px sans/500, left). Billboard treatment is
+   opt-in via .sec-head--billboard and is used on exactly two section headers,
+   matching Harvey's own count: the audience router (.bento, a structural twin
+   of Harvey's AudienceRouterSection) and the MIRA announcement. The alternation
+   between left workhorse and centered billboard also gives the page the
+   alignment rhythm it was missing when everything was centered. */
+.sec-head { max-width: var(--max); margin: 0 auto 64px; text-align: left; }
+.sec-head .eyebrow { display: block; margin-bottom: 14px; }
+.sec-head h2 {
+  font-family: var(--sans);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  font-size: clamp(26px, 2.6vw, 32px);
+  max-width: 24ch;
+  margin: 0;
+}
+.sec-head p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 52ch;
+  margin: 18px 0 0;
+}
+/* Billboard — harvey.ai's 48px serif chapter opening. Twice per page, no more. */
+.sec-head--billboard { text-align: center; margin-bottom: 72px; }
+.sec-head--billboard .eyebrow { margin-bottom: 16px; }
+.sec-head--billboard h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.05;
+  font-size: clamp(32px, 4vw, 48px);
+  max-width: 18ch;
+  margin: 0 auto;
+}
+.sec-head--billboard p { max-width: 48ch; margin: 20px auto 0; }
+@media (max-width: 640px) {
+  .sec-head { margin-bottom: 40px; }
+  .sec-head p { font-size: 15px; }
+}
+
+/* ---------- Buttons ----------
+   HARVEY AUDIT (2026-08-22): harvey.ai's CTAs, measured, are 4px-radius
+   rectangles in exactly two sizes and nothing else —
+     nav:   32px tall, 14px/500, padding 0 12px
+     hero:  48px tall, 16px/500, padding 0 20px
+   Ours were 40px and 52px fully-rounded pills. The pill was inherited from
+   Sierra and Legora, both of which sell to consumer-facing teams; it is the
+   single loudest "modern startup" signal on this page and it is pointed at an
+   audience of county planners and public agencies. Squaring the CTAs to 4px is
+   the cheapest, highest-leverage change available for the institutional
+   register this site says it wants. Sizes moved onto Harvey's own two-tier
+   scale as well: the small tier drops 40->36px so the nav CTA stops competing
+   with the hero's, and the large tier drops 52->48px with a 16px label, which
+   is Harvey's exactly. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-btn);
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: opacity 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+/* No lift-on-hover: Harvey's buttons change color and nothing else. A 1px
+   translate on every button on the page read as busy rather than responsive. */
+.btn-primary { background: var(--accent); color: var(--ink); }
+.btn-primary:hover { background: var(--accent-2); }
+/* Ink-filled pill for the nav CTA. The nav and the hero both used to be brand
+   yellow, putting two identical saturated "Book Demo" pills in the first
+   viewport with nothing to say which was primary. The nav one is now ink,
+   leaving exactly one accent moment above the fold. */
+.btn-ink { background: var(--ink); color: var(--bg); }
+.btn-ink:hover { background: var(--dark-2); }
+.btn-light { background: var(--bg); color: var(--ink); }
+.btn-light:hover { opacity: 0.85; }
+/* Large tier — harvey.ai's own hero CTA, measured: 48px tall, 16px/500, 0 20px. */
+.btn-lg { height: 48px; padding: 0 20px; font-size: 16px; }
+.btn-outline-light { background: transparent; color: var(--bg); border-color: rgba(250,250,249,0.35); }
+.btn-outline-light:hover { border-color: rgba(250,250,249,0.7); }
+.btn-text { font-family: var(--sans); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; color: var(--accent-2); }
+.btn-text svg { transition: transform 0.15s ease; }
+.btn-text:hover svg { transform: translateX(3px); }
+
+/* ---------- Top announcement strip (Legora) ----------
+   legora.com opens on a slim full-bleed strip above the nav carrying one line
+   of news plus a single forward link — the page's first horizontal edge, and
+   part of why its nav reads as anchored rather than floating on the
+   background. This page had no equivalent: the nav sat straight on --bg with
+   nothing establishing the top of the page. Deliberately NOT sticky — Legora
+   pins both bar and nav, permanently taxing viewport height; letting the
+   strip scroll away keeps this page's restraint while still landing the
+   structural move. */
+.topbar { background: var(--ink); }
+.topbar-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 13px;
+  color: rgba(250, 250, 249, 0.72);
+}
+.topbar-inner a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-weight: 500;
+}
+.topbar-inner a svg { transition: transform 0.15s ease; }
+.topbar-inner a:hover svg { transform: translateX(3px); }
+@media (max-width: 640px) {
+  .topbar-inner { height: auto; padding: 10px 20px; gap: 10px; font-size: 12.5px; flex-wrap: wrap; }
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+}
+.nav.is-scrolled { border-bottom-color: var(--border); }
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  height: 72px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-logo { display: flex; align-items: center; height: 30px; }
+.nav-logo img { height: 100%; width: auto; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  padding-left: 40px;
+}
+.nav-links a, .nav-item > span {
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-item { position: relative; }
+.nav-item svg { opacity: 0.5; }
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: -16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px rgba(15,14,13,0.10);
+  padding: 10px;
+  width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+.nav-item:hover .nav-dropdown,
+.nav-item:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+}
+.nav-dropdown a:hover { background: var(--accent-tint); }
+.nav-dropdown .dd-title { font-size: 14px; font-weight: 500; color: var(--ink); }
+.nav-dropdown .dd-desc { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.nav-actions { display: flex; align-items: center; gap: 20px; }
+.nav-actions .btn-text { font-size: 14px; color: var(--ink); }
+.nav-mobile-toggle { display: none; }
+
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-actions .btn-text { display: none; }
+  .nav-mobile-toggle {
+    display: flex; flex-direction: column; gap: 4px;
+    width: 32px; height: 32px; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer;
+  }
+  .nav-mobile-toggle span { width: 20px; height: 1.5px; background: var(--ink); }
+}
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  padding: 8px 32px 28px;
+  border-top: 1px solid var(--border);
+}
+.mobile-nav.is-open { display: flex; }
+.mobile-nav a { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+.mobile-nav .btn { margin-top: 18px; align-self: flex-start; }
+
+/* ---------- Hero — Harvey's split text layout + framed product shot bleeding into a Legora-mood band ---------- */
+.hero-band { position: relative; background: var(--bg); }
+.hero-top {
+  display: grid;
+  /* 1.75fr buys the headline the width it needs at the larger display size below;
+     Harvey gives its own h1 comparable room and lets it run to three lines */
+  grid-template-columns: 1.75fr 1fr;
+  gap: 48px;
+  /* was `center` — bottom-aligning the subhead+CTA to the headline's own
+     baseline gives the two columns a shared line to sit on, rather than
+     floating the right column in the middle of a taller left one */
+  align-items: end;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 120px 32px 80px;
+}
+.hero-headline {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 20px 0 0;
+}
+.hero-sub {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 40ch;
+}
+.hero-cta-row { display: flex; align-items: center; gap: 24px; margin-top: 28px; }
+
+.hero-shot-band {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 32px var(--space-tight);
+}
+.hero-shot-frame {
+  position: relative;
+  background: var(--frame-dark);
+  border-radius: var(--radius-lg);
+  padding: 56px 56px 0;
+}
+/* Harvey insets the product shot from the top/sides and lets it bleed off the
+   *bottom* of the frame, cropped — reads as a window onto something that
+   continues, rather than a picture centered on a mat with even padding on
+   all four sides. */
+.hero-shot-crop { overflow: hidden; max-height: 540px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+.hero-shot-frame img { width: 100%; display: block; }
+
+@media (max-width: 860px) {
+  .hero-top { grid-template-columns: 1fr; padding: 80px 24px 40px; align-items: start; }
+  .hero-sub { max-width: none; }
+  .hero-shot-frame { padding: 32px 32px 0; }
+  .hero-shot-crop { max-height: 380px; }
+}
+@media (max-width: 640px) {
+  .hero-headline { font-size: clamp(30px, 9vw, 40px); letter-spacing: 0; }
+  .hero-shot-band { padding: 0 20px 60px; }
+  .hero-shot-frame { padding: 20px 20px 0; border-radius: var(--radius-md); }
+  .hero-shot-crop { max-height: 260px; }
+}
+
+/* ---------- Announcement (Introducing MIRA) — Sierra gradient bento card ---------- */
+.announce { padding: var(--space-tight) 32px; }
+.announce-card {
+  max-width: var(--max);
+  margin: 0 auto;
+  background: var(--gradient-announce);
+  border-radius: var(--radius-lg);
+  padding: 88px 40px;
+  text-align: center;
+}
+.announce-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  color: var(--bg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 22px;
+}
+.announce-card h2 { font-family: var(--serif); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; color: var(--bg); font-size: clamp(32px, 4.2vw, 48px); margin-bottom: 18px; }
+.announce-card p {
+  max-width: 46ch;
+  margin: 0 auto 32px;
+  color: rgba(250,250,249,0.82);
+  font-size: 17px;
+  line-height: 1.55;
+}
+@media (max-width: 640px) { .announce-card { padding: 56px 28px; border-radius: var(--radius-md); } }
+
+/* ---------- Logo wall (Sierra — bigger, warmer, natural color) ---------- */
+/* Classier logo wall (2026-08-21): the bordered-card treatment read as
+   utilitarian/form-like. Since every logo here is already a flat black
+   silhouette, the card chrome was doing the unifying work a restrained
+   opacity treatment can do instead — logos now float directly on the page,
+   muted until hovered, bracketed by hairline rules like a masthead rather
+   than boxed like form fields. */
+.logowall { padding: var(--space-tight) 32px; text-align: center; }
+.logowall h3 { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2); margin: 0 auto 48px; position: relative; display: inline-block; padding: 0 20px; }
+.logowall h3::before, .logowall h3::after { content: ''; position: absolute; top: 50%; width: 40px; height: 1px; background: var(--border); }
+.logowall h3::before { right: 100%; }
+.logowall h3::after { left: 100%; }
+.logowall-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.logo-cell {
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 28px;
+}
+.logo-cell img {
+  max-height: 42px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+.logo-cell img.logo-lg { max-height: 58px; }
+.logo-cell:hover img { opacity: 1; }
+@media (max-width: 860px) {
+  .logowall-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .logo-cell { height: 92px; padding: 18px 22px; }
+  .logo-cell img { max-height: 32px; }
+  .logo-cell img.logo-lg { max-height: 44px; }
+}
+
+/* ---------- Product bento (Hebbia asymmetric grid, real screenshots) ---------- */
+.bento { padding: var(--space-lg) 32px; }
+/* Simplified to two equal tiles (2026-08-21): the "For Public Agencies" tile
+   previously sat above two extra small tiles that re-showed the same map
+   image plus a dashboard shot — three images doing one tile's job. Dropped
+   the two small tiles entirely so Consultants and Agencies are a plain,
+   symmetric pair, each making its point with exactly one screenshot. */
+.bento-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; /* sampled from hebbia.com's own bento grid gap */
+}
+.bento-tile {
+  position: relative;
+  border-radius: var(--radius-sharp); /* the one deliberately sharper geometry on
+                                          the page — marks this section as its own
+                                          "Hebbia mode" against the pill/22px rest */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 32px 0;
+}
+.bento-tile--consultants { background: linear-gradient(160deg, var(--bento-charcoal) 0%, var(--dark-1) 100%); }
+.bento-tile--agencies { background: linear-gradient(160deg, var(--bento-slate) 0%, var(--dark-2) 100%); }
+/* Copy lockup sampled from hebbia.com's own card: title at *positive* 0.02em
+   tracking (not the page's default -0.015em) and a subtitle on a wide 46ch
+   measure — Hebbia's cards say their piece in one or two calm lines rather
+   than a narrow 4-line column, which is where the section's dense-and-
+   confident quality actually comes from. */
+.bento-tile h3 { color: var(--bg); font-size: 20px; font-weight: 500; letter-spacing: 0.02em; margin-bottom: 8px; }
+.bento-tile p {
+  color: rgba(250,250,249,0.55);
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 46ch;
+  margin-bottom: 22px;
+  /* locks both tiles' copy blocks to the same height so the two CTAs and the
+     two screenshot crops land on the same line, not offset by ~20px */
+  min-height: 68px;
+}
+/* Hebbia mode: the page's one non-pill button, matching the section's own
+   sharp 8px tiles and hebbia.com's own 4px CTAs. */
+.bento-tile .btn { align-self: flex-start; border-radius: var(--radius-sharp-sm); }
+/* Harvey's own tiles bleed the screenshot flush to the tile's left/right edges,
+   flat top corners (no radius — the tile's own overflow:hidden clips the outer
+   corners), cropped hard at the bottom rather than framed as an inset card.
+   Height raised 260->340px so the screenshot is the majority of the tile, the
+   way Hebbia's own media is, instead of a thin strip under a tall copy block. */
+.bento-shot { margin-top: auto; overflow: hidden; height: 340px; margin-left: -32px; margin-right: -32px; border-radius: 0; }
+.bento-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+@media (max-width: 860px) {
+  .bento-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Platform accordion (Legora expanding capsules) ----------
+   Rebuilt after a side-by-side re-check against legora.com's live
+   "Introducing the Legora aOS" section — the component this was sampled from
+   in the first place. Four things had drifted far enough that the section no
+   longer read as Legora at all, it read as a generic enterprise settings list:
+
+   1. HUG-WIDTH, NOT FULL-WIDTH. Legora's capsules are exactly as wide as their
+      own label — the stack is left-aligned with a ragged right edge, which is
+      the entire reason it reads as objects floating in space rather than a
+      bordered list. Ours were uniform full-width bars with the toggle
+      stranded at the far right of a field of empty space. Rows now hug;
+      only the open one stretches.
+   2. CONTINUOUS SHAPE. Legora's closed pill and open card share one radius and
+      one fill — opening changes size, never identity. Ours changed *color*,
+      flooding the row with the yellow tint (a green-era holdover that read
+      like a validation warning once the palette pivoted).
+   3. THE FILL IS NEUTRAL, NOT A HUE. Open now steps --surface-1 -> --surface-2
+      (both the same neutral ink wash) and the accent does one small precise
+      job: the toggle chip.
+   4. THE TOGGLE IS INLINE. Legora's + sits in a small circle immediately after
+      the label while closed, and only travels to the row's far edge once the
+      row stretches open.
+
+   The fixed-width badge rail and deep panel indent are gone too — those made
+   a borderless table. The category badge is now the small caption line inside
+   the open panel, where Legora puts its own label once a row expands.
+
+   Two-column composition: Legora never runs this stack full-bleed — it lives
+   in a narrow column with a counterweight beside it, which is what lets
+   ragged capsules look composed rather than lost. It's also the page's one
+   deliberately left-anchored section, alternating against the centered
+   .sec-head rhythm everywhere else — sampled from how legora.com itself
+   alternates centered and left-anchored sections rather than running one
+   alignment throughout. */
+.platform { padding: var(--space-lg) 32px; }
+.platform-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: start;
+}
+.platform-intro { max-width: 440px; margin: 0; text-align: left; position: sticky; top: 120px; }
+.platform-intro .eyebrow { display: block; margin-bottom: 16px; }
+/* HARVEY AUDIT: workhorse header — 32px sans/500 left, matching .sec-head.
+   This section is a feature list, not a chapter opening; it was set in 40px
+   serif, which put it in the same visual tier as the page's actual billboards. */
+.platform-intro h2 { font-family: var(--sans); font-weight: 500; line-height: 1.08; letter-spacing: -0.01em; font-size: clamp(26px, 2.6vw, 32px); margin: 0 0 16px; }
+.platform-intro p { color: var(--muted); font-size: 16px; line-height: 1.55; }
+
+.accordion { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.accordion-row {
+  max-width: 100%;
+  background: var(--surface-1);
+  border-radius: var(--radius-xl);
+  transition: background 0.2s ease;
+}
+.accordion-row:hover { background: var(--surface-2); }
+.accordion-row.is-open {
+  align-self: stretch; /* the one row that leaves the ragged edge */
+  background: var(--surface-2);
+}
+/* 48px closed pill = 24px chip + 2x12px padding */
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 12px 12px 22px;
+  text-align: left;
+  font-family: var(--sans);
+}
+.accordion-row.is-open .accordion-trigger { width: 100%; justify-content: space-between; }
+.accordion-title { font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -0.005em; }
+.accordion-toggle {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(15,14,13,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background 0.2s ease;
+}
+.accordion-toggle::before, .accordion-toggle::after {
+  content: '';
+  position: absolute;
+  background: var(--ink);
+}
+.accordion-toggle::before { width: 9px; height: 1.3px; }
+.accordion-toggle::after { width: 1.3px; height: 9px; transition: opacity 0.2s ease; }
+.accordion-row.is-open .accordion-toggle { background: var(--accent); }
+.accordion-row.is-open .accordion-toggle::after { opacity: 0; }
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.accordion-row.is-open .accordion-panel { grid-template-rows: 1fr; }
+.accordion-panel-inner { overflow: hidden; }
+/* text starts at the same inset as the closed pill's label, so the open card
+   reads as the same object grown rather than a different component */
+.accordion-kicker {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  padding: 0 24px 8px 22px;
+}
+.accordion-panel p { max-width: 52ch; color: var(--muted); font-size: 15px; line-height: 1.6; padding: 0 24px 20px 22px; }
+.kb-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 24px 20px 22px; margin-top: -8px; }
+.kb-tags span { font-size: 11.5px; background: var(--card); padding: 4px 10px; border-radius: var(--radius-sm); color: var(--muted); }
+@media (max-width: 980px) {
+  .platform-inner { grid-template-columns: 1fr; gap: 44px; }
+  .platform-intro { position: static; max-width: 620px; text-align: center; }
+  .platform-intro .eyebrow { margin-left: auto; margin-right: auto; width: fit-content; }
+}
+@media (max-width: 640px) {
+  .accordion { align-items: stretch; }
+  .accordion-trigger { width: 100%; justify-content: space-between; padding: 12px 12px 12px 20px; }
+  .accordion-kicker, .accordion-panel p, .kb-tags { padding-left: 20px; padding-right: 20px; }
+}
+
+/* ---------- Workflow ----------
+   Rebalanced against permitflow.com's equivalent section: this was the
+   thinnest section on the page despite being the "how it works" explainer a
+   non-technical civic buyer actually needs most. Two changes: (1) the step
+   number becomes the visual anchor — serif, sitting above a hairline instead
+   of the old solid-yellow 2px slab, which was the loudest and least
+   meaningful use of the accent anywhere on the page; the accent now carries
+   as typography, consistent with the hairline vocabulary the impact band,
+   testimonials, and logo wall already use. (2) step title and body each move
+   up a size so the column reads as content, not a footnote. */
+.workflow { padding: var(--space-lg) 32px; }
+.workflow-steps {
+  max-width: var(--max);
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.workflow-steps li { border-top: 1px solid var(--border); padding-top: 22px; }
+.workflow-num { font-family: var(--serif); font-size: 26px; line-height: 1; color: var(--accent-2); display: block; margin-bottom: 16px; }
+.workflow-steps h4 { font-size: 19px; letter-spacing: -0.01em; margin-bottom: 10px; }
+.workflow-steps p { font-size: 15px; color: var(--muted); line-height: 1.55; }
+@media (max-width: 860px) { .workflow-steps { grid-template-columns: 1fr 1fr; gap: 28px; } }
+
+/* ---------- Impact band — full-bleed dark, tracked-serif stat columns ----------
+   Ground-up redesign (2026-08-21): was three separately-colored bento-style
+   tiles; now one unified dark band (the page's only other two full-bleed dark
+   moments are the announce strip and the footer, so this gives the page a
+   third resting beat) with the stats set as plain typographic columns
+   separated by hairline rules, no card chrome at all. */
+.impact { background: var(--ink); padding: var(--space-lg) 32px; }
+.impact-inner { max-width: var(--max); margin: 0 auto; }
+/* Left-anchored (was centered): the header and first stat now share the same
+   left rail the accordion, bento tiles, and workflow steps sit on, instead of
+   floating independently in the middle of their own column. The per-stat
+   kicker also drops its tracked-caps treatment — with a section eyebrow now
+   sitting above the band, two tiers of tracked uppercase in one section read
+   as an echo of each other. The section eyebrow carries the tracked caps; the
+   per-stat kicker is a plain sentence-case lede. */
+.impact .sec-head { text-align: left; margin: 0 0 64px; }
+.impact .sec-head h2 { color: var(--bg); margin: 0; }
+.impact .sec-head .eyebrow { color: var(--accent); } /* bright, not --accent-2 — deep amber goes muddy on dark grounds */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.impact-stat { padding: 0 40px; border-left: 1px solid rgba(250,250,249,0.14); }
+.impact-stat:first-child { border-left: none; padding-left: 0; }
+.impact-eyebrow { display: block; font-size: 16px; font-weight: 500; line-height: 1.4; color: rgba(250,250,249,0.92); margin-bottom: 18px; }
+/* min-height reserves two lines: the outer two stats wrap, the middle one
+   doesn't, which otherwise leaves the middle column's description ~44px
+   above its neighbors' — three stats in a row need to share a baseline. */
+.impact-num { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.1; color: var(--bg); display: block; margin-bottom: 16px; min-height: 2.3em; }
+.impact-desc { font-size: 15px; line-height: 1.55; color: rgba(250,250,249,0.58); max-width: 26ch; }
+@media (max-width: 860px) {
+  .impact-grid { grid-template-columns: 1fr; gap: 44px; }
+  .impact-stat { border-left: none; border-top: 1px solid rgba(250,250,249,0.14); padding: 36px 0 0; }
+  .impact-stat:first-child { border-top: none; padding-top: 0; }
+}
+
+/* ---------- Testimonials (Harvey serif pull-quotes, Sierra card wrap) ---------- */
+/* Ground-up redesign (2026-08-21): was three equal bordered/boxed cards;
+   now a bookended horizontal "quote log" — no card chrome, just hairline
+   rules between rows, editorial-style pairing of a wide serif quote against
+   a narrow fixed-width attribution column. Sits directly below the impact
+   band's vertical-divider columns, so this deliberately uses horizontal
+   rules instead to keep the two sections from reading as the same shape. */
+.testimonials { padding: var(--space-lg) 32px; text-align: center; }
+.testimonials-inner { max-width: 900px; margin: 0 auto; }
+.testimonial-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); text-align: left; }
+/* margin:0 is load-bearing: <blockquote> carries a UA default of `1em 40px`,
+   which inset every row 40px on each side while the list's own border-top
+   spanned the full 900px — the section's top hairline visibly overhung the
+   between-row hairlines at both ends, and rows carried phantom vertical
+   margins on top of their own padding. */
+.testimonial { display: flex; align-items: flex-start; gap: 48px; margin: 0; padding: 36px 0; border-bottom: 1px solid var(--border); }
+.testimonial p { font-family: var(--serif); font-size: 20px; line-height: 1.45; flex: 1; margin: 0; }
+.testimonial cite { flex-shrink: 0; width: 170px; display: flex; flex-direction: column; gap: 6px; font-style: normal; }
+/* role was 12px regular sitting above a 13.5px semibold org — two near-identical
+   sizes read as one muddled block. Role now uses the page's established
+   tracked-uppercase micro-label vocabulary (impact eyebrow, final-CTA eyebrow,
+   logo-wall masthead), which separates the two cleanly. */
+.t-role { font-size: 10.5px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-2); }
+.t-org { font-size: 14px; font-weight: 600; color: var(--ink); }
+@media (max-width: 760px) {
+  .testimonial { flex-direction: column; gap: 14px; padding: 28px 0; }
+  .testimonial cite { width: auto; flex-direction: row; gap: 8px; }
+  .t-org::before { content: '— '; }
+}
+
+/* ---------- Final CTA ---------- */
+/* Ground-up redesign (2026-08-21): was a full-bleed ink slab identical in
+   shape to the footer directly beneath it, so the two ran together as one
+   block. Now a contained rounded card floating on the page's cream
+   background — echoes the hero's contained-frame move from earlier in the
+   page, and gives the footer's own full-bleed dark back some contrast to
+   land against. */
+.final-cta { background: var(--bg); padding: var(--space-xl) 32px; }
+.final-cta-card {
+  max-width: 880px;
+  margin: 0 auto;
+  background: var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 76px 48px;
+  text-align: center;
+}
+.final-cta-eyebrow { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+/* 18ch forced this headline into four lines inside an 880px card — widened so
+   it sets in three, with text-wrap:balance handling the break points. */
+.final-cta h2 { font-family: var(--serif); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; color: var(--bg); font-size: clamp(30px, 4vw, 48px); max-width: 24ch; margin: 0 auto 36px; }
+
+/* ---------- Footer ---------- */
+/* Redesign (2026-08-21): the grid previously reserved 5 tracks
+   (1.6fr + repeat(4,1fr)) but only 2 link columns were ever populated,
+   leaving a large dead gap on the right at desktop widths. Grid now has
+   exactly as many tracks as there are columns, and the freed width goes
+   to the brand column (own CTA button) instead of empty space. */
+.footer { padding: 72px 32px 40px; background: var(--ink); }
+.footer-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(240px, 1.7fr) 1fr 1fr;
+  gap: 48px;
+}
+.footer-logo { height: 20px; display: block; margin-bottom: 14px; }
+.footer-brand p { font-size: 14px; color: rgba(250,250,249,0.55); max-width: 26ch; line-height: 1.5; margin-bottom: 24px; }
+.footer-col h5 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(250,250,249,0.4); margin-bottom: 14px; }
+.footer-col a { display: block; font-size: 14px; padding: 6px 0; color: var(--bg); }
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom { max-width: var(--max); margin: 48px auto 0; padding-top: 24px; border-top: 1px solid rgba(250,250,249,0.12); font-size: 13px; color: rgba(250,250,249,0.4); }
+@media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- Footer (Harvey audit): expanded 6-column layout ----------
+   harvey.ai's own footer runs 6 distinct column groups (Platform,
+   Solutions, Company, Resources, Follow — plus the brand column) rather
+   than the compact 3-track grid the rest of this page uses. Widening it
+   here, plus a legal-links row bundled into the bottom bar, is the one
+   place on this page that borrows Harvey's actual footer density instead
+   of just its type/spacing vocabulary. */
+.footer-harvey .footer-inner {
+  grid-template-columns: minmax(220px, 1.5fr) repeat(4, 0.85fr) 0.7fr;
+  gap: 32px;
+}
+.footer-harvey .footer-follow a { display: inline-block; margin-right: 14px; padding: 0; }
+.footer-harvey .footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-harvey .footer-legal a { color: rgba(250,250,249,0.4); margin-left: 20px; }
+.footer-harvey .footer-legal a:first-child { margin-left: 0; }
+.footer-harvey .footer-legal a:hover { color: var(--accent); }
+@media (max-width: 980px) {
+  .footer-harvey .footer-inner { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-harvey .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-in { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}

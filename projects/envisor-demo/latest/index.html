@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketing Website — Versions</title>
+<meta name="robots" content="noindex" />
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --card-bg: #ffffff;
+    --text: #16181d;
+    --text-muted: #5b6068;
+    --border: #e4e4e0;
+    --accent: #16181d;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1013;
+      --card-bg: #17181c;
+      --text: #f2f2f0;
+      --text-muted: #9a9ea6;
+      --border: #2a2b30;
+      --accent: #f2f2f0;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6rem 1.5rem 3rem;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    max-width: 640px;
+  }
+  header .back {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  header .back:hover { color: var(--text); }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+  }
+  header p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 980px;
+  }
+  a.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    min-height: 190px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  a.card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+  }
+  .card .kicker {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+  .card h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+  }
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin: 0;
+  }
+  .card .go {
+    margin-top: 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  footer {
+    margin-top: 4rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+  .section-heading {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 0 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+  .featured {
+    margin-bottom: 3.5rem;
+  }
+  a.card.featured-card {
+    border-color: var(--accent);
+    border-width: 1.5px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../">← Back to Envisor</a>
+    <h1>Marketing Website</h1>
+    <p>Live Harvey-styled prototype, plus ten archived design directions. V6&ndash;V10 are five independent concepts, each modeled top-to-bottom on a different real reference site &mdash; own hero, palette, type, and nav, not a shared template.</p>
+  </header>
+
+  <div class="section-heading">Featured</div>
+  <main class="cards featured">
+    <a class="card featured-card" href="https://www.envisor.ai/new-home" target="_blank" rel="noopener">
+      <div>
+        <div class="kicker">Sprint Q</div>
+        <h2>Harvey Prototype</h2>
+        <p>Live build of the Harvey-inspired direction, running as its own full-stack app (not a static mockup like the archived versions below).</p>
+      </div>
+      <span class="go">View live site →</span>
+    </a>
+  </main>
+
+  <div class="section-heading">Archived</div>
+  <main class="cards">
+    <a class="card" href="../marketing-v1/">
+      <div>
+        <div class="kicker">V1</div>
+        <h2>SaaS / Product</h2>
+        <p>Product-led marketing site direction, focused on the platform and feature set.</p>
+      </div>
+      <span class="go">View V1 →</span>
+    </a>
+
+    <a class="card" href="../marketing-v2/">
+      <div>
+        <div class="kicker">V2</div>
+        <h2>Brand / Agency</h2>
+        <p>Dark, cinematic marketing site direction with a brand-forward feel.</p>
+      </div>
+      <span class="go">View V2 →</span>
+    </a>
+
+    <a class="card" href="../marketing-v3/">
+      <div>
+        <div class="kicker">V3</div>
+        <h2>Harvey-Inspired</h2>
+        <p>Editorial serif direction with real product content, logo wall, and testimonials.</p>
+      </div>
+      <span class="go">View V3 →</span>
+    </a>
+
+    <a class="card" href="../marketing-v4/">
+      <div>
+        <div class="kicker">V4</div>
+        <h2>Blended Inspirations</h2>
+        <p>Legora, Hebbia, and Sierra blended: black/yellow/white/gray palette, a Harvey-style contained hero, an accordion feature list, and a real-screenshot bento grid.</p>
+      </div>
+      <span class="go">View V4 →</span>
+    </a>
+
+    <a class="card" href="../marketing-v5/">
+      <div>
+        <div class="kicker">V5</div>
+        <h2>Harvey Audit</h2>
+        <p>V4 re-audited against harvey.ai's live styles: a collapsed 4px/8px radius vocabulary and Harvey's own 64/128/160 section-spacing ladder.</p>
+      </div>
+      <span class="go">View V5 →</span>
+    </a>
+
+    <a class="card" href="../marketing-v6/">
+      <div>
+        <div class="kicker">V6</div>
+        <h2>PermitFlow</h2>
+        <p>A full, independent concept modeled on permitflow.com: white/navy palette, bold sans headlines, a numbered step-by-step process fused with a swapping product panel, and blunt results-first stats.</p>
+      </div>
+      <span class="go">View V6 →</span>
+    </a>
+
+    <a class="card" href="../marketing-v7/">
+      <div>
+        <div class="kicker">V7</div>
+        <h2>Pano AI</h2>
+        <p>A full, independent concept modeled on pano.ai: cream background, teal and orange accents, a split image-and-headline hero, and a mission-driven, safety-first tone.</p>
+      </div>
+      <span class="go">View V7 →</span>
+    </a>
+
+    <a class="card" href="../marketing-v8/">
+      <div>
+        <div class="kicker">V8</div>
+        <h2>Legora</h2>
+        <p>A full, independent concept modeled on legora.com: a full-viewport dark cinematic hero, verified real forest-green accent, and an accordion paired with a crossfading product-shot panel.</p>
+      </div>
+      <span class="go">View V8 →</span>
+    </a>
+
+    <a class="card" href="../marketing-v9/">
+      <div>
+        <div class="kicker">V9</div>
+        <h2>Hebbia</h2>
+        <p>A full, independent concept modeled on hebbia.com: near-monochrome palette, sharp 8px radii, a dual-tier nav, a full-bleed dark hero, and an institutional, data-forward voice.</p>
+      </div>
+      <span class="go">View V9 →</span>
+    </a>
+
+    <a class="card" href="../marketing-v10/">
+      <div>
+        <div class="kicker">V10</div>
+        <h2>Sierra</h2>
+        <p>A full, independent concept modeled on sierra.ai: warm cream background, three real sampled gradient treatments, two-tier pill buttons, and a full-color logo carousel.</p>
+      </div>
+      <span class="go">View V10 →</span>
+    </a>
+  </main>
+
+  <footer>Public preview — for client review.</footer>
+</body>
+</html>

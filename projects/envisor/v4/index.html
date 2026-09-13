@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Envisor | The Operating System for Environmental Review</title>
+<meta name="description" content="Envisor is a purpose-built AI platform for environmental review. Research, draft, respond to comments, and defend environmental documents in one connected system.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>New: MIRA, the Mapping Intake &amp; Review Assistant</span>
+    <a href="#mira">Learn more
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</div>
+<header class="nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="envisor-logo-ink.svg" alt="Envisor"></a>
+    <ul class="nav-links">
+      <li class="nav-item" tabindex="0">
+        <span>Solutions
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="nav-dropdown">
+          <a href="#platform"><span class="dd-title">CARA</span><span class="dd-desc">CEQA Comment Response Application</span></a>
+          <a href="#platform"><span class="dd-title">MIRA</span><span class="dd-desc">Mapping Intake &amp; Review Assistant</span></a>
+          <a href="#platform"><span class="dd-title">CEQA Search</span><span class="dd-desc">Free semantic search</span></a>
+          <a href="#platform"><span class="dd-title">Document Remediation</span><span class="dd-desc">WCAG 2.2 conversion</span></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="#about">About</a></li>
+      <li class="nav-item"><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="/contact" class="btn btn-ink">Book Demo</a>
+    </div>
+    <button class="nav-mobile-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#platform">Solutions</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="/contact" class="btn btn-ink">Book Demo</a>
+  </div>
+</header>
+
+<section class="hero-band">
+  <div class="hero-top">
+    <div class="hero-top-left">
+      <p class="eyebrow">AI-NATIVE ENVIRONMENTAL REVIEW &middot; CEQA &amp; NEPA</p>
+      <h1 class="hero-headline">The Operating System<br>for Environmental Review</h1>
+    </div>
+    <div class="hero-top-right">
+      <p class="hero-sub">Every project built in the United States passes through environmental review. It's the invisible system shaping the physical world around us, and Envisor brings it into the modern era.</p>
+      <div class="hero-cta-row">
+        <a href="/contact" class="btn btn-lg btn-primary">Book Demo</a>
+        <a href="#platform" class="btn-text">See the platform
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-shot-band">
+    <div class="hero-shot-frame">
+      <div class="hero-shot-crop">
+        <img src="product-shots/hero-dashboard-framed.png" alt="Envisor project dashboard showing review workflow progress, open comments, and project health">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="announce" id="mira">
+  <div class="announce-card reveal">
+    <span class="announce-badge">NEW</span>
+    <h2>Introducing MIRA</h2>
+    <p>The Mapping Intake &amp; Review Assistant. Give it a project description and an APN, and MIRA identifies concerns, likely petitioners, and mitigation strategies, then carries the project through to a review-ready Initial Study.</p>
+    <a href="/contact" class="btn btn-lg btn-light">Book Demo</a>
+  </div>
+</section>
+
+<section class="logowall">
+  <h3 class="reveal">Environmental teams building on Envisor</h3>
+  <div class="logowall-grid">
+    <div class="logo-cell reveal"><img src="logos/placeworks.png" alt="PlaceWorks" loading="lazy"></div>
+    <div class="logo-cell reveal"><img src="logos/epd.png" alt="EPD Solutions" loading="lazy"></div>
+    <div class="logo-cell reveal"><img class="logo-lg" src="logos/Ascent_Logo_FullColor.png.png" alt="Ascent Environmental" loading="lazy"></div>
+    <div class="logo-cell reveal"><img class="logo-lg" src="logos/esa.png" alt="ESA — Environmental Science Associates" loading="lazy"></div>
+    <div class="logo-cell reveal"><img src="logos/rincon.png" alt="Rincon Consultants" loading="lazy"></div>
+    <div class="logo-cell reveal"><img class="logo-lg" src="logos/Logo-ICF.png" alt="ICF" loading="lazy"></div>
+    <div class="logo-cell reveal"><img src="logos/stantec.png" alt="Stantec" loading="lazy"></div>
+    <div class="logo-cell reveal"><img src="logos/Parsons_Corporation_logo.png" alt="Parsons" loading="lazy"></div>
+    <div class="logo-cell reveal"><img src="logos/pcwa.png" alt="Placer County Water Agency" loading="lazy"></div>
+    <div class="logo-cell reveal"><img class="logo-lg" src="logos/UC_Berkeley_Cal_logo.png" alt="UC Berkeley" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="bento">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Who it&rsquo;s for</span>
+    <h2>Built for the people who deliver the work</h2>
+    <p>Consultants and agencies work from the same connected record, from first draft to final determination.</p>
+  </div>
+  <div class="bento-grid reveal">
+    <div class="bento-tile bento-tile--consultants">
+      <h3>For Environmental Consultants</h3>
+      <p>Run every project on one platform: research, evidence, drafting, and comment response in a single connected record.</p>
+      <a href="#" class="btn btn-outline-light">Explore for Consultants</a>
+      <div class="bento-shot"><img src="product-shots/cara-bracketed-comments.png" alt="CARA bracketed comments showing public comment letters mapped to agency issues by color-coded section"></div>
+    </div>
+    <div class="bento-tile bento-tile--agencies">
+      <h3>For Public Agencies</h3>
+      <p>Move projects through review with a defensible, traceable record, from applicability to determination.</p>
+      <a href="#" class="btn btn-outline-light">Explore for Agencies</a>
+      <div class="bento-shot"><img src="product-shots/mira-site-intelligence-soft.png" alt="Site Intelligence map showing mapped environmental constraints for a project site"></div>
+    </div>
+  </div>
+</section>
+
+<section class="platform" id="platform">
+  <div class="platform-inner">
+    <div class="platform-intro reveal">
+      <span class="eyebrow">The platform</span>
+      <h2>One connected system for environmental review, start to finish.</h2>
+      <p>Move faster through complex environmental review without losing the context, traceability, or defensibility the work demands.</p>
+    </div>
+    <div class="accordion reveal">
+      <div class="accordion-row is-open">
+        <button class="accordion-trigger">
+          <span class="accordion-title">Knowledge Base</span>
+          <span class="accordion-toggle"></span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">
+            <span class="accordion-kicker">Knowledge Base</span>
+            <p>Shared intelligence layer. Every module connects to the same project facts, citations, evidence, and administrative record.</p>
+            <div class="kb-tags">
+              <span>EIRs</span><span>MNDs</span><span>Technical Studies</span><span>Statutes</span><span>Agency Protocols</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-row">
+        <button class="accordion-trigger">
+          <span class="accordion-title">MIRA</span>
+          <span class="accordion-toggle"></span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">
+            <span class="accordion-kicker">Preliminary Review</span>
+            <p>Mapping Intake &amp; Review Assistant. From a project description and APN to concerns, petitioners, and mitigation strategies.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-row">
+        <button class="accordion-trigger">
+          <span class="accordion-title">CARA</span>
+          <span class="accordion-toggle"></span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">
+            <span class="accordion-kicker">Public Comments</span>
+            <p>CEQA Automated Response Assistant. Bracket, group, assign, and draft defensible responses tied to the record.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-row">
+        <button class="accordion-trigger">
+          <span class="accordion-title">Initial Study Assistant</span>
+          <span class="accordion-toggle"></span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">
+            <span class="accordion-kicker">Initial Study</span>
+            <p>Leverage public and private data to generate review-ready environmental reports.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-row">
+        <button class="accordion-trigger">
+          <span class="accordion-title">CEQA Search</span>
+          <span class="accordion-toggle"></span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">
+            <span class="accordion-kicker">Free tool</span>
+            <p>Explore statutes, thresholds, and precedent through semantic search of the CEQA database.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-row">
+        <button class="accordion-trigger">
+          <span class="accordion-title">Document Remediation</span>
+          <span class="accordion-toggle"></span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">
+            <span class="accordion-kicker">WCAG 2.2</span>
+            <p>Transform complex environmental documents into ADA-compliant, accessible formats.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="workflow">
+  <div class="sec-head reveal">
+    <span class="eyebrow">How it works</span>
+    <h2>From project description to defensible record.</h2>
+  </div>
+  <ol class="workflow-steps reveal">
+    <li><span class="workflow-num">01</span><h4>Preliminary Review</h4><p>A project description and APN are all MIRA needs to identify concerns, likely petitioners, and mitigation strategies.</p></li>
+    <li><span class="workflow-num">02</span><h4>Initial Study</h4><p>Leverage public and private data to generate review-ready environmental reports.</p></li>
+    <li><span class="workflow-num">03</span><h4>Public Comments</h4><p>Bracket, group, assign responsible parties and timelines, and generate responses with CARA.</p></li>
+    <li><span class="workflow-num">04</span><h4>Project Implementation</h4><p>Arm approving agencies with the administrative record and monitor mitigation measures over time.</p></li>
+  </ol>
+</section>
+
+<section class="impact">
+  <div class="impact-inner">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Impact</span>
+      <h2>Environmental review in half the time.</h2>
+    </div>
+    <div class="impact-grid reveal">
+      <div class="impact-stat">
+        <span class="impact-eyebrow">Review Timeline</span>
+        <span class="impact-num">6–12 mo. &rarr; 3–6 mo.</span>
+        <p class="impact-desc">A typical EIR or IS process, compressed.</p>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-eyebrow">Bid Price</span>
+        <span class="impact-num">Cut in half</span>
+        <p class="impact-desc">Billable hours reduced across the review cycle.</p>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-eyebrow">Defensibility</span>
+        <span class="impact-num">Every claim cited</span>
+        <p class="impact-desc">Surface evidence invisible to the human eye.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Testimonials</span>
+      <h2>Trusted by leading consulting firms and public agencies</h2>
+    </div>
+    <div class="testimonial-list reveal">
+      <blockquote class="testimonial">
+        <p>&ldquo;I actually think the CARA responses are better than what a respected firm prepared.&rdquo;</p>
+        <cite><span class="t-role">Principal Planner</span><span class="t-org">Stantec</span></cite>
+      </blockquote>
+      <blockquote class="testimonial">
+        <p>&ldquo;This technology can easily reduce the time responding to comments by 70%.&rdquo;</p>
+        <cite><span class="t-role">Principal Planner</span><span class="t-org">EPD Solutions</span></cite>
+      </blockquote>
+      <blockquote class="testimonial">
+        <p>&ldquo;Firms without these tools will be uncompetitive within 10 years.&rdquo;</p>
+        <cite><span class="t-role">Brian Harrington</span><span class="t-org">UCOP Planning</span></cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="final-cta-card reveal">
+    <span class="final-cta-eyebrow">Ready when you are</span>
+    <h2>Move faster through complex environmental review without losing the record.</h2>
+    <a href="/contact" class="btn btn-light">Book Demo</a>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img class="footer-logo" src="envisor-logo.svg" alt="Envisor">
+      <p>The operating system for environmental review.</p>
+      <a href="/contact" class="btn btn-outline-light">Book Demo</a>
+    </div>
+    <div class="footer-col">
+      <h5>Solutions</h5>
+      <a href="#platform">CARA</a>
+      <a href="#platform">MIRA</a>
+      <a href="#platform">CEQA Search</a>
+      <a href="#platform">Document Remediation</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#">Security</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 Envisor AI. All rights reserved.</div>
+</footer>
+
+<script>
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('is-scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  var toggle = document.getElementById('menu-toggle');
+  var mobileNav = document.getElementById('mobile-nav');
+  toggle.addEventListener('click', function () {
+    var open = mobileNav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  var accordionRows = document.querySelectorAll('.accordion-row');
+  accordionRows.forEach(function (row) {
+    var trigger = row.querySelector('.accordion-trigger');
+    trigger.addEventListener('click', function () {
+      var wasOpen = row.classList.contains('is-open');
+      accordionRows.forEach(function (r) { r.classList.remove('is-open'); });
+      if (!wasOpen) { row.classList.add('is-open'); }
+    });
+  });
+
+  var revealables = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealables.forEach(function (el) { el.classList.add('is-in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    revealables.forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.add('is-in'); }
+      else { io.observe(el); }
+    });
+  }
+})();
+</script>
+</body>
+</html>
