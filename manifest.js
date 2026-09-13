@@ -13,7 +13,7 @@ window.DESIGN_LIBRARY = {
   title: "Pragmatic Design Library",
   subtitle: "versioned UI prototypes",
   initial: "P",
-  repoUrl: "",
+  repoUrl: "https://github.com/pragmaticlabsdevelopment/design-library",
 
   projects: [
     {
