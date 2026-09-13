@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Library</title>
+<style>
+  :root{
+    --bg:#f6f6f5; --panel:#ffffff; --panel-2:#fbfbfa; --line:#e3e2df;
+    --text:#1c1b19; --text-2:#6b6862; --text-3:#9b978f;
+    --accent:#c2410c; --accent-soft:#fdf0e8;
+    --canvas:#eceae6; --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);
+    --ok:#15803d; --ok-soft:#e8f5ec; --draft:#a16207; --draft-soft:#fdf6e3;
+    --arch:#6b6862; --arch-soft:#efeeeb;
+    --sidebar-w:264px; --radius:8px;
+    color-scheme:light;
+  }
+  :root[data-theme="dark"]{
+    --bg:#141413; --panel:#1c1b19; --panel-2:#232220; --line:#302e2b;
+    --text:#f0eee9; --text-2:#a09c94; --text-3:#6f6b64;
+    --accent:#e8815a; --accent-soft:#2a1c15;
+    --canvas:#0e0e0d; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    --ok:#6ee7a0; --ok-soft:#13291c; --draft:#e8c468; --draft-soft:#2a2313;
+    --arch:#a09c94; --arch-soft:#26251f;
+    color-scheme:dark;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#141413; --panel:#1c1b19; --panel-2:#232220; --line:#302e2b;
+      --text:#f0eee9; --text-2:#a09c94; --text-3:#6f6b64;
+      --accent:#e8815a; --accent-soft:#2a1c15;
+      --canvas:#0e0e0d; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+      --ok:#6ee7a0; --ok-soft:#13291c; --draft:#e8c468; --draft-soft:#2a2313;
+      --arch:#a09c94; --arch-soft:#26251f;
+      color-scheme:dark;
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font:14px/1.5 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  a{color:inherit}
+
+  /* ---------- shell ---------- */
+  .app{display:grid;grid-template-columns:var(--sidebar-w) 1fr;grid-template-rows:52px 1fr;height:100dvh}
+  .topbar{
+    grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:0 14px;
+    background:var(--panel);border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+  .mark{width:22px;height:22px;border-radius:6px;background:var(--accent);display:grid;place-items:center;color:#fff;font-size:12px;font-weight:700;flex:none}
+  .brand small{display:block;font-weight:400;font-size:11px;color:var(--text-3);letter-spacing:0}
+  .spacer{flex:1}
+  .iconbtn{
+    display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:7px;
+    border:1px solid var(--line);color:var(--text-2);font-size:12.5px;white-space:nowrap;
+  }
+  .iconbtn:hover{background:var(--panel-2);color:var(--text)}
+  .iconbtn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+  .menubtn{display:none}
+
+  /* ---------- sidebar ---------- */
+  .sidebar{
+    background:var(--panel);border-right:1px solid var(--line);
+    overflow-y:auto;padding:14px 10px 40px;
+  }
+  .side-label{
+    font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--text-3);padding:0 8px 8px;
+  }
+  .proj{margin-bottom:6px}
+  .proj-btn{
+    width:100%;display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:7px;
+    text-align:left;color:var(--text);font-weight:500;
+  }
+  .proj-btn:hover{background:var(--panel-2)}
+  .proj-btn .chev{color:var(--text-3);transition:transform .15s;flex:none}
+  .proj.open .chev{transform:rotate(90deg)}
+  .proj-btn .count{margin-left:auto;font-size:11px;color:var(--text-3);font-variant-numeric:tabular-nums}
+  .vers{display:none;padding:2px 0 6px 8px;margin-left:11px;border-left:1px solid var(--line)}
+  .proj.open .vers{display:block}
+  .ver-btn{
+    width:100%;display:flex;align-items:baseline;gap:7px;padding:5px 8px;border-radius:6px;
+    text-align:left;color:var(--text-2);font-size:13px;
+  }
+  .ver-btn:hover{background:var(--panel-2);color:var(--text)}
+  .ver-btn.active{background:var(--accent-soft);color:var(--accent);font-weight:500}
+  .ver-btn .vid{font-variant-numeric:tabular-nums;font-weight:600;font-size:12px;flex:none}
+  .ver-btn .vlabel{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dot{width:6px;height:6px;border-radius:50%;flex:none;margin-left:auto;align-self:center}
+  .dot.current{background:var(--ok)} .dot.draft{background:var(--draft)}
+  .dot.archived,.dot.superseded{background:var(--text-3)}
+
+  /* ---------- main ---------- */
+  .main{display:flex;flex-direction:column;min-width:0;background:var(--canvas)}
+  .vhead{
+    background:var(--panel);border-bottom:1px solid var(--line);padding:12px 18px 0;
+  }
+  .crumb{font-size:12px;color:var(--text-3);margin-bottom:3px}
+  .vtitle{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .vtitle h1{margin:0;font-size:17px;font-weight:600;letter-spacing:-.015em}
+  .badge{
+    font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+    padding:2.5px 7px;border-radius:5px;
+  }
+  .badge.current{background:var(--ok-soft);color:var(--ok)}
+  .badge.draft{background:var(--draft-soft);color:var(--draft)}
+  .badge.archived,.badge.superseded{background:var(--arch-soft);color:var(--arch)}
+  .vmeta{font-size:12.5px;color:var(--text-2);margin:5px 0 0;max-width:70ch}
+  .vdate{font-size:12px;color:var(--text-3);font-variant-numeric:tabular-nums}
+
+  .toolbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:11px 0 10px}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+  .seg button{padding:0 10px;height:28px;font-size:12.5px;color:var(--text-2);border-right:1px solid var(--line)}
+  .seg button:last-child{border-right:0}
+  .seg button:hover{background:var(--panel-2);color:var(--text)}
+  .seg button.on{background:var(--accent);color:#fff}
+  .tool-sep{width:1px;height:20px;background:var(--line);margin:0 3px}
+  .dim{font-size:11.5px;color:var(--text-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  .canvas{flex:1;overflow:auto;padding:24px;display:flex;justify-content:center;align-items:flex-start;gap:24px}
+  .frame-wrap{flex:none}
+  .frame-cap{
+    display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12px;color:var(--text-2);
+  }
+  .frame-cap select{
+    font:inherit;font-size:12px;background:var(--panel);color:var(--text);
+    border:1px solid var(--line);border-radius:6px;padding:3px 6px;max-width:240px;
+  }
+  .shell{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .shell iframe{display:block;border:0;background:#fff}
+
+  .empty{margin:auto;text-align:center;color:var(--text-3);max-width:34ch;padding:40px 20px}
+  .empty h2{color:var(--text-2);font-size:15px;font-weight:600;margin:0 0 6px}
+  .empty code{background:var(--panel);border:1px solid var(--line);padding:1px 5px;border-radius:4px;font-size:12px}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    .app{grid-template-columns:1fr}
+    .sidebar{
+      position:fixed;top:52px;bottom:0;left:0;width:var(--sidebar-w);z-index:20;
+      transform:translateX(-100%);transition:transform .2s;box-shadow:var(--shadow);
+    }
+    body.nav-open .sidebar{transform:none}
+    .menubtn{display:inline-flex}
+    .canvas{padding:14px;gap:14px}
+    .vhead{padding:10px 14px 0}
+    .brand small{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button class="iconbtn menubtn" id="menuBtn" aria-label="Toggle projects">☰</button>
+    <div class="brand">
+      <span class="mark" id="mark">D</span>
+      <span id="brandName">Design Library<small id="brandSub">versioned UI prototypes</small></span>
+    </div>
+    <span class="spacer"></span>
+    <button class="iconbtn" id="cmpBtn" title="Compare two versions side by side">⇄ Compare</button>
+    <a class="iconbtn" id="repoLink" href="#" target="_blank" rel="noopener" hidden>Repo</a>
+    <button class="iconbtn" id="themeBtn" title="Toggle theme">◐</button>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <div class="side-label">Projects</div>
+    <div id="projList"></div>
+  </nav>
+
+  <main class="main">
+    <div class="vhead" id="vhead" hidden>
+      <div class="crumb" id="crumb"></div>
+      <div class="vtitle">
+        <h1 id="vtitle"></h1>
+        <span class="badge" id="vbadge"></span>
+        <span class="vdate" id="vdate"></span>
+      </div>
+      <p class="vmeta" id="vnotes"></p>
+      <div class="toolbar">
+        <div class="seg" id="devSeg"></div>
+        <div class="tool-sep"></div>
+        <div class="seg" id="zoomSeg">
+          <button data-zoom="fit">Fit</button>
+          <button data-zoom="1">100%</button>
+        </div>
+        <span class="dim" id="dimText"></span>
+        <span class="spacer"></span>
+        <a class="iconbtn" id="openBtn" target="_blank" rel="noopener">Open ↗</a>
+        <button class="iconbtn" id="linkBtn" title="Copy a direct link to this version">Copy link</button>
+      </div>
+    </div>
+    <div class="canvas" id="canvas"></div>
+  </main>
+</div>
+
+<script src="manifest.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var LIB = window.DESIGN_LIBRARY || {projects:[]};
+  var PROJECTS = LIB.projects || [];
+
+  var DEVICES = [
+    {id:"desktop", name:"Desktop", w:1440, h:900},
+    {id:"laptop",  name:"Laptop",  w:1280, h:800},
+    {id:"tablet",  name:"Tablet",  w:834,  h:1112},
+    {id:"phone",   name:"Phone",   w:390,  h:844}
+  ];
+
+  var state = {
+    project:null, version:null,
+    device:"desktop", zoom:"fit",
+    compare:false, versionB:null
+  };
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  /* ---------- branding ---------- */
+  if (LIB.title){
+    document.title = LIB.title;
+    $("brandName").firstChild.nodeValue = LIB.title;
+  }
+  if (LIB.subtitle) $("brandSub").textContent = LIB.subtitle;
+  if (LIB.initial) $("mark").textContent = LIB.initial;
+  if (LIB.repoUrl){ $("repoLink").href = LIB.repoUrl; $("repoLink").hidden = false; }
+
+  /* ---------- theme ---------- */
+  var theme = null;
+  try { theme = localStorage.getItem("dl-theme"); } catch(e){}
+  if (theme) document.documentElement.setAttribute("data-theme", theme);
+  $("themeBtn").onclick = function(){
+    var cur = document.documentElement.getAttribute("data-theme");
+    if (!cur) cur = matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light";
+    var next = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("dl-theme", next); } catch(e){}
+  };
+
+  $("menuBtn").onclick = function(){ document.body.classList.toggle("nav-open"); };
+
+  /* ---------- lookups ---------- */
+  function findProject(slug){
+    for (var i=0;i<PROJECTS.length;i++) if (PROJECTS[i].slug === slug) return PROJECTS[i];
+    return null;
+  }
+  function findVersion(proj, id){
+    if (!proj) return null;
+    for (var i=0;i<proj.versions.length;i++) if (proj.versions[i].id === id) return proj.versions[i];
+    return null;
+  }
+  function device(id){
+    for (var i=0;i<DEVICES.length;i++) if (DEVICES[i].id === id) return DEVICES[i];
+    return DEVICES[0];
+  }
+
+  /* ---------- sidebar ---------- */
+  function renderSidebar(){
+    var host = $("projList");
+    host.innerHTML = "";
+    if (!PROJECTS.length){
+      host.innerHTML = '<div style="padding:8px;color:var(--text-3);font-size:12.5px">No projects yet.</div>';
+      return;
+    }
+    PROJECTS.forEach(function(p){
+      var wrap = document.createElement("div");
+      wrap.className = "proj" + (state.project === p.slug ? " open" : "");
+
+      var btn = document.createElement("button");
+      btn.className = "proj-btn";
+      btn.innerHTML = '<span class="chev">›</span><span>' + esc(p.name) + '</span>' +
+                      '<span class="count">' + p.versions.length + '</span>';
+      btn.onclick = function(){
+        if (state.project === p.slug && wrap.classList.contains("open") && p.versions.length){
+          wrap.classList.toggle("open");
+        } else {
+          var latest = p.versions[0];
+          if (latest) go(p.slug, latest.id);
+        }
+      };
+      wrap.appendChild(btn);
+
+      var vs = document.createElement("div");
+      vs.className = "vers";
+      p.versions.forEach(function(v){
+        var vb = document.createElement("button");
+        var active = state.project === p.slug && state.version === v.id;
+        vb.className = "ver-btn" + (active ? " active" : "");
+        vb.innerHTML = '<span class="vid">' + esc(v.id) + '</span>' +
+                       '<span class="vlabel">' + esc(v.label || "") + '</span>' +
+                       '<span class="dot ' + esc(v.status || "") + '"></span>';
+        vb.onclick = function(){ go(p.slug, v.id); };
+        vs.appendChild(vb);
+      });
+      wrap.appendChild(vs);
+      host.appendChild(wrap);
+    });
+  }
+
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  /* ---------- toolbar ---------- */
+  function renderToolbar(){
+    var seg = $("devSeg");
+    seg.innerHTML = "";
+    DEVICES.forEach(function(d){
+      var b = document.createElement("button");
+      b.textContent = d.name;
+      if (d.id === state.device) b.className = "on";
+      b.onclick = function(){ state.device = d.id; renderToolbar(); renderCanvas(); };
+      seg.appendChild(b);
+    });
+    var zs = $("zoomSeg").children;
+    for (var i=0;i<zs.length;i++){
+      zs[i].className = zs[i].dataset.zoom === state.zoom ? "on" : "";
+      zs[i].onclick = (function(z){ return function(){ state.zoom = z; renderCanvas(); renderToolbar(); }; })(zs[i].dataset.zoom);
+    }
+    $("cmpBtn").className = "iconbtn" + (state.compare ? " on" : "");
+  }
+
+  /* ---------- canvas ---------- */
+  function renderCanvas(){
+    var canvas = $("canvas");
+    canvas.innerHTML = "";
+
+    var proj = findProject(state.project);
+    var ver  = findVersion(proj, state.version);
+
+    if (!ver){
+      $("vhead").hidden = true;
+      var e = document.createElement("div");
+      e.className = "empty";
+      e.innerHTML = PROJECTS.length
+        ? "<h2>Pick a version</h2><p>Choose a project on the left to see its design versions.</p>"
+        : "<h2>Nothing here yet</h2><p>Add a project to <code>manifest.js</code> to get started.</p>";
+      canvas.appendChild(e);
+      return;
+    }
+
+    $("vhead").hidden = false;
+    $("crumb").textContent = proj.name + (proj.description ? " · " + proj.description : "");
+    $("vtitle").textContent = ver.label || ver.id;
+    var badge = $("vbadge");
+    if (ver.status){ badge.hidden = false; badge.textContent = ver.status; badge.className = "badge " + ver.status; }
+    else badge.hidden = true;
+    $("vdate").textContent = ver.date || "";
+    $("vnotes").textContent = ver.notes || "";
+    $("openBtn").href = ver.path;
+
+    var d = device(state.device);
+    $("dimText").textContent = d.w + " × " + d.h;
+
+    var frames = [ver];
+    if (state.compare){
+      var b = findVersion(proj, state.versionB) || proj.versions[1] || proj.versions[0];
+      state.versionB = b.id;
+      frames.push(b);
+    }
+
+    // available width per frame
+    var pad = 48, gap = 24;
+    var avail = canvas.clientWidth - pad - (frames.length - 1) * gap;
+    var per = avail / frames.length;
+    var scale = state.zoom === "fit" ? Math.min(1, per / d.w) : 1;
+
+    frames.forEach(function(v, i){
+      var wrap = document.createElement("div");
+      wrap.className = "frame-wrap";
+      wrap.style.width = (d.w * scale) + "px";
+
+      var cap = document.createElement("div");
+      cap.className = "frame-cap";
+      if (state.compare){
+        var sel = document.createElement("select");
+        proj.versions.forEach(function(o){
+          var op = document.createElement("option");
+          op.value = o.id; op.textContent = o.id + " — " + (o.label || "");
+          if (o.id === v.id) op.selected = true;
+          sel.appendChild(op);
+        });
+        sel.onchange = function(){
+          if (i === 0) state.version = sel.value; else state.versionB = sel.value;
+          syncHash(); renderSidebar(); renderCanvas();
+        };
+        cap.appendChild(sel);
+      } else {
+        cap.innerHTML = '<strong>' + esc(v.id) + '</strong> <span style="color:var(--text-3)">' + esc(v.date || "") + '</span>';
+      }
+      if (scale < 1){
+        var z = document.createElement("span");
+        z.style.cssText = "margin-left:auto;color:var(--text-3);font-size:11.5px";
+        z.textContent = Math.round(scale * 100) + "%";
+        cap.appendChild(z);
+      }
+      wrap.appendChild(cap);
+
+      var holder = document.createElement("div");
+      holder.style.cssText = "height:" + (d.h * scale) + "px;overflow:hidden";
+      var shell = document.createElement("div");
+      shell.className = "shell";
+      shell.style.cssText = "width:" + d.w + "px;height:" + d.h + "px;" +
+        "transform:scale(" + scale + ");transform-origin:top left";
+      var f = document.createElement("iframe");
+      f.src = v.path;
+      f.width = d.w; f.height = d.h;
+      f.loading = "lazy";
+      f.title = proj.name + " " + v.id;
+      shell.appendChild(f);
+      holder.appendChild(shell);
+      wrap.appendChild(holder);
+      canvas.appendChild(wrap);
+    });
+  }
+
+  /* ---------- routing ---------- */
+  function go(slug, vid){
+    state.project = slug; state.version = vid;
+    document.body.classList.remove("nav-open");
+    syncHash(); renderSidebar(); renderToolbar(); renderCanvas();
+  }
+  function syncHash(){
+    var h = "#/" + state.project + "/" + state.version;
+    if (state.compare && state.versionB) h += "..." + state.versionB;
+    if (location.hash !== h) history.replaceState(null, "", h);
+  }
+  function readHash(){
+    var m = /^#\/([^\/]+)\/([^\/]+)$/.exec(location.hash);
+    if (!m) return false;
+    var slug = decodeURIComponent(m[1]);
+    var rest = decodeURIComponent(m[2]).split("...");
+    var p = findProject(slug);
+    if (!p) return false;
+    var v = findVersion(p, rest[0]);
+    if (!v) return false;
+    state.project = slug; state.version = v.id;
+    if (rest[1] && findVersion(p, rest[1])){ state.compare = true; state.versionB = rest[1]; }
+    return true;
+  }
+
+  $("cmpBtn").onclick = function(){
+    var proj = findProject(state.project);
+    if (!proj) return;
+    state.compare = !state.compare;
+    if (state.compare && !state.versionB){
+      var other = proj.versions.filter(function(v){ return v.id !== state.version; })[0];
+      state.versionB = other ? other.id : state.version;
+    }
+    if (state.compare && state.device === "desktop") state.device = "laptop";
+    syncHash(); renderToolbar(); renderCanvas();
+  };
+
+  $("linkBtn").onclick = function(){
+    var url = location.href;
+    var btn = $("linkBtn");
+    function done(){ btn.textContent = "Copied ✓"; setTimeout(function(){ btn.textContent = "Copy link"; }, 1400); }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(done, done);
+    } else done();
+  };
+
+  var rt;
+  addEventListener("resize", function(){ clearTimeout(rt); rt = setTimeout(renderCanvas, 120); });
+  addEventListener("hashchange", function(){ if (readHash()){ renderSidebar(); renderToolbar(); renderCanvas(); } });
+
+  /* ---------- boot ---------- */
+  if (!readHash() && PROJECTS.length && PROJECTS[0].versions.length){
+    state.project = PROJECTS[0].slug;
+    state.version = PROJECTS[0].versions[0].id;
+  }
+  renderSidebar(); renderToolbar(); renderCanvas();
+  syncHash();
+})();
+</script>
+</body>
+</html>

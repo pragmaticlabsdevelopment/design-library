@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Get Pragmatic — v2 visual pass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17150f; --ink-2:#514c42; --ink-3:#8b8479;
+    --paper:#faf8f4; --paper-2:#f1ece3; --line:#e2dcd0;
+    --accent:#c2410c; --accent-2:#ea6d2f;
+    --max:1120px;
+    --display:"Fraunces",ui-serif,Georgia,serif;
+    --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 40px}
+  h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.08;margin:0}
+  h1{font-size:clamp(38px,4.6vw,62px)}
+  h2{font-size:clamp(28px,3vw,40px)}
+  h3{font-size:19px;letter-spacing:-.01em;line-height:1.3}
+  p{margin:0;color:var(--ink-2)}
+  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:6px;
+       font-size:14.5px;font-weight:500;text-decoration:none;transition:.15s}
+  .btn.solid{background:var(--ink);color:var(--paper)}
+  .btn.solid:hover{background:var(--accent)}
+  .btn.ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--ink)}
+
+  /* nav */
+  header{border-bottom:1px solid var(--line);background:rgba(250,248,244,.9);backdrop-filter:blur(8px)}
+  nav{display:flex;align-items:center;gap:34px;height:70px}
+  .logo{font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.03em;text-decoration:none;color:var(--ink)}
+  .logo span{color:var(--accent)}
+  nav a.nl{font-size:14.5px;color:var(--ink-2);text-decoration:none}
+  nav a.nl:hover{color:var(--ink)}
+  nav .right{margin-left:auto;display:flex;align-items:center;gap:18px}
+
+  /* hero */
+  .hero{padding:84px 0 76px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+  .hero p.lede{font-size:18.5px;margin-top:22px;max-width:46ch}
+  .hero .cta{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
+  .hero .note{font-size:13px;color:var(--ink-3);margin-top:18px}
+  .visual{aspect-ratio:4/3.2;border-radius:12px;border:1px solid var(--line);
+          background:linear-gradient(150deg,#fff 0%,var(--paper-2) 100%);
+          box-shadow:0 1px 2px rgba(23,21,15,.04),0 24px 48px -20px rgba(23,21,15,.18);
+          padding:22px;display:flex;flex-direction:column;gap:12px}
+  .v-bar{height:9px;border-radius:99px;background:var(--paper-2)}
+  .v-chip{height:30px;border-radius:6px;background:#fff;border:1px solid var(--line)}
+  .v-row{display:flex;gap:10px}
+  .v-fill{flex:1}
+  .v-accent{background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:.9}
+
+  /* proof strip */
+  .strip{border-block:1px solid var(--line);padding:26px 0;background:var(--paper-2)}
+  .strip-in{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+  .strip small{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+  .strip .marks{display:flex;gap:34px;flex-wrap:wrap;flex:1}
+  .mark{font-family:var(--display);font-size:17px;color:var(--ink-3);opacity:.85}
+
+  /* sections */
+  section.pad{padding:86px 0}
+  .sec-head{max-width:60ch;margin-bottom:44px}
+  .sec-head p{margin-top:14px;font-size:17px}
+
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:28px}
+  .card .ico{width:38px;height:38px;border-radius:9px;background:var(--accent);opacity:.12;margin-bottom:18px}
+  .card h3{margin-bottom:10px}
+  .card p{font-size:14.8px}
+
+  .case{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .shot{border-radius:10px;border:1px solid var(--line);background:#fff;
+        box-shadow:0 20px 44px -24px rgba(23,21,15,.25);overflow:hidden}
+  .shot .tb{height:34px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 12px;background:var(--paper-2)}
+  .shot .tb i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+  .shot .body{padding:22px;display:flex;flex-direction:column;gap:11px;min-height:230px}
+  .stat{font-family:var(--display);font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1}
+  .stat + p{font-size:14.5px;margin-top:6px}
+  .stats{display:flex;gap:44px;margin:28px 0 30px}
+
+  /* closing */
+  .closing{background:var(--ink);color:var(--paper);border-radius:14px;padding:72px 40px;text-align:center;margin:0 0 86px}
+  .closing h2{color:var(--paper)}
+  .closing p{color:#b9b1a4;margin:16px auto 32px;max-width:48ch;font-size:17px}
+  .closing .btn.solid{background:var(--accent);color:#fff}
+  .closing .btn.solid:hover{background:var(--accent-2)}
+
+  footer{border-top:1px solid var(--line);padding:52px 0 40px}
+  .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px}
+  .fgrid h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px;font-weight:600}
+  .fgrid a{display:block;font-size:14.5px;color:var(--ink-2);text-decoration:none;margin-bottom:9px}
+  .fgrid a:hover{color:var(--accent)}
+  .fbot{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3)}
+
+  @media(max-width:900px){
+    .wrap{padding:0 22px}
+    .hero-grid,.case{grid-template-columns:1fr;gap:40px}
+    .three,.fgrid{grid-template-columns:1fr}
+    .hero{padding:56px 0 48px}
+    section.pad{padding:60px 0}
+    nav{gap:18px} nav .nl{display:none}
+    .stats{gap:28px}
+    .closing{padding:52px 24px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#">Get<span>Pragmatic</span></a>
+      <a class="nl" href="#">Services</a>
+      <a class="nl" href="#">Work</a>
+      <a class="nl" href="#">About</a>
+      <div class="right">
+        <a class="nl" href="#">Sign in</a>
+        <a class="btn solid" href="#">Book a call</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Placeholder eyebrow</div>
+      <h1 style="margin-top:16px">A headline that earns the next scroll.</h1>
+      <p class="lede">One or two sentences of supporting copy that says who this is for and what changes for them. Real words go here in the next version.</p>
+      <div class="cta">
+        <a class="btn solid" href="#">Book a call →</a>
+        <a class="btn ghost" href="#">See the work</a>
+      </div>
+      <p class="note">Placeholder reassurance line · no commitment</p>
+    </div>
+    <div class="visual" aria-hidden="true">
+      <div class="v-row"><div class="v-chip v-fill"></div><div class="v-chip" style="width:70px"></div></div>
+      <div class="v-bar" style="width:80%"></div>
+      <div class="v-bar" style="width:58%"></div>
+      <div class="v-bar v-accent" style="width:42%"></div>
+      <div class="v-row" style="margin-top:auto">
+        <div class="v-chip v-fill"></div><div class="v-chip v-fill"></div><div class="v-chip v-fill"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="wrap strip-in">
+    <small>Trusted by</small>
+    <div class="marks">
+      <span class="mark">Northbeam</span><span class="mark">Kestrel</span>
+      <span class="mark">海 Studio</span><span class="mark">Ardent</span><span class="mark">Lumen</span>
+    </div>
+  </div>
+</div>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What we do</div>
+      <h2 style="margin-top:14px">Three things, done properly.</h2>
+      <p>Section intro copy — placeholder. This explains the shape of the offer before the reader has to commit to reading three cards.</p>
+    </div>
+    <div class="three">
+      <div class="card">
+        <div class="ico"></div>
+        <h3>Strategy &amp; positioning</h3>
+        <p>Placeholder description of the first service. Two lines is the target length so the three cards stay balanced.</p>
+      </div>
+      <div class="card">
+        <div class="ico"></div>
+        <h3>Design &amp; build</h3>
+        <p>Placeholder description of the second service. Keep it concrete — what you get, not what you believe.</p>
+      </div>
+      <div class="card">
+        <div class="ico"></div>
+        <h3>Ongoing partnership</h3>
+        <p>Placeholder description of the third service. Ends on the outcome rather than the process.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" style="background:var(--paper-2);border-block:1px solid var(--line)">
+  <div class="wrap case">
+    <div class="shot" aria-hidden="true">
+      <div class="tb"><i></i><i></i><i></i></div>
+      <div class="body">
+        <div class="v-bar" style="width:52%;height:14px"></div>
+        <div class="v-bar" style="width:88%"></div>
+        <div class="v-bar" style="width:74%"></div>
+        <div class="v-row" style="margin-top:10px">
+          <div class="v-chip v-fill"></div><div class="v-chip v-fill"></div>
+        </div>
+        <div class="v-bar v-accent" style="width:36%;margin-top:auto"></div>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow">Case study</div>
+      <h2 style="margin-top:14px">Proof, not promises.</h2>
+      <p style="margin-top:16px;font-size:17px">Placeholder summary of one engagement — the situation, what was done, and what moved. Numbers below carry most of the weight.</p>
+      <div class="stats">
+        <div><div class="stat">2.4×</div><p>placeholder metric</p></div>
+        <div><div class="stat">6 wks</div><p>placeholder metric</p></div>
+      </div>
+      <a class="btn ghost" href="#">Read the case study</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="padding-top:86px">
+  <div class="closing">
+    <h2>Ready when you are.</h2>
+    <p>Closing placeholder copy. Restates the offer in one sentence and removes the last objection before the button.</p>
+    <a class="btn solid" href="#">Book a call →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="#">Get<span>Pragmatic</span></a>
+        <p style="font-size:14px;margin-top:12px;max-width:30ch">One-line positioning statement goes here.</p>
+      </div>
+      <div><h4>Services</h4><a href="#">Strategy</a><a href="#">Design</a><a href="#">Build</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Work</a><a href="#">Contact</a></div>
+      <div><h4>More</h4><a href="#">Journal</a><a href="#">Careers</a></div>
+    </div>
+    <div class="fbot">© 2026 Pragmatic Labs · v2 visual pass · placeholder copy</div>
+  </div>
+</footer>
+
+</body>
+</html>

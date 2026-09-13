@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Get Pragmatic — v1 wireframe</title>
+<style>
+  :root{--ink:#3d3d3d;--mid:#8a8a8a;--line:#c9c9c9;--fill:#e6e6e6;--bg:#fafafa;color-scheme:light}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+  .tag{position:absolute;top:6px;left:8px;font-size:9px;letter-spacing:.14em;
+       text-transform:uppercase;color:var(--mid)}
+  section{position:relative;border-bottom:1px dashed var(--line);padding:44px 0}
+  .bar{background:var(--fill);border-radius:2px;height:12px}
+  .bar.h1{height:34px} .bar.h2{height:22px}
+  .box{border:1px dashed var(--line);background:#f1f1f1;border-radius:3px;
+       display:grid;place-items:center;color:var(--mid);font-size:10px;
+       letter-spacing:.1em;text-transform:uppercase}
+  .btn{border:1px solid var(--ink);border-radius:3px;padding:10px 18px;font-size:11px;
+       letter-spacing:.08em;text-transform:uppercase;display:inline-block}
+  .btn.ghost{border-color:var(--line);color:var(--mid)}
+  .row{display:flex;gap:14px;align-items:center}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .stack>*+*{margin-top:10px}
+  nav{display:flex;align-items:center;gap:26px;padding:18px 0;border-bottom:1px dashed var(--line)}
+  nav .bar{width:96px}
+  .card{border:1px dashed var(--line);border-radius:4px;padding:20px;background:#fff}
+  footer{padding:36px 0;color:var(--mid);font-size:11px}
+  @media(max-width:760px){
+    .wrap{padding:0 18px}
+    .split,.grid3,.grid4{grid-template-columns:1fr}
+    nav{flex-wrap:wrap;gap:14px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <div class="box" style="width:120px;height:30px">logo</div>
+    <div class="bar" style="width:60px"></div>
+    <div class="bar" style="width:74px"></div>
+    <div class="bar" style="width:52px"></div>
+    <div style="margin-left:auto" class="btn">CTA</div>
+  </nav>
+</div>
+
+<section>
+  <span class="tag">hero</span>
+  <div class="wrap split">
+    <div class="stack">
+      <div class="bar h1" style="width:92%"></div>
+      <div class="bar h1" style="width:64%"></div>
+      <div class="bar" style="width:100%;margin-top:18px"></div>
+      <div class="bar" style="width:86%"></div>
+      <div class="row" style="margin-top:24px">
+        <span class="btn">Primary</span><span class="btn ghost">Secondary</span>
+      </div>
+    </div>
+    <div class="box" style="height:300px">hero visual</div>
+  </div>
+</section>
+
+<section>
+  <span class="tag">social proof</span>
+  <div class="wrap grid4">
+    <div class="box" style="height:44px">logo</div>
+    <div class="box" style="height:44px">logo</div>
+    <div class="box" style="height:44px">logo</div>
+    <div class="box" style="height:44px">logo</div>
+  </div>
+</section>
+
+<section>
+  <span class="tag">what we do — 3 up</span>
+  <div class="wrap">
+    <div class="bar h2" style="width:280px;margin-bottom:28px"></div>
+    <div class="grid3">
+      <div class="card stack">
+        <div class="box" style="height:40px;width:40px">ico</div>
+        <div class="bar h2" style="width:70%"></div>
+        <div class="bar" style="width:100%"></div>
+        <div class="bar" style="width:82%"></div>
+      </div>
+      <div class="card stack">
+        <div class="box" style="height:40px;width:40px">ico</div>
+        <div class="bar h2" style="width:64%"></div>
+        <div class="bar" style="width:100%"></div>
+        <div class="bar" style="width:74%"></div>
+      </div>
+      <div class="card stack">
+        <div class="box" style="height:40px;width:40px">ico</div>
+        <div class="bar h2" style="width:76%"></div>
+        <div class="bar" style="width:100%"></div>
+        <div class="bar" style="width:88%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="tag">proof / case study</span>
+  <div class="wrap split">
+    <div class="box" style="height:260px">screenshot</div>
+    <div class="stack">
+      <div class="bar h2" style="width:80%"></div>
+      <div class="bar" style="width:100%"></div>
+      <div class="bar" style="width:92%"></div>
+      <div class="bar" style="width:70%"></div>
+      <div style="margin-top:18px"><span class="btn ghost">Read more</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="tag">closing cta</span>
+  <div class="wrap" style="text-align:center">
+    <div class="bar h1" style="width:46%;margin:0 auto"></div>
+    <div class="bar" style="width:34%;margin:14px auto 26px"></div>
+    <span class="btn">Primary</span>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="grid4" style="margin-bottom:26px">
+    <div class="stack"><div class="box" style="width:100px;height:26px">logo</div></div>
+    <div class="stack"><div class="bar" style="width:60%"></div><div class="bar" style="width:48%"></div><div class="bar" style="width:54%"></div></div>
+    <div class="stack"><div class="bar" style="width:56%"></div><div class="bar" style="width:44%"></div><div class="bar" style="width:62%"></div></div>
+    <div class="stack"><div class="bar" style="width:52%"></div><div class="bar" style="width:58%"></div></div>
+  </div>
+  wireframe v1 · structure only
+</footer>
+
+</body>
+</html>
