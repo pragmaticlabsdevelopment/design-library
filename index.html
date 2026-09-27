@@ -131,6 +131,16 @@
         border:1px solid var(--line);border-radius:99px;padding:1px 7px}
   .wmeta{font-size:11px;color:var(--text-2);opacity:.75}
 
+  /* Equal-height cards: the thumb is fixed, the body grows, and the meta row
+     is pushed to the bottom so every card's chrome lines up across the grid. */
+  .w-pcard{display:flex;flex-direction:column}
+  .w-body{display:flex;flex-direction:column;flex:1}
+  .w-body .wdesc{
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    overflow:hidden;min-height:2.6em;
+  }
+  .wbits{margin-top:auto;padding-top:10px}
+
   /* work: versions list */
   .w-versions{padding:40px 32px 60px;max-width:1060px;margin:0 auto;overflow-y:auto;flex:1;animation:fadeUp .25s ease}
   .w-versions h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
@@ -291,6 +301,20 @@
   var PROJECTS = LIB.projects || [];
   var $ = function(id){ return document.getElementById(id); };
 
+  // "3 weeks ago" reads faster than 2026-08-22 when scanning twenty cards.
+  function wAgo(iso){
+    if(!iso) return "";
+    var d = Math.floor((Date.now() - new Date(iso+"T12:00:00Z")) / 86400000);
+    if(d <= 0) return "today";
+    if(d === 1) return "yesterday";
+    if(d < 7) return d + " days ago";
+    if(d < 14) return "last week";
+    if(d < 60) return Math.floor(d/7) + " weeks ago";
+    if(d < 365) return Math.floor(d/30) + " months ago";
+    var y = Math.floor(d/365);
+    return y === 1 ? "a year ago" : y + " years ago";
+  }
+
   function esc(s){
     return String(s==null?"":s).replace(/[&<>"']/g,function(c){
       return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
@@ -446,10 +470,11 @@
       if(multi) body.innerHTML += '<div class="wcount">'+p.versions.length+" versions</div>";
 
       var bits = [];
+      var ago = wAgo(p.updated);
       if(p.visibility==="PRIVATE") bits.push('<span class="wtag">private</span>');
       if(p.archived) bits.push('<span class="wtag">archived</span>');
       if(p.language) bits.push('<span class="wmeta">'+esc(p.language)+'</span>');
-      if(p.updated) bits.push('<span class="wmeta">'+esc(p.updated)+'</span>');
+      if(ago) bits.push('<span class="wmeta">'+esc(ago)+'</span>');
       if(bits.length) body.innerHTML += '<div class="wbits">'+bits.join("")+'</div>';
       card.appendChild(body);
       grid.appendChild(card);

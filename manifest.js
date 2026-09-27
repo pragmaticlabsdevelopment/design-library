@@ -141,8 +141,8 @@ window.DESIGN_LIBRARY = {
     },
     {
       "slug": "nudgy-website",
-      "name": "Nudgy (legacy)",
-      "description": "Mac screenshot tool marketing site — archived",
+      "name": "Nudgy — screenshot tool",
+      "description": "The original Mac screenshot tool. Archived Sept 2026.",
       "versions": [
         {
           "id": "v1",
@@ -246,7 +246,7 @@ window.DESIGN_LIBRARY = {
     },
     {
       "slug": "design-library",
-      "name": "design-library",
+      "name": "Design Library",
       "description": "Versioned UI prototype library — click through projects and design versions",
       "repoUrl": "https://github.com/pragmaticlabsdevelopment/design-library",
       "liveUrl": "https://pragmaticlabsdevelopment.github.io/design-library/",
@@ -258,7 +258,7 @@ window.DESIGN_LIBRARY = {
     },
     {
       "slug": "projects-index",
-      "name": "projects-index",
+      "name": "Projects Index",
       "description": "",
       "repoUrl": "https://github.com/pragmatic-labs-development/projects-index",
       "liveUrl": "https://pragmatic-labs-development.github.io/projects-index/",
@@ -269,20 +269,8 @@ window.DESIGN_LIBRARY = {
       "versions": []
     },
     {
-      "slug": "nudgy-site",
-      "name": "nudgy-site",
-      "description": "",
-      "repoUrl": "https://github.com/pragmatic-labs-development/nudgy-site",
-      "liveUrl": "https://pragmatic-labs-development.github.io/nudgy-site/",
-      "visibility": "PUBLIC",
-      "archived": false,
-      "language": "Astro",
-      "updated": "2026-09-26",
-      "versions": []
-    },
-    {
       "slug": "nudgy",
-      "name": "nudgy",
+      "name": "Nudgy",
       "description": "",
       "repoUrl": "https://github.com/pragmatic-labs-development/nudgy",
       "liveUrl": null,
@@ -290,23 +278,13 @@ window.DESIGN_LIBRARY = {
       "archived": false,
       "language": "TypeScript",
       "updated": "2026-09-25",
-      "versions": []
-    },
-    {
-      "slug": "nudgy-website",
-      "name": "nudgy-website",
-      "description": "Marketing website for Nudgy — Mac screenshot annotation tool",
-      "repoUrl": "https://github.com/pragmatic-labs-development/nudgy-website",
-      "liveUrl": "https://get-nudged.online",
-      "visibility": "PUBLIC",
-      "archived": true,
-      "language": "Astro",
-      "updated": "2026-09-25",
-      "versions": []
+      "versions": [],
+      "alsoUrl": "https://pragmatic-labs-development.github.io/nudgy-site/",
+      "alsoLabel": "Marketing site"
     },
     {
       "slug": "pickup-soccer-bot",
-      "name": "pickup-soccer-bot",
+      "name": "Pickup Soccer Bot",
       "description": "",
       "repoUrl": "https://github.com/pragmaticlabsdevelopment/pickup-soccer-bot",
       "liveUrl": null,
@@ -318,7 +296,7 @@ window.DESIGN_LIBRARY = {
     },
     {
       "slug": "domain-bot",
-      "name": "domain-bot",
+      "name": "Domain Bot",
       "description": "",
       "repoUrl": "https://github.com/pragmatic-labs-development/domain-bot",
       "liveUrl": "https://pragmatic-labs-development.github.io/domain-bot/",
@@ -330,7 +308,7 @@ window.DESIGN_LIBRARY = {
     },
     {
       "slug": "anaconda-ai-governance-dashboard",
-      "name": "anaconda-ai-governance-dashboard",
+      "name": "Anaconda AI Governance",
       "description": "AI Governance Dashboard - Portfolio Demo",
       "repoUrl": "https://github.com/pragmatic-labs-development/anaconda-ai-governance-dashboard",
       "liveUrl": null,
@@ -342,7 +320,7 @@ window.DESIGN_LIBRARY = {
     },
     {
       "slug": "box-ops",
-      "name": "box-ops",
+      "name": "Box Ops",
       "description": "",
       "repoUrl": "https://github.com/pragmatic-labs-development/box-ops",
       "liveUrl": "https://box-ops.vercel.app",
@@ -362,30 +340,6 @@ window.DESIGN_LIBRARY = {
       "archived": false,
       "language": "TypeScript",
       "updated": "2026-03-22",
-      "versions": []
-    },
-    {
-      "slug": "HAL",
-      "name": "HAL",
-      "description": "A place for HAL to work",
-      "repoUrl": "https://github.com/pragmatic-labs-development/HAL",
-      "liveUrl": null,
-      "visibility": "PRIVATE",
-      "archived": false,
-      "language": "Python",
-      "updated": "2026-02-19",
-      "versions": []
-    },
-    {
-      "slug": "demo-repository",
-      "name": "demo-repository",
-      "description": "A code repository designed to show the best GitHub has to offer.",
-      "repoUrl": "https://github.com/pragmatic-labs-development/demo-repository",
-      "liveUrl": null,
-      "visibility": "PRIVATE",
-      "archived": false,
-      "language": "HTML",
-      "updated": "2026-02-05",
       "versions": []
     }
   ]
