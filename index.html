@@ -121,6 +121,16 @@
   .w-body .wdesc{font-size:13px;color:var(--text-2);margin-top:2px}
   .w-body .wcount{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:12px;font-weight:600;color:var(--text-3);background:var(--panel-2);padding:3px 10px;border-radius:6px}
 
+  .w-noshot{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--text-2);
+    background:repeating-linear-gradient(45deg,rgba(148,163,184,.07) 0 10px,transparent 10px 20px);
+  }
+  .wbits{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+  .wtag{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-2);
+        border:1px solid var(--line);border-radius:99px;padding:1px 7px}
+  .wmeta{font-size:11px;color:var(--text-2);opacity:.75}
+
   /* work: versions list */
   .w-versions{padding:40px 32px 60px;max-width:1060px;margin:0 auto;overflow-y:auto;flex:1;animation:fadeUp .25s ease}
   .w-versions h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
@@ -399,6 +409,12 @@
       var multi = p.versions.length > 1;
       card.className = "w-pcard" + (multi?" multi":"");
       card.onclick = function(){
+        // No snapshot committed yet — send them to the live site, or the repo.
+        if(p.versions.length===0){
+          var dest = p.liveUrl || p.repoUrl;
+          if(dest) window.open(dest,"_blank","noopener");
+          return;
+        }
         if(p.versions.length===1) wOpenPreview(p.slug,p.versions[0].id);
         else wShowVersions(p.slug);
       };
@@ -415,6 +431,11 @@
         (function(t,f){ requestAnimationFrame(function(){
           var w=t.clientWidth; if(w>0) f.style.transform="scale("+(w/1440)+")";
         }); })(thumb,iframe);
+      } else {
+        var ph = document.createElement("div");
+        ph.className = "w-noshot";
+        ph.textContent = p.liveUrl ? "Live \u2197" : "No preview yet";
+        thumb.appendChild(ph);
       }
       card.appendChild(thumb);
 
@@ -423,6 +444,13 @@
       body.innerHTML = "<h2>"+esc(p.name)+"</h2>" +
         (p.description?'<div class="wdesc">'+esc(p.description)+"</div>":"");
       if(multi) body.innerHTML += '<div class="wcount">'+p.versions.length+" versions</div>";
+
+      var bits = [];
+      if(p.visibility==="PRIVATE") bits.push('<span class="wtag">private</span>');
+      if(p.archived) bits.push('<span class="wtag">archived</span>');
+      if(p.language) bits.push('<span class="wmeta">'+esc(p.language)+'</span>');
+      if(p.updated) bits.push('<span class="wmeta">'+esc(p.updated)+'</span>');
+      if(bits.length) body.innerHTML += '<div class="wbits">'+bits.join("")+'</div>';
       card.appendChild(body);
       grid.appendChild(card);
     });
